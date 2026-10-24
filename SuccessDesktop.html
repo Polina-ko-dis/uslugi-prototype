@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Бронирование подтверждено — десктоп</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+.hs{scrollbar-width:none}.hs::-webkit-scrollbar{display:none}
+@keyframes sx-open{from{clip-path:inset(0 0 0 calc(100% - 52px) round 999px)}to{clip-path:inset(0 0 0 0 round 999px)}}
+.sx{animation:sx-open .32s cubic-bezier(.2,.8,.2,1)}
+@keyframes sx-close{from{clip-path:inset(0 0 0 0 round 999px);opacity:1}to{clip-path:inset(0 0 0 calc(100% - 52px) round 999px);opacity:0.4}}
+.sx.sx-closing{animation:sx-close .22s cubic-bezier(.4,0,.6,1) forwards}
+.sx input::placeholder{color:#7A7C82}
+.chip{transition:transform .2s ease,box-shadow .2s ease}
+.chip:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(21,22,26,0.08)}
+.chip:active{transform:scale(0.97)}
+.chip .ic{transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.chip:hover .ic{transform:scale(1.08) rotate(-8deg)}
+.chip:focus-visible{outline:2px solid #15161A;outline-offset:2px}
+.card{transition:transform .2s ease,box-shadow .2s ease}
+.card:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(21,22,26,0.10)}
+@keyframes ov-in{from{opacity:0}to{opacity:1}}
+@keyframes dlg-in{from{transform:translate(-50%,-48%) scale(.97);opacity:0}to{transform:translate(-50%,-50%);opacity:1}}
+@keyframes drw-in{from{transform:translateX(40px);opacity:0}to{transform:none;opacity:1}}
+.ov{animation:ov-in .25s ease-out both}
+.dlg{animation:dlg-in .3s cubic-bezier(.2,.8,.2,1) both}
+.drw{animation:drw-in .32s cubic-bezier(.2,.8,.2,1) both}
+textarea::placeholder{color:#7A7C82}
+</style>
+<style>html,body{height:100%;margin:0}#app{height:100vh;height:100dvh;overflow:hidden}dc-host{display:contents}</style>
+</head>
+<body>
+<div id="app"></div>
+<template data-dc="SuccessDesktop">
+<div style="width: 100%; height: 100%; position: relative; overflow: hidden; background: #F4F3EF; font-family: 'Onest', system-ui, sans-serif; color: #15161A">
+<div class="hs" style="height: 100%; overflow-y: auto; padding-bottom: 48px; box-sizing: border-box">
+<header style="position: relative; z-index: 5; display: flex; flex-direction: column; box-sizing: border-box; width: min(1200px, calc(100% - 80px)); margin: 16px auto 0; padding: 18px 0; background: #FFFFFF; border: 1px solid #EDEBE6; border-radius: 28px; box-shadow: 0 6px 20px rgba(21,22,26,0.04)">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 0 24px">
+<a href="MainDesktop.html" aria-label="Cosmos Москва ВДНХ — на главную" style="display: flex; align-items: center; height: 44px"><img src="assets/e61c0e74ae9b8b9fc548604cdf741b10.png" alt="Cosmos Москва ВДНХ" style="height: 34px; width: auto; display: block"></a>
+<div style="display: flex; gap: 8px">
+<button type="button" onClick="{{toggleMenu}}" aria-haspopup="true" aria-expanded="{{menuExpanded}}" aria-label="Язык и валюта" style="{{globeStyle}}"><span>{{langCode}} · {{curSym}}</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{chevStyle}}"><path d="M6 9l6 6 6-6"></path></svg></button>
+<a href="#login" style="height: 44px; padding: 0 14px 0 12px; border-radius: 999px; background: #F4F3EF; color: #15161A; display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Войти</a>
+</div>
+</div>
+<sc-if value="{{menuOpen}}" hint-placeholder-val="{{ false }}">
+<div role="dialog" aria-label="Язык и валюта" style="position: absolute; z-index: 30; top: 70px; right: 24px; width: 340px; box-sizing: border-box; background: #FFFFFF; border-radius: 24px; box-shadow: 0 18px 48px rgba(21,22,26,0.18), 0 0 0 1px rgba(21,22,26,0.05); padding: 8px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="padding: 10px 12px 6px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #63656B">Валюта</span>
+<sc-for list="{{curs}}" as="c" hint-placeholder-count="4">
+<button type="button" onClick="{{c.pick}}" style="{{c.style}}"><span style="width: 28px; height: 28px; border-radius: 999px; background: #F4F3EF; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700">{{c.sym}}</span><span style="flex: 1">{{c.code}}</span><sc-if value="{{c.sel}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></sc-if></button>
+</sc-for>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px; border-left: 1px solid #EEECE7; padding-left: 4px">
+<span style="padding: 10px 12px 6px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #63656B">Язык</span>
+<sc-for list="{{langs}}" as="l" hint-placeholder-count="4">
+<button type="button" onClick="{{l.pick}}" style="{{l.style}}"><span style="flex: 1">{{l.name}}</span><sc-if value="{{l.sel}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></sc-if></button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+</header>
+<main style="width: min(1200px, calc(100% - 80px)); margin: 0 auto; padding-top: 40px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 0 8px">
+<div style="display: flex; align-items: center; gap: 16px">
+<span style="flex: none; width: 56px; height: 56px; border-radius: 999px; background: #1E9E5A; color: #FFFFFF; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 16px rgba(30,158,90,0.28)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></span>
+<div style="display: flex; flex-direction: column; gap: 3px; min-width: 0">
+<h1 style="margin: 0; font-size: 30px; line-height: 1.15; font-weight: 700; letter-spacing: -0.025em">Бронирование подтверждено</h1>
+<p style="margin: 0; font-size: 15px; line-height: 1.35; color: #4A4C52">Заказ № 482317105-1</p>
+</div>
+</div>
+<a href="MainDesktop.html" style="flex: none; height: 52px; padding: 0 24px; border-radius: 16px; background: #E6EDFF; color: #2440C8; box-shadow: inset 0 0 0 1px #C9D6FF; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 600">Вернуться к услугам</a>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: start">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<section aria-label="Заказчик" style="background: #FFFFFF; border-radius: 24px; padding: 20px; display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: start">
+<span style="width: 40px; height: 40px; border-radius: 999px; background: #F4F3EF; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"></rect><path d="M4 7l8 6 8-6"></path></svg></span>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #4A4C52; text-wrap: pretty">Иван Иванович, благодарим за выбор! Подтверждение бронирования отправили на <strong style="font-weight: 600; color: #15161A">ivanov_ivan@guest.mail</strong></p>
+</section>
+<section aria-label="Оплата" style="background: #FFFFFF; border-radius: 24px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<span style="font-size: 15px; font-weight: 600">Оплата</span>
+<span style="{{pillStyle}}"><span style="width: 8px; height: 8px; border-radius: 999px; background: currentColor"></span>{{pillText}}</span>
+</div>
+<div style="display: flex; align-items: baseline; justify-content: space-between">
+<span style="font-size: 14px; color: #4A4C52">{{payNote}}</span>
+<span style="font-size: 24px; font-weight: 700; letter-spacing: -0.02em">1 500 ₽</span>
+</div>
+<sc-if value="{{pending}}" hint-placeholder-val="{{ false }}">
+<button type="button" style="height: 52px; border: 0; border-radius: 16px; background: {{accent}}; color: #FFFFFF; font: inherit; font-size: 16px; font-weight: 600; cursor: pointer">Оплатить 1 500 ₽</button>
+</sc-if>
+</section>
+</div>
+<section aria-label="Состав заказа" style="background: #FFFFFF; border-radius: 24px; padding: 8px 20px; display: flex; flex-direction: column">
+<div style="padding: 12px 0 6px; font-size: 15px; font-weight: 600">Состав заказа</div>
+<div style="display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; align-items: start; padding: 10px 0 14px; border-bottom: 1px solid #EEECE7">
+<img src="assets/0ef13fa6319fc54e36811f1e9d1af2d3.jpg" alt="" style="width: 56px; height: 56px; border-radius: 14px; object-fit: cover; display: block">
+<span style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><span style="font-size: 15px; font-weight: 600">Баня с пармастером</span><span style="font-size: 13px; color: #63656B">Пн, 14 декабря · 11:00</span><span style="font-size: 13px; color: #63656B">4 гостя · 2 часа · место: любое</span></span>
+<span style="font-size: 15px; font-weight: 700">1 000 ₽</span>
+</div>
+<div style="display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; align-items: start; padding: 14px 0 16px">
+<img src="assets/80425026c3bef2b091a3788efccf20ed.jpg" alt="" style="width: 56px; height: 56px; border-radius: 14px; object-fit: cover; display: block">
+<span style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><span style="font-size: 15px; font-weight: 600">Прокат горного велосипеда</span><span style="font-size: 13px; color: #63656B">Пн, 14 декабря · 13:30</span><span style="font-size: 13px; color: #63656B">1 гость · 1 час</span></span>
+<span style="font-size: 15px; font-weight: 700">500 ₽</span>
+</div>
+</section>
+</div>
+</main>
+</div>
+</div>
+</template>
+<script type="text/x-dc-logic" data-dc="SuccessDesktop" data-props='{"accent":{"editor":"color","default":"#3355F0","options":["#3355F0","#15161A","#E2572B","#1F7A55"]},"showMenu":{"editor":"boolean","default":false},"payment":{"editor":"enum","default":"paid","options":["paid","pending","hotel"]},"$preview":{"width":1440,"height":1024}}'>
+class Component extends DCLogic {
+hdr() {
+const st = this.state || {};
+const open = st.menu ?? (this.props.showMenu ?? false);
+const cur = st.cur || 'RUB';
+const lang = st.lang || 'ru';
+const item = 'width: 100%; min-height: 44px; padding: 0 10px; border: 0; border-radius: 14px; font: inherit; font-size: 15px; color: #15161A; display: flex; align-items: center; gap: 10px; text-align: left; cursor: pointer; ';
+const curList = [['RUB', '₽'], ['USD', '$'], ['EUR', '€'], ['KZT', '₸']];
+const langList = [['ru', 'Русский', 'RU'], ['en', 'English', 'EN'], ['de', 'Deutsch', 'DE'], ['zh', '中文', 'ZH']];
+const on = 'background: #F4F3EF; font-weight: 600';
+const off = 'background: transparent; font-weight: 500';
+const curs = curList.map(([code, sym]) => ({ code, sym, sel: code === cur, style: item + (code === cur ? on : off), pick: () => this.setState({ cur: code }) }));
+const langs = langList.map(([id, name]) => ({ name, sel: id === lang, style: item + (id === lang ? on : off), pick: () => this.setState({ lang: id }) }));
+return {
+menuOpen: open,
+menuExpanded: open ? 'true' : 'false',
+toggleMenu: () => this.setState({ menu: !open }),
+curs, langs,
+curSym: curList.find((c) => c[0] === cur)[1],
+langCode: langList.find((l) => l[0] === lang)[2],
+globeStyle: 'height: 44px; padding: 0 10px 0 12px; border: 0; border-radius: 999px; font: inherit; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 6px; cursor: pointer; ' + (open ? 'background: #15161A; color: #FFFFFF' : 'background: #F4F3EF; color: #15161A'),
+chevStyle: 'transition: transform .2s; transform: rotate(' + (open ? '180' : '0') + 'deg)'
+};
+}
+
+renderVals() {
+const accent = this.props.accent ?? '#3355F0';
+const payment = this.props.payment ?? 'paid';
+const base = 'height: 32px; padding: 0 12px; border-radius: 999px; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; ';
+const map = {
+paid: { text: 'Оплачено', note: 'Картой онлайн', style: 'background: #DFF3E7; color: #17633B' },
+pending: { text: 'Ожидает оплаты', note: 'К оплате', style: 'background: #FDF0D5; color: #8A5300' },
+hotel: { text: 'Оплата в отеле', note: 'При получении услуги', style: 'background: #ECEBE7; color: #3F4147' }
+};
+const s = map[payment] || map.paid;
+return { ...this.hdr(), accent, pillText: s.text, payNote: s.note, pillStyle: base + s.style, pending: payment === 'pending' };
+}
+}
+</script>
+<script src="dc-runtime.js"></script>
+<script>DC.boot("SuccessDesktop")</script>
+</body>
+</html>

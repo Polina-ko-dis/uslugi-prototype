@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Услуги — прототип</title>
+<script>
+(function () {
+  var w = Math.min(window.innerWidth, screen.width || window.innerWidth);
+  var p = new URLSearchParams(location.search).get('device');
+  var page = p === 'mobile' ? 'Main' : p === 'tablet' ? 'MainTablet' : p === 'desktop' ? 'MainDesktop'
+    : (w < 700 ? 'Main' : w < 1180 ? 'MainTablet' : 'MainDesktop');
+  location.replace(page + '.html');
+})();
+</script>
+</head>
+<body></body>
+</html>
