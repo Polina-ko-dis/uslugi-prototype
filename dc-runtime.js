@@ -179,6 +179,7 @@
     if (!comp.state) comp.state = {};
     comp.props = props;
     comp.__host = host;
+    comp.__isPage = !parentHost;
     host.comp = comp;
     host.render = function () {
       var vals = comp.renderVals() || {};

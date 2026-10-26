@@ -30,7 +30,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 .drw{animation:drw-in .32s cubic-bezier(.2,.8,.2,1) both}
 textarea::placeholder{color:#7A7C82}
 </style>
-<style>html,body{height:100%;margin:0}#app{height:100vh;height:100dvh;overflow:hidden}dc-host{display:contents}</style>
+<style>html,body{height:100%;margin:0}#app{height:100vh;height:100dvh;overflow:hidden}dc-host{display:contents}section[aria-label="Состав заказа"]>div:last-child{border-bottom:0!important}</style>
 </head>
 <body>
 <div id="app"></div>
@@ -68,7 +68,7 @@ textarea::placeholder{color:#7A7C82}
 <span style="flex: none; width: 56px; height: 56px; border-radius: 999px; background: #1E9E5A; color: #FFFFFF; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 16px rgba(30,158,90,0.28)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></span>
 <div style="display: flex; flex-direction: column; gap: 3px; min-width: 0">
 <h1 style="margin: 0; font-size: 30px; line-height: 1.15; font-weight: 700; letter-spacing: -0.025em">Бронирование подтверждено</h1>
-<p style="margin: 0; font-size: 15px; line-height: 1.35; color: #4A4C52">Заказ № 482317105-1</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.35; color: #4A4C52">Заказ № {{orderNo}}</p>
 </div>
 </div>
 <a href="MainDesktop.html" style="flex: none; height: 52px; padding: 0 24px; border-radius: 16px; background: #E6EDFF; color: #2440C8; box-shadow: inset 0 0 0 1px #C9D6FF; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 600">Вернуться к услугам</a>
@@ -86,25 +86,20 @@ textarea::placeholder{color:#7A7C82}
 </div>
 <div style="display: flex; align-items: baseline; justify-content: space-between">
 <span style="font-size: 14px; color: #4A4C52">{{payNote}}</span>
-<span style="font-size: 24px; font-weight: 700; letter-spacing: -0.02em">1 500 ₽</span>
+<span style="font-size: 24px; font-weight: 700; letter-spacing: -0.02em">{{orderTotal}}</span>
 </div>
 <sc-if value="{{pending}}" hint-placeholder-val="{{ false }}">
-<button type="button" style="height: 52px; border: 0; border-radius: 16px; background: {{accent}}; color: #FFFFFF; font: inherit; font-size: 16px; font-weight: 600; cursor: pointer">Оплатить 1 500 ₽</button>
+<button type="button" style="height: 52px; border: 0; border-radius: 16px; background: {{accent}}; color: #FFFFFF; font: inherit; font-size: 16px; font-weight: 600; cursor: pointer">Оплатить {{orderTotal}}</button>
 </sc-if>
 </section>
 </div>
 <section aria-label="Состав заказа" style="background: #FFFFFF; border-radius: 24px; padding: 8px 20px; display: flex; flex-direction: column">
 <div style="padding: 12px 0 6px; font-size: 15px; font-weight: 600">Состав заказа</div>
-<div style="display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; align-items: start; padding: 10px 0 14px; border-bottom: 1px solid #EEECE7">
-<img src="assets/0ef13fa6319fc54e36811f1e9d1af2d3.jpg" alt="" style="width: 56px; height: 56px; border-radius: 14px; object-fit: cover; display: block">
-<span style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><span style="font-size: 15px; font-weight: 600">Баня с пармастером</span><span style="font-size: 13px; color: #63656B">Пн, 14 декабря · 11:00</span><span style="font-size: 13px; color: #63656B">4 гостя · 2 часа · место: любое</span></span>
-<span style="font-size: 15px; font-weight: 700">1 000 ₽</span>
-</div>
-<div style="display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; align-items: start; padding: 14px 0 16px">
-<img src="assets/80425026c3bef2b091a3788efccf20ed.jpg" alt="" style="width: 56px; height: 56px; border-radius: 14px; object-fit: cover; display: block">
-<span style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><span style="font-size: 15px; font-weight: 600">Прокат горного велосипеда</span><span style="font-size: 13px; color: #63656B">Пн, 14 декабря · 13:30</span><span style="font-size: 13px; color: #63656B">1 гость · 1 час</span></span>
-<span style="font-size: 15px; font-weight: 700">500 ₽</span>
-</div>
+<sc-for list="{{orderLines}}" as="l"><div style="display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; align-items: start; padding: 10px 0 14px; border-bottom: 1px solid #EEECE7">
+<img src="{{l.img}}" alt="" style="width: 56px; height: 56px; border-radius: 14px; object-fit: cover; display: block">
+<span style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><span style="font-size: 15px; font-weight: 600">{{l.name}}</span><span style="font-size: 13px; color: #63656B">{{l.when}}</span><span style="font-size: 13px; color: #63656B">{{l.what}}</span></span>
+<span style="font-size: 15px; font-weight: 700">{{l.sum}}</span>
+</div></sc-for>
 </section>
 </div>
 </main>
@@ -147,10 +142,13 @@ pending: { text: 'Ожидает оплаты', note: 'К оплате', style: 
 hotel: { text: 'Оплата в отеле', note: 'При получении услуги', style: 'background: #ECEBE7; color: #3F4147' }
 };
 const s = map[payment] || map.paid;
-return { ...this.hdr(), accent, pillText: s.text, payNote: s.note, pillStyle: base + s.style, pending: payment === 'pending' };
+return { ...this.hdr(), ...P.successVals(this, 'Desktop'), accent, pillText: s.text, payNote: s.note, pillStyle: base + s.style, pending: payment === 'pending' };
 }
 }
+P.mix(Component);
 </script>
+<script src="catalog.js"></script>
+<script src="proto-logic.js"></script>
 <script src="dc-runtime.js"></script>
 <script>DC.boot("SuccessDesktop")</script>
 </body>
