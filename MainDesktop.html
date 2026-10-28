@@ -42,7 +42,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 <body>
 <div id="app"></div>
 <template data-dc="MainDesktop">
-<div ref="{{setRoot}}" style="width: 1440px; height: 900px; display: flex; flex-direction: column; position: relative; overflow: hidden; background: {{pageBg}}; font-family: {{fontFamily}}; --tx: {{textColor}}; color: var(--tx)">
+<div ref="{{setRoot}}" style="width: 100%; height: 100%; display: flex; flex-direction: column; position: relative; overflow: hidden; background: {{pageBg}}; font-family: {{fontFamily}}; --tx: {{textColor}}; color: var(--tx)">
 <div aria-label="Демо-настройки" style="position: absolute; z-index: 60; right: 16px; bottom: 16px; display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 999px; background: rgba(255,255,255,0.92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: 0 8px 24px rgba(21,22,26,0.14), 0 0 0 1px rgba(21,22,26,0.06)">
 <button type="button" onClick="{{togglePhoto}}" role="switch" aria-checked="{{photoAria}}" title="Демо: у отеля есть фото" style="height: 30px; padding: 0 4px 0 12px; border: 1px solid #E4E2DC; border-radius: 999px; background: #FFFFFF; display: flex; align-items: center; gap: 8px; font: 600 12px system-ui, sans-serif; color: #3F4147; cursor: pointer">Фото<span style="{{swTrack}}"><span style="{{swKnob}}"></span></span></button>
 <select aria-label="Объём стилей" value="{{scopeVal}}" onChange="{{onScope}}" style="{{demoSel}}"><option value="accent">Только акцентный цвет</option><option value="all">Все стили</option></select>

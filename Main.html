@@ -42,7 +42,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 <body>
 <div id="app"></div>
 <template data-dc="Main">
-<div ref="{{setRoot}}" style="width: 390px; height: 844px; display: flex; flex-direction: column; position: relative; overflow: hidden; background: {{pageBg}}; font-family: {{fontFamily}}; --tx: {{textColor}}; color: var(--tx)">
+<div ref="{{setRoot}}" style="width: 100%; height: 100%; display: flex; flex-direction: column; position: relative; overflow: hidden; background: {{pageBg}}; font-family: {{fontFamily}}; --tx: {{textColor}}; color: var(--tx)">
 <div class="hs" onScroll="{{onScroll}}" style="flex: 1; min-height: 0; overflow-y: auto; padding-bottom: 112px; box-sizing: border-box; background: {{pageBg}}; transition: background-color .3s ease">
 
 <header style="{{heroStyle}}">
@@ -51,7 +51,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 <a href="Main.html" aria-label="Cosmos Москва ВДНХ — на главную" style="display: flex; align-items: center; height: 44px"><img src="assets/e61c0e74ae9b8b9fc548604cdf741b10.png" alt="Cosmos Москва ВДНХ" style="height: 34px; width: auto; display: block"></a>
 <div style="display: flex; gap: 8px">
 
-<button type="button" onClick="{{toggleMenu}}" data-fly-anchor="1" aria-haspopup="true" aria-expanded="{{menuExpanded}}" aria-label="Язык и валюта" style="{{globeStyle}}"><span>{{langCode}} · {{curSym}}</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{chevStyle}}"><path d="M6 9l6 6 6-6"></path></svg></button>
+<button type="button" onClick="{{toggleMenu}}" data-fly-anchor="1" aria-haspopup="true" aria-expanded="{{menuExpanded}}" aria-label="Язык и валюта" style="{{globeStyle}}"><span style="white-space: nowrap">{{langCode}} · {{curSym}}</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{chevStyle}}"><path d="M6 9l6 6 6-6"></path></svg></button>
 <a href="#login" style="height: 44px; padding: 0 14px 0 12px; border-radius: {{rBtnRound}}; background: #F4F3EF; color: var(--tx); display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Войти</a>
 </div>
 </div>
