@@ -60,7 +60,7 @@
   };
   P.fromQS = function (from, c) { return from === 'cat' && c ? 'from=cat&c=' + c : 'from=main'; };
   P.home = function (S) { return 'Main' + S + '.html'; };
-  P.catHref = function (S, c) { return 'Category' + S + '.html?c=' + c; };
+  P.catHref = function (S, c) { return 'Main' + S + '.html?c=' + c; };
   P.backHref = function (S, ctx) { return ctx.from === 'cat' && ctx.c ? P.catHref(S, ctx.c) : P.home(S); };
   P.svcHref = function (S, id, from, c) { return 'Service' + S + '.html?s=' + id + '&' + P.fromQS(from, c); };
   P.cartVals = function (S, from, c) {
@@ -96,20 +96,9 @@
 
   P.mainVals = function (comp, S) {
     var q = ((comp.state && comp.state.query) || '').trim().toLowerCase();
-    var sections = [];
-    var shown = 0;
-    C.cats.forEach(function (cat) {
-      var items = cat.items.filter(function (s) { return !q || s.name.toLowerCase().indexOf(q) >= 0; });
-      if (!items.length) return;
-      shown += items.length;
-      var list = q ? items : items.slice(0, LIMIT[S]);
-      sections.push({
-        id: cat.id, name: cat.name, href: P.catHref(S, cat.id), count: cat.items.length,
-        more: !q,
-        items: list.map(function (s) { return P.card(s, S, 'main'); })
-      });
-    });
-    return Object.assign({ sections: sections, noResults: shown === 0 }, P.cartVals(S, 'main'));
+    var items = C.services.filter(function (s) { return !q || s.name.toLowerCase().indexOf(q) >= 0; })
+      .map(function (s) { return P.card(s, S, 'main'); });
+    return Object.assign({ items: items, noResults: items.length === 0 }, P.cartVals(S, 'main'));
   };
 
   P.catVals = function (comp, S) {

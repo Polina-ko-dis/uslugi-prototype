@@ -106,7 +106,7 @@ textarea::placeholder{color:#7A7C82}
 </div>
 </div>
 </template>
-<script type="text/x-dc-logic" data-dc="SuccessDesktop" data-props='{"accent":{"editor":"color","default":"#3355F0","options":["#3355F0","#15161A","#E2572B","#1F7A55"]},"showMenu":{"editor":"boolean","default":false},"payment":{"editor":"enum","default":"paid","options":["paid","pending","hotel"]},"$preview":{"width":1440,"height":1024}}'>
+<script type="text/x-dc-logic" data-dc="SuccessDesktop" data-props='{"accent":{"editor":"color","default":"#1B5EB2","options":["#1B5EB2","#15161A","#E2572B","#1F7A55"]},"showMenu":{"editor":"boolean","default":false},"payment":{"editor":"enum","default":"paid","options":["paid","pending","hotel"]},"$preview":{"width":1440,"height":1024}}'>
 class Component extends DCLogic {
 hdr() {
 const st = this.state || {};
@@ -133,7 +133,7 @@ chevStyle: 'transition: transform .2s; transform: rotate(' + (open ? '180' : '0'
 }
 
 renderVals() {
-const accent = this.props.accent ?? '#3355F0';
+const accent = this.props.accent ?? '#1B5EB2';
 const payment = this.props.payment ?? 'paid';
 const base = 'height: 32px; padding: 0 12px; border-radius: 999px; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; ';
 const map = {
