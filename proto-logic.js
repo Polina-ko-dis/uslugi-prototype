@@ -86,7 +86,7 @@
   };
   P.go = function (url) { location.href = url; };
   /* A/B-тест: ?ab=a|b включает вариант (запоминается), ?ab=off выключает.
-     В тесте — дефолтная тема с фото, без демо-панели. */
+     В тесте — дефолтная тема без фото и без демо-панели. */
   P.ab = (function () {
     var v = qs.get('ab');
     try {
@@ -96,7 +96,7 @@
     } catch (e) { v = v === 'a' || v === 'b' ? v : null; }
     return v === 'a' || v === 'b' ? v : null;
   })();
-  var AB_LS = { 'uslugi-theme': 'default', 'uslugi-scope': 'accent', 'uslugi-photo': '1' };
+  var AB_LS = { 'uslugi-theme': 'default', 'uslugi-scope': 'accent', 'uslugi-photo': '0' };
   P.lsGet = function (k) {
     if (P.ab && k in AB_LS) return AB_LS[k];
     try { return localStorage.getItem(k); } catch (e) { return null; }

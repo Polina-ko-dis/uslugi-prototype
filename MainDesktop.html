@@ -1314,7 +1314,7 @@ lsGet(k) { return window.P.lsGet(k); }
 lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
 cartBase() { return (this.props.startWithCart ?? false) ? { 'banya-master': 1 } : {}; }
 cartN() { return window.CAT.cart.count(); }
-photoOn() { if (this.state.photo !== undefined) return this.state.photo; const v = this.lsGet('uslugi-photo'); if (v !== null && 'Desktop' === 'Desktop') return v === '1'; return (this.props.showPhoto ?? true) !== false; }
+photoOn() { if (window.P.ab) return false; if (this.state.photo !== undefined) return this.state.photo; const v = this.lsGet('uslugi-photo'); if (v !== null && 'Desktop' === 'Desktop') return v === '1'; return (this.props.showPhoto ?? true) !== false; }
 hero() {
 const shell = 'position: relative; z-index: 5; display: flex; flex-direction: column; box-sizing: border-box; width: min(1200px, calc(100% - 80px)); min-height: 330px; background: #FFFFFF; border: 1px solid #EDEBE6; border-radius: 28px; box-shadow: 0 6px 20px rgba(21,22,26,0.04); ';
 const row = 'z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 32px; box-sizing: border-box; ';
@@ -1377,7 +1377,7 @@ onKey: (e) => { if (e.key === 'Escape') { this.setState({ query: '' }); if (this
 P.mix(Component);
 </script>
 <script src="catalog.js"></script>
-<script src="proto-logic.js?v=ab1"></script>
+<script src="proto-logic.js?v=ab2"></script>
 <script src="dc-runtime.js"></script>
 <script>DC.boot("MainDesktop")</script>
 </body>
