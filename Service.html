@@ -1268,7 +1268,7 @@ onScope: (e) => { this.lsSet('uslugi-scope', e.target.value); this.setState({ sc
 onTheme: (e) => { this.lsSet('uslugi-theme', e.target.value); this.setState({ themeId: e.target.value }); }
 };
 }
-lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+lsGet(k) { return window.P.lsGet(k); }
 lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
 cartBase() { return (this.props.startWithCart ?? false) ? { 'banya-master': 1 } : {}; }
 cartN() { return window.CAT.cart.count(); }
@@ -1419,7 +1419,7 @@ return Object.assign({ accent: this.props.accent ?? '#3355F0' }, P.svcVals(this,
 P.mix(Component);
 </script>
 <script src="catalog.js"></script>
-<script src="proto-logic.js"></script>
+<script src="proto-logic.js?v=ab1"></script>
 <script src="dc-runtime.js"></script>
 <script>DC.boot("Service")</script>
 </body>

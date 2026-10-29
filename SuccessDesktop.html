@@ -116,7 +116,7 @@ ohta: { name: 'Охта Парк', accentBg: '#006738', accentText: '#FFFFFF', p
 territoria: { name: 'Территория', accentBg: '#986E61', accentText: '#FFFFFF', pageBg: '#FFFFFF', blockBg: '#FFFFFF', radiusBtn: 999, radiusCard: 0, font: "'Roboto', system-ui, sans-serif", text: '#1C2631', cardBg: '#FFFFFF', hotel: 'Услуги глэмпинга «Территория»', logo: 'assets/af765d90b6cbb1f7f82594328f1058f7.png', logoAlt: 'Глэмпинг Территория', logoH: 26, photo: 'assets/4a9cd242cf35a8a207249a4f60d8e155.webp', photoPos: '50% 72%' },
 zoldol: { name: 'Золотая Долина', accentBg: '#FFC800', accentText: '#3F4E5F', pageBg: '#FFFFFF', blockBg: '#FFFFFF', radiusBtn: 999, radiusCard: 30, font: "'Roboto', system-ui, sans-serif", text: '#000000', cardBg: '#FFFFFF', hotel: 'Услуги курорта «Золотая Долина»', logo: 'assets/c631464bff161dbfed48c1e6d5d1c142.png', logoAlt: 'Золотая долина', logoH: 36, photo: 'assets/da8651ce8e6beb681775930db4c3e6a6.webp', photoPos: '50% 50%' }
 };
-}lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+}lsGet(k) { return window.P.lsGet(k); }
 succTheme() {
 const all = this.themesAll();
 const id = this.lsGet('uslugi-theme') || this.props.theme || 'default';
@@ -187,7 +187,7 @@ return { ...this.hdr(), ...th, ...P.successVals(this, 'Desktop'), accent, pillTe
 P.mix(Component);
 </script>
 <script src="catalog.js"></script>
-<script src="proto-logic.js"></script>
+<script src="proto-logic.js?v=ab1"></script>
 <script src="dc-runtime.js"></script>
 <script>DC.boot("SuccessDesktop")</script>
 </body>

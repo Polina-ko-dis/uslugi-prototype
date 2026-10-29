@@ -10,7 +10,9 @@
   var p = new URLSearchParams(location.search).get('device');
   var page = p === 'mobile' ? 'Main' : p === 'tablet' ? 'MainTablet' : p === 'desktop' ? 'MainDesktop'
     : (w < 700 ? 'Main' : w < 1180 ? 'MainTablet' : 'MainDesktop');
-  location.replace(page + '.html');
+  // ?ab=a|b — вариант A/B-теста; без него обычный прототип с демо-панелью
+  var ab = new URLSearchParams(location.search).get('ab');
+  location.replace(page + '.html?ab=' + (ab === 'a' || ab === 'b' ? ab : 'off'));
 })();
 </script>
 </head>
