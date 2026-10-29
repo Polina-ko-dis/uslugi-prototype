@@ -1091,7 +1091,7 @@ add: (e) => { if (INFO[s[0]] && INFO[s[0]][0]) { this.openModal(s[0]); return; }
 };
 });
 const sel_on = 'background: ' + this.tint(0.16) + '; border: 1.5px solid ' + this.icAcc() + '; color: ' + this.selAcc() + '; box-shadow: 0 6px 16px ' + this.icAcc() + '2E';
-const sel_off = 'background: ' + this.tint(0.07) + '; border: 1px solid ' + this.tint(0.07) + '; color: var(--tx)';
+const sel_off = 'background: ' + this.chipBg() + '; border: 1px solid ' + this.chipBg() + '; color: var(--tx)';
 const base = 'position: relative; flex: none; height: 56px; padding: 0 18px 0 8px; border-radius: 999px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; transition: background .2s, border-color .2s, color .2s; ';
 const tab = {};
 DATA.cats.forEach(([id]) => {
@@ -1099,7 +1099,7 @@ const on = sel === id;
 tab[id] = { on, hint: on ? 'Снять фильтр' : '', pressed: on ? 'true' : 'false', pick: () => this.setState({ tab: on ? null : id, sub: 'all' }), style: base + (on ? sel_on : sel_off) };
 });
 const subBase = 'flex: none; height: 36px; padding: 0 14px; border-radius: 999px; font: inherit; font-size: 14px; cursor: pointer; transition: background .2s, color .2s, border-color .2s; ';
-const subs = [['all', 'Все']].concat(tags.map((t) => [t, t])).map(([sid, label]) => ({ label, pressed: sub === sid ? 'true' : 'false', pick: () => this.setState({ sub: sid }), style: subBase + (sub === sid ? 'border: 1px solid ' + this.tint(0.3) + '; background: ' + this.tint(0.14) + '; color: ' + this.selAcc() + '; font-weight: 600' : 'border: 1px solid ' + this.tint(0.07) + '; background: ' + this.tint(0.07) + '; color: #3F4147; font-weight: 500') }));
+const subs = [['all', 'Все']].concat(tags.map((t) => [t, t])).map(([sid, label]) => ({ label, pressed: sub === sid ? 'true' : 'false', pick: () => this.setState({ sub: sid }), style: subBase + (sub === sid ? 'border: 1.5px solid ' + this.icAcc() + '; background: ' + this.tint(0.14) + '; color: ' + this.selAcc() + '; font-weight: 600' : 'border: 1px solid ' + this.chipBg() + '; background: ' + this.chipBg() + '; color: #3F4147; font-weight: 500') }));
 const tid = this.state.toast !== undefined ? this.state.toast : ((this.props.showToast ?? false) ? 'banya-master' : null);
 const ts = tid ? DATA.svc.find((x) => x[0] === tid) : null;
 const tx = this.state.toastX && this.state.toastX.id === tid ? this.state.toastX : null;
@@ -1233,8 +1233,10 @@ for (let l = l0; l > 0; l -= 0.01) { const c = hex3(l); if (this.contrast(c, bg)
 return hex3(0);
 }
 secAcc() { return this.deepen(this.chipAcc(), this.tint(0.12), 4.5); }
-icAcc() { return this.deepen(this.chipAcc(), this.tint(0.07), 3); }
+icAcc() { return this.deepen(this.chipAcc(), this.chipBg(), 3); }
 selAcc() { return this.deepen(this.icAcc(), this.tint(0.16), 4.5); }
+lowAcc() { return this.contrast(this.chipAcc(), this.tint(0.07)) < 3; }
+chipBg() { return this.lowAcc() ? '#F4F3EF' : this.tint(0.07); }
 themeVals() {
 const t = this.theme(), all = this.themesAll();
 const id = this.state.themeId || this.lsGet('uslugi-theme') || this.props.theme || 'default';
@@ -1300,7 +1302,7 @@ closed: !this.state.search,
 sxClass: this.state.closing ? 'sx sx-closing' : 'sx',
 searchWrap: 'display: flex; flex: none; transition: width .32s cubic-bezier(.2,.8,.2,1); width: ' + ((this.state.focused || this.state.query) ? '360px' : '56px'),
 ph: 'Введите название услуги',
-fieldStyle: 'flex: 1; min-width: 0; height: 56px; box-sizing: border-box; border-radius: 999px; background: ' + ((this.state.focused || this.state.query) ? '#FFFFFF' : this.tint(0.07)) + '; display: flex; align-items: center; overflow: hidden; cursor: text; padding: 0 ' + ((this.state.focused || this.state.query) ? '8px 0 18px; gap: 10px' : '18px; gap: 0') + '; transition: box-shadow .2s; box-shadow: ' + (this.state.focused ? '0 0 0 2px ' + (this.acc()) : 'inset 0 0 0 1px ' + ((this.state.query) ? '#E4E2DC' : this.tint(0.07))),
+fieldStyle: 'flex: 1; min-width: 0; height: 56px; box-sizing: border-box; border-radius: 999px; background: ' + ((this.state.focused || this.state.query) ? '#FFFFFF' : this.chipBg()) + '; display: flex; align-items: center; overflow: hidden; cursor: text; padding: 0 ' + ((this.state.focused || this.state.query) ? '8px 0 18px; gap: 10px' : '18px; gap: 0') + '; transition: box-shadow .2s; box-shadow: ' + (this.state.focused ? '0 0 0 2px ' + (this.acc()) : 'inset 0 0 0 1px ' + ((this.state.query) ? '#E4E2DC' : this.chipBg())),
 query: this.state.query,
 hasQuery: this.state.query.length > 0,
 ...this.filter(),
