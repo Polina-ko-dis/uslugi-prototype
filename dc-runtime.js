@@ -131,7 +131,7 @@
     vn.dom = el;
     Object.keys(vn.attrs).forEach(function (k) { setAttr(el, k, vn.attrs[k], vn); });
     vn.kids.forEach(function (c) { el.appendChild(create(c, parentHost)); });
-    if (vn.tag === 'textarea' && 'value' in vn.attrs) el.value = str(vn.attrs.value);
+    if ((vn.tag === 'textarea' || vn.tag === 'select') && 'value' in vn.attrs) el.value = str(vn.attrs.value);
     listen(el, vn);
     if (vn.ref) parentHost.refs.push([vn.ref, el]);
     return el;
