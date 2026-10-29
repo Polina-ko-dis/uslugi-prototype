@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Бронирование подтверждено</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&amp;family=Montserrat:wght@400;500;600;700&amp;family=Roboto:wght@400;500;600;700&amp;display=swap">
 <style>
 body{margin:0}
 a{color:inherit;text-decoration:none}a:hover{color:inherit}
@@ -14,26 +14,26 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 <body>
 <div id="app"></div>
 <template data-dc="Success">
-<div style="width: 100%; height: 100%; position: relative; overflow: hidden; background: #F4F3EF; font-family: 'Onest', system-ui, sans-serif; color: #15161A; display: flex; flex-direction: column">
+<div style="width: 100%; height: 100%; position: relative; overflow: hidden; background: {{pageBg}}; font-family: {{fontFamily}}; --tx: {{textColor}}; color: var(--tx); display: flex; flex-direction: column">
 
-<header style="position: relative; z-index: 5; display: flex; align-items: center; justify-content: space-between; padding: 12px 16px 12px 20px; background: #FFFFFF; border-bottom: 1px solid #EDEBE6; border-bottom-left-radius: 24px; border-bottom-right-radius: 24px">
-<a href="Main.html" aria-label="Cosmos Москва ВДНХ — на главную" style="display: flex; align-items: center; height: 44px"><img src="assets/e61c0e74ae9b8b9fc548604cdf741b10.png" alt="Cosmos Москва ВДНХ" style="height: 34px; width: auto; display: block"></a>
+<header style="position: relative; z-index: 5; display: flex; align-items: center; justify-content: space-between; padding: 12px 16px 12px 20px; background: {{blockBg}}; border-bottom: 1px solid #EDEBE6; border-bottom-left-radius: {{rBlock}}; border-bottom-right-radius: {{rBlock}}">
+<a href="Main.html" aria-label="{{logoAlt}} — на главную" style="display: flex; align-items: center; height: 44px"><img src="{{logo}}" alt="{{logoAlt}}" style="height: {{logoH}}; width: auto; display: block"></a>
 <div style="display: flex; gap: 6px">
 <button type="button" onClick="{{toggleMenu}}" aria-haspopup="true" aria-expanded="{{menuExpanded}}" aria-label="Язык и валюта" style="{{globeStyle}}"><span style="white-space: nowrap">{{langCode}} · {{curSym}}</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{chevStyle}}"><path d="M6 9l6 6 6-6"></path></svg></button>
-<a href="#login" style="height: 44px; padding: 0 14px 0 12px; border-radius: 999px; background: #F4F3EF; color: #15161A; display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Войти</a>
+<a href="#login" style="height: 44px; padding: 0 14px 0 12px; border-radius: {{rBtnRound}}; background: #F4F3EF; color: var(--tx); display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Войти</a>
 </div>
 <sc-if value="{{menuOpen}}" hint-placeholder-val="{{ false }}">
 <div role="dialog" aria-label="Язык и валюта" style="position: absolute; z-index: 30; top: 64px; right: 12px; width: 340px; box-sizing: border-box; background: #FFFFFF; border-radius: 24px; box-shadow: 0 18px 48px rgba(21,22,26,0.18), 0 0 0 1px rgba(21,22,26,0.05); padding: 8px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px">
 <div style="display: flex; flex-direction: column; gap: 2px">
 <span style="padding: 10px 12px 6px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #63656B">Валюта</span>
 <sc-for list="{{curs}}" as="c" hint-placeholder-count="4">
-<button type="button" onClick="{{c.pick}}" style="{{c.style}}"><span style="width: 28px; height: 28px; border-radius: 999px; background: #F4F3EF; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700">{{c.sym}}</span><span style="flex: 1">{{c.code}}</span><sc-if value="{{c.sel}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></sc-if></button>
+<button type="button" onClick="{{c.pick}}" style="{{c.style}}"><span style="width: 28px; height: 28px; border-radius: 999px; background: #F4F3EF; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700">{{c.sym}}</span><span style="flex: 1">{{c.code}}</span><sc-if value="{{c.sel}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{icAcc}}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></sc-if></button>
 </sc-for>
 </div>
 <div style="display: flex; flex-direction: column; gap: 2px; border-left: 1px solid #EEECE7; padding-left: 4px">
 <span style="padding: 10px 12px 6px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #63656B">Язык</span>
 <sc-for list="{{langs}}" as="l" hint-placeholder-count="4">
-<button type="button" onClick="{{l.pick}}" style="{{l.style}}"><span style="flex: 1">{{l.name}}</span><sc-if value="{{l.sel}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></sc-if></button>
+<button type="button" onClick="{{l.pick}}" style="{{l.style}}"><span style="flex: 1">{{l.name}}</span><sc-if value="{{l.sel}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{icAcc}}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></sc-if></button>
 </sc-for>
 </div>
 </div>
@@ -50,11 +50,11 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 </div>
 </div>
 
-<section aria-label="Заказчик" style="background: #FFFFFF; border-radius: 24px; padding: 16px; display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: start">
+<section aria-label="Заказчик" style="background: {{blockBg}}; border-radius: {{rBlock}}; padding: 16px; display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: start">
 <span style="width: 40px; height: 40px; border-radius: 999px; background: #F4F3EF; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"></rect><path d="M4 7l8 6 8-6"></path></svg></span>
-<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #4A4C52; text-wrap: pretty">Иван Иванович, благодарим за выбор! Подтверждение бронирования отправили на <strong style="font-weight: 600; color: #15161A">ivanov_ivan@guest.mail</strong></p>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #4A4C52; text-wrap: pretty">Иван Иванович, благодарим за выбор! Подтверждение бронирования отправили на <strong style="font-weight: 600; color: var(--tx)">ivanov_ivan@guest.mail</strong></p>
 </section>
-<section aria-label="Оплата" style="background: #FFFFFF; border-radius: 24px; padding: 16px; display: flex; flex-direction: column; gap: 14px">
+<section aria-label="Оплата" style="background: {{blockBg}}; border-radius: {{rBlock}}; padding: 16px; display: flex; flex-direction: column; gap: 14px">
 <div style="display: flex; align-items: center; justify-content: space-between">
 <span style="font-size: 15px; font-weight: 600">Оплата</span>
 <span style="{{pillStyle}}"><span style="width: 8px; height: 8px; border-radius: 999px; background: currentColor"></span>{{pillText}}</span>
@@ -64,12 +64,12 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 <span style="font-size: 24px; font-weight: 700; letter-spacing: -0.02em">{{orderTotal}}</span>
 </div>
 <sc-if value="{{pending}}" hint-placeholder-val="{{ false }}">
-<button type="button" style="height: 52px; border: 0; border-radius: 16px; background: {{accent}}; color: #FFFFFF; font: inherit; font-size: 16px; font-weight: 600; cursor: pointer">Оплатить {{orderTotal}}</button>
+<button type="button" style="height: 52px; border: 0; border-radius: {{rBtn16}}; background: {{accent}}; color: {{accentText}}; font: inherit; font-size: 16px; font-weight: 600; cursor: pointer">Оплатить {{orderTotal}}</button>
 </sc-if>
 </section>
 
 
-<section aria-label="Состав заказа" style="background: #FFFFFF; border-radius: 24px; padding: 6px 16px; display: flex; flex-direction: column">
+<section aria-label="Состав заказа" style="background: {{blockBg}}; border-radius: {{rBlock}}; padding: 6px 16px; display: flex; flex-direction: column">
 <div style="padding: 12px 0 6px; font-size: 15px; font-weight: 600">Состав заказа</div>
 <sc-for list="{{orderLines}}" as="l"><div style="display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; align-items: start; padding: 10px 0 14px; border-bottom: 1px solid #EEECE7">
 <img src="{{l.img}}" alt="" style="width: 56px; height: 56px; border-radius: 14px; object-fit: cover; display: block">
@@ -80,13 +80,51 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 </div>
 
 <div style="padding: 20px 12px 24px">
-<a href="Main.html" style="height: 56px; border-radius: 18px; background: #E6EDFF; color: #2440C8; box-shadow: inset 0 0 0 1px #C9D6FF; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 600">Вернуться к услугам</a>
+<a href="Main.html" style="height: 56px; border-radius: {{rBtn18}}; background: {{secBg}}; color: {{secText}}; box-shadow: inset 0 0 0 1px {{secLine}}; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 600">Вернуться к услугам</a>
 </div>
 
 </div>
 </template>
 <script type="text/x-dc-logic" data-dc="Success" data-props='{"accent":{"editor":"color","default":"#1B5EB2","options":["#1B5EB2","#15161A","#E2572B","#1F7A55"]},"payment":{"editor":"enum","default":"paid","options":["paid","pending","hotel"]},"showMenu":{"editor":"boolean","default":false},"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
+themesAll() {
+return {
+default: { name: 'Дефолтный', accentBg: '#1B5EB2', accentText: '#FFFFFF', pageBg: '#F4F3EF', blockBg: '#FFFFFF', radiusBtn: null, radiusCard: 24, font: "'Onest', system-ui, sans-serif", text: '#15161A', cardBg: '#FFFFFF', hotel: 'Услуги отеля', logo: 'assets/71f2b8ba869ca24ce665ae6a8b5d5182.svg', logoAlt: 'Логотип отеля', logoH: 34, photo: 'assets/194c581a51832f8d117efe20ac6d059e.webp', photoPos: '50% 60%' },
+cosmos: { name: 'Cosmos', accentBg: '#00A5B5', accentText: '#FFFFFF', pageBg: '#FFFFFF', blockBg: '#FFFFFF', radiusBtn: 2, radiusCard: 4, font: "'Circe', Arial, sans-serif", text: '#323232', cardBg: '#FFFFFF', hotel: 'Услуги в гостинице «Космос»', logo: 'assets/e61c0e74ae9b8b9fc548604cdf741b10.png', logoAlt: 'Cosmos Москва ВДНХ', logoH: 34, photo: 'assets/17814eb412adbe740e438842d121f330.jpg', photoPos: '50% 38.4305%' },
+ohta: { name: 'Охта Парк', accentBg: '#006738', accentText: '#FFFFFF', pageBg: '#FFFFFF', blockBg: '#FFFFFF', radiusBtn: 10, radiusCard: 20, font: "'Montserrat', system-ui, sans-serif", text: '#000000', cardBg: '#F9FAF9', hotel: 'Услуги курорта «Охта Парк»', logo: 'assets/49695d9890919d24f3b1c1a6d0a47f86.svg', logoAlt: 'Охта Парк', logoH: 40, photo: 'assets/7f883da43b7e27ddcb0e290435b1fb65.webp', photoPos: '50% 55%' },
+territoria: { name: 'Территория', accentBg: '#986E61', accentText: '#FFFFFF', pageBg: '#FFFFFF', blockBg: '#FFFFFF', radiusBtn: 20, radiusCard: 0, font: "'Roboto', system-ui, sans-serif", text: '#1C2631', cardBg: '#FFFFFF', hotel: 'Услуги глэмпинга «Территория»', logo: 'assets/af765d90b6cbb1f7f82594328f1058f7.png', logoAlt: 'Глэмпинг Территория', logoH: 26, photo: 'assets/4a9cd242cf35a8a207249a4f60d8e155.webp', photoPos: '50% 72%' },
+zoldol: { name: 'Золотая Долина', accentBg: '#FFC800', accentText: '#3F4E5F', pageBg: '#FFFFFF', blockBg: '#FFFFFF', radiusBtn: 999, radiusCard: 30, font: "'Roboto', system-ui, sans-serif", text: '#000000', cardBg: '#FFFFFF', hotel: 'Услуги курорта «Золотая Долина»', logo: 'assets/c631464bff161dbfed48c1e6d5d1c142.png', logoAlt: 'Золотая долина', logoH: 36, photo: 'assets/da8651ce8e6beb681775930db4c3e6a6.webp', photoPos: '50% 50%' }
+};
+}lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+succTheme() {
+const all = this.themesAll();
+const id = this.lsGet('uslugi-theme') || this.props.theme || 'default';
+const scope = this.lsGet('uslugi-scope') || this.props.styleScope || 'accent';
+const D = { ...all.default, accentBg: this.props.accent ?? all.default.accentBg };
+const T = all[id] || D;
+const H = all[id] || all.default;
+const t = id === 'default' ? D : scope === 'all' ? { ...D, ...T } : { ...D, accentBg: T.accentBg, accentText: T.accentText };
+const rgb = (h) => { const n = parseInt(h.replace('#', ''), 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; };
+const tint = (p) => '#' + rgb(t.accentBg).map((v) => Math.round(255 - (255 - v) * p).toString(16).padStart(2, '0')).join('');
+const lum = (h) => rgb(h).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }).reduce((a, v, i) => a + v * [0.2126, 0.7152, 0.0722][i], 0);
+const contrast = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+// same hue, lower lightness until the contrast is reached (as deepen() on the main screens)
+const deepen = (hex, bg, min) => {
+if (contrast(hex, bg) >= min) return hex;
+const [r, g, b] = rgb(hex).map((v) => v / 255); const mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn; let h = 0, s = 0; const l0 = (mx + mn) / 2;
+if (d) { s = l0 > 0.5 ? d / (2 - mx - mn) : d / (mx + mn); h = mx === r ? (g - b) / d + (g < b ? 6 : 0) : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; h *= 60; }
+const hex3 = (l) => { const a = s * Math.min(l, 1 - l); const f = (k) => { const m = (k + h / 30) % 12; return Math.round(255 * (l - a * Math.max(-1, Math.min(m - 3, 9 - m, 1)))); }; return '#' + [f(0), f(8), f(4)].map((v) => v.toString(16).padStart(2, '0')).join(''); };
+for (let l = l0; l > 0; l -= 0.01) { const c = hex3(l); if (contrast(c, bg) >= min) return c; }
+return hex3(0);
+};
+const rb = (d) => t.radiusBtn == null ? d : t.radiusBtn + 'px';
+return {
+themeId: id, scope, accent: t.accentBg, accentText: t.accentText, fontFamily: t.font, textColor: t.text, pageBg: t.pageBg, blockBg: t.blockBg,
+rBlock: t.radiusCard + 'px', rBtnRound: rb('999px'), rBtn16: rb('16px'), rBtn18: rb('18px'),
+secBg: tint(0.12), secLine: tint(0.3), secText: deepen(t.accentBg, tint(0.12), 4.5), icAcc: deepen(t.accentBg, tint(0.07), 3),
+logo: H.logo, logoAlt: H.logoAlt, logoH: H.logoH + 'px'
+};
+}
 hdr() {
 const st = this.state || {};
 const open = st.menu ?? (this.props.showMenu ?? false);
@@ -106,12 +144,13 @@ toggleMenu: () => this.setState({ menu: !open }),
 curs, langs,
 curSym: curList.find((c) => c[0] === cur)[1],
 langCode: langList.find((l) => l[0] === lang)[2],
-globeStyle: 'height: 44px; padding: 0 10px 0 12px; border: 0; border-radius: 999px; font: inherit; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 6px; cursor: pointer; ' + (open ? 'background: #15161A; color: #FFFFFF' : 'background: #F4F3EF; color: #15161A'),
+globeStyle: 'height: 44px; padding: 0 10px 0 12px; border: 0; border-radius: ' + this.succTheme().rBtnRound + '; font: inherit; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 6px; cursor: pointer; ' + (open ? 'background: #15161A; color: #FFFFFF' : 'background: #F4F3EF; color: #15161A'),
 chevStyle: 'transition: transform .2s; transform: rotate(' + (open ? '180' : '0') + 'deg)'
 };
 }
 renderVals() {
-const accent = this.props.accent ?? '#1B5EB2';
+const th = this.succTheme();
+const accent = th.accent;
 const payment = this.props.payment ?? 'paid';
 const base = 'height: 32px; padding: 0 12px; border-radius: 999px; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; ';
 const map = {
@@ -120,7 +159,7 @@ pending: { text: 'Ожидает оплаты', note: 'К оплате', style: 
 hotel: { text: 'Оплата в отеле', note: 'При получении услуги', style: 'background: #ECEBE7; color: #3F4147' }
 };
 const s = map[payment] || map.paid;
-return { ...this.hdr(), ...P.successVals(this, ''), accent, pillText: s.text, payNote: s.note, pillStyle: base + s.style, pending: payment === 'pending' };
+return { ...this.hdr(), ...th, ...P.successVals(this, ''), accent, pillText: s.text, payNote: s.note, pillStyle: base + s.style, pending: payment === 'pending' };
 }
 }
 P.mix(Component);

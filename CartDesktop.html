@@ -1469,7 +1469,7 @@ const t = id === 'default' ? D : scope === 'all' ? { ...D, ...T } : { ...D, acce
 const tint = (p) => { const n = parseInt(t.accentBg.replace('#', ''), 16); return '#' + [n >> 16 & 255, n >> 8 & 255, n & 255].map((v) => Math.round(255 - (255 - v) * p).toString(16).padStart(2, '0')).join(''); };
 return {
 themeId: id, scope, accent: t.accentBg, accentText: t.accentText, fontFamily: t.font, textColor: t.text, pageBg: t.pageBg, blockBg: t.blockBg,
-badgeBg: tint(0.12), badgeText: t.accentBg, rBtnCta: t.radiusBtn == null ? '16px' : t.radiusBtn + 'px'
+badgeBg: tint(0.12), badgeText: t.text, rBtnCta: t.radiusBtn == null ? '16px' : t.radiusBtn + 'px'
 };
 }
 renderVals() {
