@@ -107,7 +107,8 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 </sc-if>
 </label>
 </div>
-<nav aria-label="Разделы" class="hs" style="flex: 1; min-width: 0; display: flex; gap: 10px; overflow-x: auto; padding: 10px 12px 10px 0; width: 100%">
+<nav aria-label="Разделы" class="hs" style="flex: 1; min-width: 0; display: flex; gap: 10px; overflow-x: auto; padding: 10px 12px 24px 10px; margin: 0 0 -14px -10px; width: 100%">
+<sc-if value="{{showAll}}" hint-placeholder-val="{{ true }}"><button type="button" class="chip" onClick="{{tabAll.pick}}" aria-pressed="{{tabAll.pressed}}" style="{{tabAll.style}}">Все</button></sc-if>
 <button type="button" class="chip" onClick="{{tab.food.pick}}" aria-pressed="{{tab.food.pressed}}" title="{{tab.food.hint}}" style="{{tab.food.style}}">
 <span class="ic" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center"><span style="{{icBox}}"><svg width="38" height="38" viewBox="0 0 80 80" fill="none" aria-hidden="true" style="display: block; filter: drop-shadow(0 2px 2px rgba(20,30,80,0.18))">
 <path d="M39.9988 4.66406C20.4805 4.66406 4.66016 20.4845 4.66016 40.0029C4.66016 54.0662 12.8965 66.1732 24.7885 71.861L25.8947 50.4883C25.8947 50.4883 23.8142 49.8055 23.3588 49.5831C18.9458 47.6392 15.7401 41.9159 15.7401 34.4877C15.7401 26.382 22.0264 19.4001 28.1039 19.3424C28.1116 19.3424 28.1116 19.3424 28.1167 19.3424C28.1194 19.3424 28.1245 19.3424 28.1268 19.3424C34.2057 19.3999 40.4923 26.3818 40.4923 34.4877C40.4923 41.9159 37.2825 47.6369 32.8787 49.5831C32.8441 49.5983 30.3226 50.5139 30.3226 50.5139L31.5578 74.2778C34.2684 74.945 37.0868 75.3367 40.0037 75.3367C43.9371 75.3367 47.7041 74.6665 51.2385 73.4824L52.333 52.3043C49.4484 51.6698 46.9881 49.8334 45.446 47.5294C43.5355 44.6677 46.9165 19.34 46.9165 19.34H49.1158V43.1075H51.3001V19.3427H53.6887V43.1128H55.8625V19.3427H58.3409V43.1128H60.5223V19.3427H62.21C62.21 19.3427 65.591 44.6704 63.6783 47.5321C62.1513 49.8134 59.7139 51.6446 56.8653 52.2941C56.8142 52.312 56.7679 52.3297 56.7679 52.3297L57.7193 70.5467C68.2459 64.4266 75.3402 53.0563 75.3402 40.0031C75.3349 20.4847 59.5145 4.66406 39.9988 4.66406Z" fill="url(#ifood_paint0_linear_17343_75798)"></path>
@@ -1107,9 +1108,11 @@ const sel_on = 'background: ' + this.tint(0.16) + '; border: 1.5px solid ' + thi
 const sel_off = 'background: ' + this.chipBg() + '; border: 1px solid ' + this.chipBg() + '; color: var(--tx)';
 const base = 'position: relative; flex: none; height: 56px; padding: 0 18px 0 8px; border-radius: 999px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; transition: background .2s, border-color .2s, color .2s; ';
 const tab = {};
+const abA = window.P.ab === 'a';
+const tabAll = { pressed: sel ? 'false' : 'true', pick: (e) => { this.chipReveal(e); this.setState({ tab: null, sub: 'all' }); }, style: base + 'padding: 0 22px; ' + (sel ? sel_off : sel_on) };
 DATA.cats.forEach(([id]) => {
 const on = sel === id;
-tab[id] = { on, hint: on ? 'Снять фильтр' : '', pressed: on ? 'true' : 'false', pick: () => this.setState({ tab: on ? null : id, sub: 'all' }), style: base + (on ? sel_on : sel_off) };
+tab[id] = { on, hint: on ? 'Снять фильтр' : '', pressed: on ? 'true' : 'false', pick: (e) => { this.chipReveal(e); this.setState({ tab: on ? null : id, sub: 'all' }); }, style: base + (on ? sel_on : sel_off) };
 });
 const subBase = 'flex: none; height: 36px; padding: 0 14px; border-radius: 999px; font: inherit; font-size: 14px; cursor: pointer; transition: background .2s, color .2s, border-color .2s; ';
 const subs = [['all', 'Все']].concat(tags.map((t) => [t, t])).map(([sid, label]) => ({ label, pressed: sub === sid ? 'true' : 'false', pick: () => this.setState({ sub: sid }), style: subBase + (sub === sid ? 'border: 1.5px solid ' + this.icAcc() + '; background: ' + this.tint(0.14) + '; color: ' + this.selAcc() + '; font-weight: 600' : 'border: 1px solid ' + this.chipBg() + '; background: ' + this.chipBg() + '; color: #3F4147; font-weight: 500') }));
@@ -1127,7 +1130,8 @@ items, tab, subs, hasSubs: tags.length > 0, gridTop: tags.length > 0 ? '14px' : 
 noResults: items.length === 0,
 nrTitle: q ? 'Ничего не нашлось' : 'В этом разделе пока нет услуг',
 nrText: q ? 'Попробуйте другое название или выберите раздел выше' : 'Выберите другой раздел или снимите фильтр',
-xStyle: 'position: absolute; top: -6px; right: -6px; width: 22px; height: 22px; border-radius: 999px; background: ' + this.icAcc() + '; color: #FFFFFF; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 2px #FFFFFF',
+showAll: !abA, tabAll, 
+xStyle: abA ? 'position: absolute; top: -6px; right: -6px; width: 22px; height: 22px; border-radius: 999px; background: ' + this.icAcc() + '; color: #FFFFFF; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 2px #FFFFFF' : 'display: none',
 ...mv, toastOn: !!ts, toast, closeToast: () => { clearTimeout(this.toastT); this.setState({ toast: null }); }, hasCart: count > 0, cartCount: count, cartLabel: count + ' ' + plural(count, 'услуга', 'услуги', 'услуг'), cartTotal: fmt(total),
 cartAria: 'Корзина: ' + count + ' ' + plural(count, 'услуга', 'услуги', 'услуг') + ' на ' + fmt(total), cartHref: 'Cart' + S + '.html'
 };
@@ -1211,6 +1215,17 @@ onKey: (e) => { if (e.key === 'Escape') close(); },
 add: () => { const pic = this.rootEl ? this.rootEl.querySelector('[data-modal-img]') : null; this.flyToCart(pic, id, s[7], { meta, sum, base: price, slot, qty }); this.setState({ modal: null }); }
 }
 };
+}
+chipReveal(e) {
+const c = e && e.currentTarget, n = c && c.closest ? c.closest('nav') : null;
+if (!n) return;
+const arrows = !!(n.parentElement && n.parentElement.querySelector('[data-nav-arr]'));
+const L = arrows ? 57 : 10, R = arrows ? 47 : 12;
+const a = c.getBoundingClientRect(), b = n.getBoundingClientRect();
+const dl = a.left - b.left, dr = b.right - a.right;
+const to = dl < L ? n.scrollLeft - (L - dl) : dr < R ? n.scrollLeft + (R - dr) : null;
+if (to === null) return;
+try { n.scrollTo({ left: to, behavior: 'smooth' }); } catch (err) { n.scrollLeft = to; }
 }
 tint(p) { const h = (this.chipAcc()).replace('#', ''); const n = parseInt(h, 16); const c = [n >> 16 & 255, n >> 8 & 255, n & 255].map((v) => Math.round(255 - (255 - v) * p)); return '#' + c.map((v) => v.toString(16).padStart(2, '0')).join(''); }
 themesAll() {

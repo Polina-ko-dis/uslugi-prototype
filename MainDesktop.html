@@ -27,7 +27,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 @keyframes dlg-in{from{transform:translate(-50%,-48%) scale(.97);opacity:0}to{transform:translate(-50%,-50%);opacity:1}}
 .ov{animation:ov-in .25s ease-out both}
 .dlg{animation:dlg-in .3s cubic-bezier(.2,.8,.2,1) both}
-.nav-arr:hover{color:#1B5EB2!important}
+.nav-arr:hover{filter:brightness(.96)}
 .nav-arr:focus-visible{outline:2px solid #15161A;outline-offset:2px}
 .toast{animation:toast-in .26s cubic-bezier(.2,.8,.2,1) both}
 @keyframes pill-pop0{0%{transform:scale(.55);opacity:0}55%{transform:scale(1.14);opacity:1}100%{transform:scale(1)}}
@@ -110,9 +110,9 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 </sc-if>
 </label>
 </div>
-<div style="position: relative; flex: 1; min-width: 0; display: flex">
-<nav aria-label="Разделы" class="hs" ref="{{setNav}}" onScroll="{{onNavScroll}}" style="position: relative; flex: 1; min-width: 0; display: flex; gap: 10px; overflow-x: auto; overscroll-behavior-x: contain; padding: 16px 24px 28px 0; margin: -6px 0 -18px; width: 100%">
-<sc-if value="{{abB}}" hint-placeholder-val="{{ false }}"><button type="button" class="chip" onClick="{{tabAll.pick}}" aria-pressed="{{tabAll.pressed}}" style="{{tabAll.style}}">Все</button></sc-if>
+<div style="position: relative; flex: 1; min-width: 0; display: flex; margin-left: -10px; --na-bg: {{navArrBg}}; --na-fg: {{navArrFg}}">
+<nav aria-label="Разделы" class="hs" ref="{{setNav}}" onScroll="{{onNavScroll}}" style="position: relative; flex: 1; min-width: 0; display: flex; gap: 10px; overflow-x: auto; overscroll-behavior-x: contain; padding: 16px 24px 28px 10px; margin: -6px 0 -18px; width: 100%">
+<sc-if value="{{showAll}}" hint-placeholder-val="{{ true }}"><button type="button" class="chip" onClick="{{tabAll.pick}}" aria-pressed="{{tabAll.pressed}}" style="{{tabAll.style}}">Все</button></sc-if>
 <button type="button" class="chip" onClick="{{tab.food.pick}}" aria-pressed="{{tab.food.pressed}}" title="{{tab.food.hint}}" style="{{tab.food.style}}">
 <span class="ic" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center"><span style="{{icBox}}"><svg width="38" height="38" viewBox="0 0 80 80" fill="none" aria-hidden="true" style="display: block; filter: drop-shadow(0 2px 2px rgba(20,30,80,0.18))">
 <path d="M39.9988 4.66406C20.4805 4.66406 4.66016 20.4845 4.66016 40.0029C4.66016 54.0662 12.8965 66.1732 24.7885 71.861L25.8947 50.4883C25.8947 50.4883 23.8142 49.8055 23.3588 49.5831C18.9458 47.6392 15.7401 41.9159 15.7401 34.4877C15.7401 26.382 22.0264 19.4001 28.1039 19.3424C28.1116 19.3424 28.1116 19.3424 28.1167 19.3424C28.1194 19.3424 28.1245 19.3424 28.1268 19.3424C34.2057 19.3999 40.4923 26.3818 40.4923 34.4877C40.4923 41.9159 37.2825 47.6369 32.8787 49.5831C32.8441 49.5983 30.3226 50.5139 30.3226 50.5139L31.5578 74.2778C34.2684 74.945 37.0868 75.3367 40.0037 75.3367C43.9371 75.3367 47.7041 74.6665 51.2385 73.4824L52.333 52.3043C49.4484 51.6698 46.9881 49.8334 45.446 47.5294C43.5355 44.6677 46.9165 19.34 46.9165 19.34H49.1158V43.1075H51.3001V19.3427H53.6887V43.1128H55.8625V19.3427H58.3409V43.1128H60.5223V19.3427H62.21C62.21 19.3427 65.591 44.6704 63.6783 47.5321C62.1513 49.8134 59.7139 51.6446 56.8653 52.2941C56.8142 52.312 56.7679 52.3297 56.7679 52.3297L57.7193 70.5467C68.2459 64.4266 75.3402 53.0563 75.3402 40.0031C75.3349 20.4847 59.5145 4.66406 39.9988 4.66406Z" fill="url(#ifood_paint0_linear_17343_75798)"></path>
@@ -927,8 +927,8 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 </defs>
 </svg></span></span>Подарки<sc-if value="{{tab.gifts.on}}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="{{xStyle}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></span></sc-if></button>
 </nav>
-<button type="button" class="nav-arr" data-nav-arr="l" onClick="{{navPrev}}" aria-label="Предыдущие разделы" tabindex="-1" aria-hidden="true" style="position: absolute; top: 23px; left: 0; z-index: 3; width: 30px; height: 30px; padding: 0; border: 0; border-radius: 999px; background: transparent; color: #6B6E75; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: opacity .2s ease, color .2s ease; opacity: 0; pointer-events: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6"></path></svg></button>
-<button type="button" class="nav-arr" data-nav-arr="r" onClick="{{navNext}}" aria-label="Следующие разделы" tabindex="-1" aria-hidden="true" style="position: absolute; top: 23px; left: 0; z-index: 3; width: 30px; height: 30px; padding: 0; border: 0; border-radius: 999px; background: transparent; color: #6B6E75; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: opacity .2s ease, color .2s ease; opacity: 0; pointer-events: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"></path></svg></button>
+<button type="button" class="nav-arr" data-nav-arr="l" onClick="{{navPrev}}" aria-label="Предыдущие разделы" tabindex="-1" aria-hidden="true" style="position: absolute; top: 22px; left: 0; z-index: 3; width: 32px; height: 32px; padding: 0; border: 0; border-radius: 999px; background: var(--na-bg); color: var(--na-fg); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: opacity .2s ease, color .2s ease; opacity: 0; pointer-events: none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
+<button type="button" class="nav-arr" data-nav-arr="r" onClick="{{navNext}}" aria-label="Следующие разделы" tabindex="-1" aria-hidden="true" style="position: absolute; top: 22px; left: 0; z-index: 3; width: 32px; height: 32px; padding: 0; border: 0; border-radius: 999px; background: var(--na-bg); color: var(--na-fg); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: opacity .2s ease, color .2s ease; opacity: 0; pointer-events: none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
 </div>
 </div>
 
@@ -1108,11 +1108,11 @@ const sel_on = 'background: ' + this.tint(0.16) + '; border: 1.5px solid ' + thi
 const sel_off = 'background: ' + this.chipBg() + '; border: 1px solid ' + this.chipBg() + '; color: var(--tx)';
 const base = 'position: relative; flex: none; height: 56px; padding: 0 18px 0 8px; border-radius: 999px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; transition: background .2s, border-color .2s, color .2s; ';
 const tab = {};
-const abB = window.P.ab === 'b';
-const tabAll = { pressed: sel ? 'false' : 'true', pick: () => this.setState({ tab: null, sub: 'all' }), style: base + 'padding: 0 22px; ' + (sel ? sel_off : sel_on) };
+const abA = window.P.ab === 'a';
+const tabAll = { pressed: sel ? 'false' : 'true', pick: (e) => { this.chipReveal(e); this.setState({ tab: null, sub: 'all' }); }, style: base + 'padding: 0 22px; ' + (sel ? sel_off : sel_on) };
 DATA.cats.forEach(([id]) => {
 const on = sel === id;
-tab[id] = { on, hint: on && !abB ? 'Снять фильтр' : '', pressed: on ? 'true' : 'false', pick: () => this.setState({ tab: on && !abB ? null : id, sub: 'all' }), style: base + (on ? sel_on : sel_off) };
+tab[id] = { on, hint: on ? 'Снять фильтр' : '', pressed: on ? 'true' : 'false', pick: (e) => { this.chipReveal(e); this.setState({ tab: on ? null : id, sub: 'all' }); }, style: base + (on ? sel_on : sel_off) };
 });
 const subBase = 'flex: none; height: 36px; padding: 0 14px; border-radius: 999px; font: inherit; font-size: 14px; cursor: pointer; transition: background .2s, color .2s, border-color .2s; ';
 const subs = [['all', 'Все']].concat(tags.map((t) => [t, t])).map(([sid, label]) => ({ label, pressed: sub === sid ? 'true' : 'false', pick: () => this.setState({ sub: sid }), style: subBase + (sub === sid ? 'border: 1.5px solid ' + this.icAcc() + '; background: ' + this.tint(0.14) + '; color: ' + this.selAcc() + '; font-weight: 600' : 'border: 1px solid ' + this.chipBg() + '; background: ' + this.chipBg() + '; color: #3F4147; font-weight: 500') }));
@@ -1130,8 +1130,8 @@ items, tab, subs, hasSubs: tags.length > 0, gridTop: tags.length > 0 ? '14px' : 
 noResults: items.length === 0,
 nrTitle: q ? 'Ничего не нашлось' : 'В этом разделе пока нет услуг',
 nrText: q ? 'Попробуйте другое название или выберите раздел выше' : 'Выберите другой раздел или снимите фильтр',
-abB, tabAll,
-xStyle: abB ? 'display: none' : 'position: absolute; top: -6px; right: -6px; width: 22px; height: 22px; border-radius: 999px; background: ' + this.icAcc() + '; color: #FFFFFF; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 2px #FFFFFF',
+showAll: !abA, tabAll, 
+xStyle: abA ? 'position: absolute; top: -6px; right: -6px; width: 22px; height: 22px; border-radius: 999px; background: ' + this.icAcc() + '; color: #FFFFFF; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 2px #FFFFFF' : 'display: none',
 ...mv, toastOn: !!ts, toast, closeToast: () => { clearTimeout(this.toastT); this.setState({ toast: null }); }, hasCart: count > 0, cartCount: count, cartLabel: count + ' ' + plural(count, 'услуга', 'услуги', 'услуг'), cartTotal: fmt(total),
 cartAria: 'Корзина: ' + count + ' ' + plural(count, 'услуга', 'услуги', 'услуг') + ' на ' + fmt(total), cartHref: 'Cart' + S + '.html'
 };
@@ -1220,12 +1220,12 @@ navCheck() {
 const n = this.navEl; if (!n) return;
 const W = n.clientWidth, sl = n.scrollLeft;
 const l = sl > 2, r = sl + W < n.scrollWidth - 2;
-const cl = 16, cr = W - 16;
+const cl = 26, cr = W - 16;
 const img = [], pos = [], size = [];
-if (l) { img.push('url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2740%27 height=%27100%27 viewBox=%270 0 40 100%27%3E%3Cdefs%3E%3Cmask id=%27m%27%3E%3Crect width=%2740%27 height=%27100%27 fill=%27white%27/%3E%3Ccircle cx=%275%27 cy=%2744%27 r=%2716%27 fill=%27black%27/%3E%3C/mask%3E%3C/defs%3E%3Cpath d=%27M40 16H28A28 28 0 0 0 28 72H40Z%27 fill=%27black%27 mask=%27url(%23m)%27/%3E%3C/svg%3E")'); pos.push(cl + 'px 0'); size.push('40px 100%'); }
+if (l) { img.push('url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2740%27 height=%27100%27 viewBox=%270 0 40 100%27%3E%3Cdefs%3E%3Cmask id=%27m%27%3E%3Crect width=%2740%27 height=%27100%27 fill=%27white%27/%3E%3Ccircle cx=%275%27 cy=%2744%27 r=%2720%27 fill=%27black%27/%3E%3C/mask%3E%3ClinearGradient id=%27f%27 x1=%271%27 x2=%270%27%3E%3Cstop offset=%270%27 stop-color=%27black%27/%3E%3Cstop offset=%271%27 stop-color=%27black%27 stop-opacity=%270%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=%27M40 16H28A28 28 0 0 0 28 72H40Z%27 fill=%27black%27 mask=%27url(%23m)%27/%3E%3Crect x=%2712%27 width=%2728%27 height=%2716%27 fill=%27url(%23f)%27/%3E%3Crect x=%2712%27 y=%2772%27 width=%2728%27 height=%2728%27 fill=%27url(%23f)%27/%3E%3C/svg%3E")'); pos.push(cl + 'px 0'); size.push('40px 100%'); }
 const a = l ? cl + 40 : 0, b = r ? cr - 40 : W;
 img.push('linear-gradient(#000, #000)'); pos.push(a + 'px 0'); size.push(Math.max(0, b - a) + 'px 100%');
-if (r) { img.push('url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2740%27 height=%27100%27 viewBox=%270 0 40 100%27%3E%3Cdefs%3E%3Cmask id=%27m%27%3E%3Crect width=%2740%27 height=%27100%27 fill=%27white%27/%3E%3Ccircle cx=%2735%27 cy=%2744%27 r=%2716%27 fill=%27black%27/%3E%3C/mask%3E%3C/defs%3E%3Cpath d=%27M0 16H12A28 28 0 0 1 12 72H0Z%27 fill=%27black%27 mask=%27url(%23m)%27/%3E%3C/svg%3E")'); pos.push((cr - 40) + 'px 0'); size.push('40px 100%'); }
+if (r) { img.push('url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2740%27 height=%27100%27 viewBox=%270 0 40 100%27%3E%3Cdefs%3E%3Cmask id=%27m%27%3E%3Crect width=%2740%27 height=%27100%27 fill=%27white%27/%3E%3Ccircle cx=%2735%27 cy=%2744%27 r=%2720%27 fill=%27black%27/%3E%3C/mask%3E%3ClinearGradient id=%27f%27 x1=%270%27 x2=%271%27%3E%3Cstop offset=%270%27 stop-color=%27black%27/%3E%3Cstop offset=%271%27 stop-color=%27black%27 stop-opacity=%270%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=%27M0 16H12A28 28 0 0 1 12 72H0Z%27 fill=%27black%27 mask=%27url(%23m)%27/%3E%3Crect x=%270%27 width=%2728%27 height=%2716%27 fill=%27url(%23f)%27/%3E%3Crect x=%270%27 y=%2772%27 width=%2728%27 height=%2728%27 fill=%27url(%23f)%27/%3E%3C/svg%3E")'); pos.push((cr - 40) + 'px 0'); size.push('40px 100%'); }
 const key = [l, r, W].join('|');
 if (key !== this.navKey) {
 this.navKey = key;
@@ -1235,7 +1235,7 @@ set('mask-image', img.join(', ')); set('mask-position', pos.join(', ')); set('ma
 const wrap = n.parentElement;
 const bl = wrap && wrap.querySelector('[data-nav-arr="l"]'), br = wrap && wrap.querySelector('[data-nav-arr="r"]');
 const arr = (el, show, x) => { if (!el) return; el.style.left = x + 'px'; el.style.opacity = show ? '1' : '0'; el.style.pointerEvents = show ? 'auto' : 'none'; el.tabIndex = show ? 0 : -1; el.setAttribute('aria-hidden', show ? 'false' : 'true'); };
-arr(bl, l, cl - 10); arr(br, r, cr - 20);
+arr(bl, l, cl - 11); arr(br, r, cr - 21);
 }
 const lo = l ? cl + 6 : -1e9, hi = r ? cr - 6 : 1e9;
 n.querySelectorAll('.chip').forEach((c) => { const L = c.offsetLeft - sl, R = L + c.offsetWidth; const vis = Math.min(R, hi) - Math.max(L, lo); const hide = vis < 44 && (R > hi || L < lo); const o = hide ? '0' : ''; if (c.style.opacity !== o) { c.style.transition = 'opacity .18s ease, transform .2s ease, box-shadow .2s ease'; c.style.opacity = o; } });
@@ -1252,8 +1252,21 @@ navVals() {
 return {
 setNav: (el) => { const first = !this.navEl && el; this.navEl = el; if (first) { this.navKey = ''; requestAnimationFrame(() => this.navCheck()); try { this.navRO = new ResizeObserver(() => this.navCheck()); this.navRO.observe(el); } catch (e) {} } },
 onNavScroll: () => { if (this.navRaf) return; this.navRaf = requestAnimationFrame(() => { this.navRaf = 0; this.navCheck(); }); },
-navPrev: () => this.navGo(-1), navNext: () => this.navGo(1)
+navPrev: () => this.navGo(-1), navNext: () => this.navGo(1),
+navArrBg: this.chipAcc() === '#1B5EB2' ? '#D9E9FF' : this.tint(0.16),
+navArrFg: this.chipAcc() === '#1B5EB2' ? '#1B5EB2' : this.selAcc()
 };
+}
+chipReveal(e) {
+const c = e && e.currentTarget, n = c && c.closest ? c.closest('nav') : null;
+if (!n) return;
+const arrows = !!(n.parentElement && n.parentElement.querySelector('[data-nav-arr]'));
+const L = arrows ? 57 : 10, R = arrows ? 47 : 12;
+const a = c.getBoundingClientRect(), b = n.getBoundingClientRect();
+const dl = a.left - b.left, dr = b.right - a.right;
+const to = dl < L ? n.scrollLeft - (L - dl) : dr < R ? n.scrollLeft + (R - dr) : null;
+if (to === null) return;
+try { n.scrollTo({ left: to, behavior: 'smooth' }); } catch (err) { n.scrollLeft = to; }
 }
 tint(p) { const h = (this.chipAcc()).replace('#', ''); const n = parseInt(h, 16); const c = [n >> 16 & 255, n >> 8 & 255, n & 255].map((v) => Math.round(255 - (255 - v) * p)); return '#' + c.map((v) => v.toString(16).padStart(2, '0')).join(''); }
 themesAll() {
