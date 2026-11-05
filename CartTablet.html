@@ -74,7 +74,7 @@ textarea::placeholder{color:#7A7C82}
 <div style="{{topRowStyle}}">
 <a href="MainTablet.html" aria-label="{{hotelLogoAlt}} — на главную" style="display: flex; align-items: center; height: 44px"><img src="{{hotelLogo}}" alt="{{hotelLogoAlt}}" style="height: {{hotelLogoH}}; width: auto; display: block"></a>
 <div style="display: flex; gap: 8px">
-<sc-if value="{{hasCart}}"><span style="position: relative; display: flex"><a href="{{cartHref}}" data-cart-pill="1" class="{{pillClass}}" aria-label="{{cartAria}}" style="height: 44px; padding: 0 16px 0 6px; border-radius: {{rBtnRound}}; background: {{accent}}; color: {{accentText}}; display: flex; align-items: center; gap: 8px; font-size: 14px; line-height: 16px; font-weight: 600; letter-spacing: -0.5px; box-shadow: 0 4px 12px rgba(27,94,178,0.25)"><span style="height: 32px; padding: 0 10px 0 8px; border-radius: 999px; background: rgba(255,255,255,0.18); display: flex; align-items: center; gap: 5px; font-size: 14px; line-height: 16px; font-weight: 600; letter-spacing: -0.5px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1 13H7z"></path><path d="M9 7a3 3 0 0 1 6 0"></path></svg>{{cartCount}}</span>{{cartTotal}}</a>
+<sc-if value="{{hasCart}}"><span style="position: relative; display: flex"><a href="{{cartHref}}" data-cart-pill="1" class="{{pillClass}}" aria-label="{{cartAria}}" style="height: 44px; padding: 0 16px 0 6px; border-radius: {{rBtnRound}}; background: {{accent}}; color: {{accentText}}; display: flex; align-items: center; gap: 8px; font-size: 14px; line-height: 16px; font-weight: 600; letter-spacing: -0.5px; box-shadow: 0 4px 12px color-mix(in srgb, {{accent}} 25%, transparent)"><span style="height: 32px; padding: 0 10px 0 8px; border-radius: 999px; background: rgba(255,255,255,0.18); display: flex; align-items: center; gap: 5px; font-size: 14px; line-height: 16px; font-weight: 600; letter-spacing: -0.5px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1 13H7z"></path><path d="M9 7a3 3 0 0 1 6 0"></path></svg>{{cartCount}}</span>{{cartTotal}}</a>
 <sc-if value="{{toastOn}}" hint-placeholder-val="{{ false }}">
 <div class="toast" role="status" aria-live="polite" style="position: absolute; z-index: 40; top: calc(100% + 14px); right: 0; width: 440px; box-sizing: border-box; padding: 18px 18px 20px 20px; background: #FFFFFF; border-radius: 24px; box-shadow: 0 18px 48px rgba(21,22,26,0.18), 0 0 0 1px rgba(21,22,26,0.05); display: flex; flex-direction: column; gap: 16px; color: var(--tx); text-align: left">
 <span aria-hidden="true" style="position: absolute; top: -7px; right: 58px; width: 14px; height: 14px; background: #FFFFFF; transform: rotate(45deg); border-radius: 3px 0 0 0; box-shadow: -1px -1px 0 rgba(21,22,26,0.05)"></span>
@@ -90,7 +90,7 @@ textarea::placeholder{color:#7A7C82}
 <span style="margin-top: 2px; font-size: 16px; line-height: 24px; font-weight: 600">{{toast.price}}</span>
 </div>
 </div>
-<a href="{{cartHref}}" style="height: 44px; border-radius: {{rBtnToast}}; background: {{secBg}}; color: {{secText}}; display: flex; align-items: center; justify-content: center; font-size: 16px; line-height: 20px; font-weight: 600; letter-spacing: -0.5px">Перейти в корзину</a>
+<a href="{{cartHref}}" style="height: 44px; border-radius: {{rBtnToast}}; background: {{secBg}}; color: {{secText}}; display: flex; align-items: center; justify-content: center; font-size: 14px; line-height: 16px; font-weight: 600; letter-spacing: -0.5px">Перейти в корзину</a>
 </div>
 </sc-if>
 </span></sc-if>
@@ -1287,7 +1287,7 @@ const sel = 'height: 30px; padding: 0 26px 0 10px; border: 1px solid #E4E2DC; bo
 return {
 fontFamily: t.font, textColor: t.text, accentText: t.accentText, secBg: this.tint(0.12), secText: this.secAcc(), secLine: this.tint(0.3), pageBg: t.pageBg, blockBg: t.blockBg, cardBg: t.cardBg,
 hotelTitle: H.hotel, hotelLogo: H.logo, hotelLogoAlt: H.logoAlt, hotelLogoH: H.logoH + 'px', hotelPhoto: H.photo, hotelPhotoPos: H.photoPos,
-rBtnRound: t.radiusBtn == null ? '999px' : t.radiusBtn + 'px', rBtnCta: t.radiusBtn == null ? '18px' : t.radiusBtn + 'px', rBtnToast: t.radiusBtn == null ? '14px' : t.radiusBtn + 'px',
+rBtnRound: t.radiusBtn == null ? '999px' : t.radiusBtn + 'px', rBtnCta: t.radiusBtn == null ? '999px' : t.radiusBtn + 'px', rBtnToast: t.radiusBtn == null ? '999px' : t.radiusBtn + 'px',
 rCard: t.radiusCard + 'px', rBlock: t.radiusBlock + 'px',
 demoSel: sel, scopeVal: scope, themeVal: id,
 themeOpts: Object.keys(all).map((k) => ({ id: k, name: all[k].name })),
@@ -1434,7 +1434,7 @@ const t = id === 'default' ? D : scope === 'all' ? { ...D, ...T } : { ...D, acce
 const tint = (p) => { const n = parseInt(t.accentBg.replace('#', ''), 16); return '#' + [n >> 16 & 255, n >> 8 & 255, n & 255].map((v) => Math.round(255 - (255 - v) * p).toString(16).padStart(2, '0')).join(''); };
 return {
 themeId: id, scope, accent: t.accentBg, accentText: t.accentText, fontFamily: t.font, textColor: t.text, pageBg: t.pageBg, blockBg: t.blockBg,
-badgeBg: tint(0.12), badgeText: t.text, rBtnCta: t.radiusBtn == null ? '16px' : t.radiusBtn + 'px'
+badgeBg: tint(0.12), badgeText: t.text, rBtnCta: t.radiusBtn == null ? '999px' : t.radiusBtn + 'px'
 };
 }
 renderVals() {

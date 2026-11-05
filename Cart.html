@@ -1274,7 +1274,7 @@ const sel = 'height: 30px; padding: 0 26px 0 10px; border: 1px solid #E4E2DC; bo
 return {
 fontFamily: t.font, textColor: t.text, accentText: t.accentText, secBg: this.tint(0.12), secText: this.secAcc(), secLine: this.tint(0.3), pageBg: t.pageBg, blockBg: t.blockBg, cardBg: t.cardBg,
 hotelTitle: H.hotel, hotelLogo: H.logo, hotelLogoAlt: H.logoAlt, hotelLogoH: H.logoH + 'px', hotelPhoto: H.photo, hotelPhotoPos: H.photoPos,
-rBtnRound: t.radiusBtn == null ? '999px' : t.radiusBtn + 'px', rBtnCta: t.radiusBtn == null ? '18px' : t.radiusBtn + 'px', rBtnToast: t.radiusBtn == null ? '14px' : t.radiusBtn + 'px',
+rBtnRound: t.radiusBtn == null ? '999px' : t.radiusBtn + 'px', rBtnCta: t.radiusBtn == null ? '999px' : t.radiusBtn + 'px', rBtnToast: t.radiusBtn == null ? '999px' : t.radiusBtn + 'px',
 rCard: t.radiusCard + 'px', rBlock: t.radiusBlock + 'px',
 demoSel: sel, scopeVal: scope, themeVal: id,
 themeOpts: Object.keys(all).map((k) => ({ id: k, name: all[k].name })),
@@ -1428,7 +1428,7 @@ const t = id === 'default' ? D : scope === 'all' ? { ...D, ...T } : { ...D, acce
 const tint = (p) => { const n = parseInt(t.accentBg.replace('#', ''), 16); return '#' + [n >> 16 & 255, n >> 8 & 255, n & 255].map((v) => Math.round(255 - (255 - v) * p).toString(16).padStart(2, '0')).join(''); };
 return {
 themeId: id, scope, accent: t.accentBg, accentText: t.accentText, fontFamily: t.font, textColor: t.text, pageBg: t.pageBg, blockBg: t.blockBg,
-badgeBg: tint(0.12), badgeText: t.text, rBtnCta: t.radiusBtn == null ? '16px' : t.radiusBtn + 'px'
+badgeBg: tint(0.12), badgeText: t.text, rBtnCta: t.radiusBtn == null ? '999px' : t.radiusBtn + 'px'
 };
 }
 renderVals() {
