@@ -47,6 +47,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 <button type="button" onClick="{{togglePhoto}}" role="switch" aria-checked="{{photoAria}}" title="Демо: у отеля есть фото" style="height: 30px; padding: 0 4px 0 12px; border: 1px solid #E4E2DC; border-radius: 999px; background: #FFFFFF; display: flex; align-items: center; gap: 8px; font: 600 12px system-ui, sans-serif; color: #3F4147; cursor: pointer">Фото<span style="{{swTrack}}"><span style="{{swKnob}}"></span></span></button>
 <select aria-label="Объём стилей" value="{{scopeVal}}" onChange="{{onScope}}" style="{{demoSel}}"><option value="accent">Только акцентный цвет</option><option value="all">Все стили</option></select>
 <select aria-label="Стили отеля" value="{{themeVal}}" onChange="{{onTheme}}" style="{{demoSel}}"><sc-for list="{{themeOpts}}" as="o" hint-placeholder-count="2"><option value="{{o.id}}">{{o.name}}</option></sc-for></select>
+<select aria-label="Ошибка" value="{{errVal}}" onChange="{{onErr}}" style="{{demoSel}}"><sc-for list="{{errOpts}}" as="o" hint-placeholder-count="2"><option value="{{o.id}}">{{o.name}}</option></sc-for></select>
 </div>
 <div class="hs" onScroll="{{onScroll}}" style="flex: 1; min-height: 0; overflow-y: auto; padding-bottom: 48px; box-sizing: border-box; background: {{pageBg}}; transition: background-color .3s ease">
 
@@ -76,7 +77,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 </sc-if>
 </span></sc-if>
 <button type="button" onClick="{{toggleMenu}}" data-fly-anchor="1" aria-haspopup="true" aria-expanded="{{menuExpanded}}" aria-label="Язык и валюта" style="{{globeStyle}}"><span>{{langCode}} · {{curSym}}</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{chevStyle}}"><path d="M6 9l6 6 6-6"></path></svg></button>
-<a href="#login" style="height: 44px; padding: 0 14px 0 12px; border-radius: {{rBtnRound}}; background: #F4F3EF; color: var(--tx); display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Войти</a>
+<a href="#login" onClick="{{onLogin}}" style="height: 44px; padding: 0 14px 0 12px; border-radius: {{rBtnRound}}; background: #F4F3EF; color: var(--tx); display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Войти</a>
 </div>
 </div>
 <sc-if value="{{hasPhoto}}" hint-placeholder-val="{{ true }}"><h1 aria-hidden="{{titleHidden}}" style="{{titleStyle}}">{{hotelTitle}}</h1></sc-if>
@@ -99,7 +100,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 
 
 </header>
-<section aria-label="Услуги" style="position: relative; z-index: 4; margin: 20px max(40px, calc((100% - 1200px) / 2)) 0; padding: 0 0 24px; background: {{blockBg}}; border: 1px solid #EDEBE6; border-radius: {{rBlock}}; box-shadow: 0 6px 20px rgba(21,22,26,0.04)">
+<sc-if value="{{errNone}}" hint-placeholder-val="{{ true }}"><section aria-label="Услуги" style="position: relative; z-index: 4; margin: 20px max(40px, calc((100% - 1200px) / 2)) 0; padding: 0 0 24px; background: {{blockBg}}; border: 1px solid #EDEBE6; border-radius: {{rBlock}}; box-shadow: 0 6px 20px rgba(21,22,26,0.04)">
 <div style="{{panelStyle}}">
 <div style="{{searchWrap}}">
 <label style="{{fieldStyle}}">
@@ -968,11 +969,490 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 </div>
 </sc-if>
 </div>
+</section></sc-if>
+<sc-if value="{{errPage}}" hint-placeholder-val="{{ false }}">
+<section aria-label="Ошибка" data-err-screens="1" style="position: relative; z-index: 4; margin: 20px max(40px, calc((100% - 1200px) / 2)) -28px; min-height: calc(100% - 90px); box-sizing: border-box; padding: 64px 40px 72px; background: {{blockBg}}; border: 1px solid #EDEBE6; border-radius: {{rBlock}}; box-shadow: 0 6px 20px rgba(21,22,26,0.04); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center">
+<div style="width: 560px; max-width: 100%; display: flex; flex-direction: column; align-items: center">
+<sc-if value="{{errPick}}" hint-placeholder-val="{{ false }}"><span style="{{icBox}}"><svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 190 190" fill="none" aria-hidden="true" style="display: block"><g>
+<g>
+<path id="errppick_Vector" d="M94.9999 183.921C142.85 183.921 181.64 145.131 181.64 97.2806C181.64 49.4307 142.85 10.6406 94.9999 10.6406C47.1499 10.6406 8.35986 49.4307 8.35986 97.2806C8.35986 145.131 47.1499 183.921 94.9999 183.921Z" fill="url(#errppick_paint0_linear_2361_68217)"></path>
+<path id="errppick_Vector_2" d="M94.9999 181.64C142.85 181.64 181.64 142.85 181.64 95.0004C181.64 47.1504 142.85 8.36035 94.9999 8.36035C47.1499 8.36035 8.35986 47.1504 8.35986 95.0004C8.35986 142.85 47.1499 181.64 94.9999 181.64Z" fill="url(#errppick_paint1_linear_2361_68217)" style="stroke: var(--ic1b5eb2)"></path>
+</g>
+<g>
+<mask id="errppick_mask0_2361_68217" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="8" y="8" width="174" height="174">
+<g>
+<path id="errppick_Vector_3" d="M94.64 181.28C142.49 181.28 181.28 142.49 181.28 94.64C181.28 46.7901 142.49 8 94.64 8C46.7901 8 8 46.7901 8 94.64C8 142.49 46.7901 181.28 94.64 181.28Z" fill="white"></path>
+</g>
+</mask>
+<g mask="url(#errppick_mask0_2361_68217)">
+<g opacity="0.46" filter="url(#errppick_filter0_f_2361_68217)">
+<path id="errppick_Vector_4" d="M74.12 39.5404C107.069 39.5404 133.78 32.2247 133.78 23.2004C133.78 14.176 107.069 6.86035 74.12 6.86035C41.1707 6.86035 14.46 14.176 14.46 23.2004C14.46 32.2247 41.1707 39.5404 74.12 39.5404Z" style="fill: var(--ica0caff)"></path>
+<path id="errppick_Vector_5" d="M169.5 192.301C191.956 192.301 210.16 178.18 210.16 160.761C210.16 143.342 191.956 129.221 169.5 129.221C147.044 129.221 128.84 143.342 128.84 160.761C128.84 178.18 147.044 192.301 169.5 192.301Z" style="fill: var(--ic0d468c)"></path>
+</g>
+</g>
+</g>
+<g>
+<g>
+<mask id="errppick_mask1_2361_68217" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="24" y="24" width="142" height="142">
+<g>
+<path id="errppick_Vector_6" d="M164.278 25.7217V164.277H25.7222V25.7217H164.278Z" stroke-width="1.946" style="fill: var(--icd8e9ff); stroke: var(--icf6faff)"></path>
+<path id="errppick_Vector_7" d="M134.793 104.66L55.6316 105.942L50.2295 117.318L56.8206 128.048L135.663 120.833L131.801 112.93L134.793 104.66Z" stroke-width="3.892" stroke-linejoin="round" style="fill: var(--icd8e9ff); stroke: var(--icf6faff)"></path>
+<path id="errppick_Vector_8" d="M49.7095 70.5489L140.487 62.3838L148.056 74.7923L141.818 87.92L50.6825 89.2297L53.6237 79.7108L49.7095 70.5489Z" stroke-width="3.892" stroke-linejoin="round" style="fill: var(--icd8e9ff); stroke: var(--icf6faff)"></path>
+</g>
+</mask>
+<g mask="url(#errppick_mask1_2361_68217)">
+<path id="errppick_Vector_9" d="M88.3433 53.219C88.3433 50.156 90.8264 47.6729 93.8894 47.6729C96.9524 47.6729 99.4355 50.156 99.4355 53.219V165.25H88.3433V53.219Z" stroke-width="2.1406" style="fill: var(--ica0caff); stroke: var(--icf6faff)"></path>
+</g>
+</g>
+<path id="errppick_Vector_10" d="M134.793 104.66L55.6316 105.942L50.2295 117.318L56.8206 128.048L135.663 120.833L131.801 112.93L134.793 104.66Z" stroke="white" stroke-width="2.1406" stroke-linejoin="round" style="fill: var(--ica0caff)"></path>
+<path id="errppick_Vector_11" d="M49.7095 70.5489L140.487 62.3838L148.056 74.7923L141.818 87.92L50.6825 89.2297L53.6237 79.7108L49.7095 70.5489Z" stroke="white" stroke-width="2.1406" stroke-linejoin="round" style="fill: var(--ica0caff)"></path>
+</g>
+<g>
+<mask id="errppick_mask2_2361_68217" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="49" y="47" width="100" height="119">
+<g>
+<g>
+<path id="errppick_Vector_12" d="M88.3433 53.219C88.3433 50.156 90.8264 47.6729 93.8894 47.6729C96.9524 47.6729 99.4355 50.156 99.4355 53.219V165.25H88.3433V53.219Z" fill="white"></path>
+<path id="errppick_Vector_13" d="M134.793 104.66L55.6316 105.942L50.2295 117.318L56.8206 128.048L135.663 120.833L131.801 112.93L134.793 104.66Z" fill="white"></path>
+<path id="errppick_Vector_14" d="M49.709 70.5489L140.487 62.3838L148.055 74.7923L141.817 87.92L50.682 89.2297L53.6232 79.7108L49.709 70.5489Z" fill="white"></path>
+</g>
+</g>
+</mask>
+<g mask="url(#errppick_mask2_2361_68217)">
+<g>
+<g opacity="0.55" filter="url(#errppick_filter1_f_2361_68217)">
+<path d="M47.1196 132.619C56.9996 118.939 67.2596 106.399 81.3196 93.4795" stroke-width="34" stroke-linecap="round" style="stroke: var(--ice8f2ff)"></path>
+</g>
+<g filter="url(#errppick_filter2_f_2361_68217)">
+<path d="M52.8198 130.339C61.1798 119.319 69.1598 110.199 79.0398 101.459" stroke-width="7" stroke-linecap="round" style="stroke: var(--icd8e9ff)"></path>
+</g>
+</g>
+</g>
+</g>
+<g>
+<g>
+<mask id="errppick_mask3_2361_68217" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="24" y="24" width="142" height="142">
+<g>
+<path id="errppick_Vector_17" d="M165.251 24.749H24.7495V165.25H165.251V24.749Z" fill="white"></path>
+<path id="errppick_Vector_18" d="M134.793 104.66L55.6316 105.942L50.2295 117.318L56.8206 128.048L135.663 120.833L131.801 112.93L134.793 104.66Z" fill="black" stroke="black" stroke-width="3.892" stroke-linejoin="round"></path>
+<path id="errppick_Vector_19" d="M49.7095 70.5489L140.487 62.3838L148.056 74.7923L141.818 87.92L50.6825 89.2297L53.6237 79.7108L49.7095 70.5489Z" fill="black" stroke="black" stroke-width="3.892" stroke-linejoin="round"></path>
+</g>
+</mask>
+<g mask="url(#errppick_mask3_2361_68217)">
+<path id="errppick_Vector_20" d="M88.3433 53.219C88.3433 50.156 90.8264 47.6729 93.8894 47.6729C96.9524 47.6729 99.4355 50.156 99.4355 53.219V165.25H88.3433V53.219Z" stroke-width="1.40112" style="stroke: var(--icf6faff)"></path>
+</g>
+</g>
+<path id="errppick_Vector_21" d="M134.793 104.66L55.6316 105.942L50.2295 117.318L56.8206 128.048L135.663 120.833L131.801 112.93L134.793 104.66Z" stroke-width="1.40112" stroke-linejoin="round" style="stroke: var(--ice8f2ff)"></path>
+<path id="errppick_Vector_22" d="M49.7095 70.5489L140.487 62.3838L148.056 74.7923L141.818 87.92L50.6825 89.2297L53.6237 79.7108L49.7095 70.5489Z" stroke-width="1.40112" stroke-linejoin="round" style="stroke: var(--ice8f2ff)"></path>
+</g>
+</g>
+<defs>
+<filter id="errppick_filter0_f_2361_68217" x="-3.54004" y="-11.1396" width="231.7" height="221.44" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
+<feGaussianBlur stdDeviation="9" result="effect1_foregroundBlur_2361_68217"></feGaussianBlur>
+</filter>
+<filter id="errppick_filter1_f_2361_68217" x="12.1182" y="58.4795" width="104.202" height="109.142" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
+<feGaussianBlur stdDeviation="9" result="effect1_foregroundBlur_2361_68217"></feGaussianBlur>
+</filter>
+<filter id="errppick_filter2_f_2361_68217" x="44.9198" y="93.559" width="42.0202" height="44.6799" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
+<feGaussianBlur stdDeviation="2.2" result="effect1_foregroundBlur_2361_68217"></feGaussianBlur>
+</filter>
+<linearGradient id="errppick_paint0_linear_2361_68217" x1="94.9999" y1="7.60063" x2="94.9999" y2="184.681" gradientUnits="userSpaceOnUse">
+<stop style="stop-color: var(--ic3076d4)"></stop>
+<stop offset="0.76" style="stop-color: var(--ic1b5eb2)"></stop>
+<stop offset="1" style="stop-color: var(--ic0d468c)"></stop>
+</linearGradient>
+<linearGradient id="errppick_paint1_linear_2361_68217" x1="41.0399" y1="16.3404" x2="156.18" y2="173.28" gradientUnits="userSpaceOnUse">
+<stop style="stop-color: var(--ic6eadff)"></stop>
+<stop offset="0.38" style="stop-color: var(--ic3076d4)"></stop>
+<stop offset="0.72" style="stop-color: var(--ic3076d4)"></stop>
+<stop offset="1" style="stop-color: var(--ic0d468c)"></stop>
+</linearGradient>
+</defs>
+</svg></span></sc-if>
+<sc-if value="{{errConn}}" hint-placeholder-val="{{ false }}"><span style="{{icBox}}"><svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 190 190" fill="none" aria-hidden="true" style="display: block"><g>
+<g>
+<path id="errpconnection_Vector" d="M94.9999 183.921C142.85 183.921 181.64 145.131 181.64 97.2806C181.64 49.4307 142.85 10.6406 94.9999 10.6406C47.1499 10.6406 8.35986 49.4307 8.35986 97.2806C8.35986 145.131 47.1499 183.921 94.9999 183.921Z" fill="url(#errpconnection_paint0_linear_2361_68217)"></path>
+<path id="errpconnection_Vector_2" d="M94.9999 181.64C142.85 181.64 181.64 142.85 181.64 95.0004C181.64 47.1504 142.85 8.36035 94.9999 8.36035C47.1499 8.36035 8.35986 47.1504 8.35986 95.0004C8.35986 142.85 47.1499 181.64 94.9999 181.64Z" fill="url(#errpconnection_paint1_linear_2361_68217)" style="stroke: var(--ic1b5eb2)"></path>
+</g>
+<g>
+<mask id="errpconnection_mask0_2361_68217" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="8" y="8" width="174" height="174">
+<g>
+<path id="errpconnection_Vector_3" d="M94.9999 181.64C142.85 181.64 181.64 142.85 181.64 95.0004C181.64 47.1504 142.85 8.36035 94.9999 8.36035C47.1499 8.36035 8.35986 47.1504 8.35986 95.0004C8.35986 142.85 47.1499 181.64 94.9999 181.64Z" fill="white"></path>
+</g>
+</mask>
+<g mask="url(#errpconnection_mask0_2361_68217)">
+<g opacity="0.46" filter="url(#errpconnection_filter0_f_2361_68217)">
+<path id="errpconnection_Vector_4" d="M74.4798 39.9007C107.429 39.9007 134.14 32.585 134.14 23.5607C134.14 14.5364 107.429 7.2207 74.4798 7.2207C41.5305 7.2207 14.8198 14.5364 14.8198 23.5607C14.8198 32.585 41.5305 39.9007 74.4798 39.9007Z" style="fill: var(--ica0caff)"></path>
+<path id="errpconnection_Vector_5" d="M169.86 192.661C192.316 192.661 210.52 178.54 210.52 161.121C210.52 143.702 192.316 129.581 169.86 129.581C147.404 129.581 129.2 143.702 129.2 161.121C129.2 178.54 147.404 192.661 169.86 192.661Z" style="fill: var(--ic1251a0)"></path>
+</g>
+</g>
+</g>
+<g>
+<path id="errpconnection_lowerConnectorFront" d="M53.5893 128.276C52.7725 128.276 52.1104 127.614 52.1104 126.797V114.226C52.1104 113.818 52.4414 113.486 52.8498 113.486H74.2948V128.276H53.5893Z" stroke-width="1.7514" stroke-linejoin="round" style="fill: var(--ice8f2ff); stroke: var(--icf6faff)"></path>
+<path id="errpconnection_Vector_6" d="M93.5209 116.444V103.134L74.2944 114.596V128.276L93.5209 116.444Z" stroke-width="1.7514" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--ice8f2ff)"></path>
+<path id="errpconnection_Vector_7" d="M68.3788 103.134H93.5211L75.7207 114.088C74.7883 114.662 73.715 114.965 72.6202 114.965H53.5397C52.1107 114.965 51.5941 113.081 52.8235 112.351L68.3788 103.134Z" stroke-width="1.7514" stroke-linejoin="round" style="fill: var(--ice8f2ff); stroke: var(--icf6faff)"></path>
+<path id="errpconnection_Vector_8" d="M82.0593 97.958H102.025L93.5212 103.134H73.1855L82.0593 97.958Z" stroke-width="1.7514" stroke-linejoin="round" style="fill: var(--ice8f2ff); stroke: var(--icf6faff)"></path>
+<path id="errpconnection_Vector_9" d="M102.025 97.958V107.941L93.521 113.487V103.134L102.025 97.958Z" stroke-width="1.7514" stroke-linejoin="round" style="fill: var(--icd8e9ff); stroke: var(--icf6faff)"></path>
+<path id="errpconnection_bottomCable" d="M76.0784 162.673C73.2654 161.888 70.5235 160.932 67.8646 159.818C68.8601 159.412 69.8261 159.004 70.7608 158.594C77.8892 155.471 82.9402 152.38 85.5213 149.823C86.8474 148.509 87.1477 147.701 87.1822 147.424C87.1896 147.365 87.184 147.359 87.1808 147.356L87.1794 147.354C87.1621 147.321 87.0576 147.141 86.6721 146.871C85.8445 146.292 84.1936 145.624 81.3103 145.126C78.4871 144.638 74.7314 144.353 69.9135 144.353C60.0157 144.353 53.2664 143.574 49.0378 142.133C46.9339 141.415 45.105 140.421 43.9125 138.951C42.5835 137.314 42.2814 135.378 42.7962 133.533C43.2602 131.871 44.3391 130.418 45.5027 129.219C46.7006 127.984 48.1981 126.804 49.8209 125.707C53.0697 123.513 57.0941 121.474 60.9527 119.868C62.4608 119.24 64.1924 119.953 64.8202 121.461C65.4481 122.97 64.7345 124.701 63.2264 125.329C59.6151 126.832 55.9646 128.697 53.1323 130.61C51.7146 131.568 50.5701 132.492 49.7492 133.338C48.894 134.219 48.5775 134.826 48.4942 135.124C48.4843 135.159 48.4773 135.178 48.4736 135.187C48.4711 135.193 48.4711 135.197 48.4711 135.197C48.4711 135.197 48.4725 135.198 48.4742 135.198C48.4791 135.2 48.4893 135.204 48.5055 135.224C48.6869 135.447 49.305 135.973 50.946 136.533C54.2071 137.645 60.1393 138.437 69.9132 138.437C74.9312 138.437 79.0489 138.732 82.3172 139.296C85.5252 139.851 88.1837 140.709 90.0638 142.025C92.09 143.442 93.3766 145.557 93.0525 148.157C92.7718 150.408 91.3358 152.39 89.6847 154.026C86.7772 156.906 82.0176 159.861 76.0784 162.673Z" stroke-width="1.7514" stroke-linejoin="round" style="fill: var(--icd8e9ff); stroke: var(--icf6faff)"></path>
+<g>
+<mask id="errpconnection_mask1_2361_68217" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="24" y="24" width="142" height="142">
+<g>
+<path id="errpconnection_Vector_10" d="M165.251 24.749H24.7495V165.25H165.251V24.749Z" fill="white"></path>
+<path id="errpconnection_Vector_11" d="M53.5893 128.276C52.7725 128.276 52.1104 127.614 52.1104 126.797V114.226C52.1104 113.818 52.4414 113.486 52.8498 113.486H74.2948V128.276H53.5893Z" fill="black" stroke="black" stroke-width="2.919"></path>
+<path id="errpconnection_Vector_12" d="M93.5209 116.444V103.134L74.2944 114.596V128.276L93.5209 116.444Z" fill="black" stroke="black" stroke-width="2.919"></path>
+<path id="errpconnection_Vector_13" d="M68.3788 103.134H93.5211L75.7207 114.088C74.7883 114.662 73.715 114.965 72.6202 114.965H53.5397C52.1107 114.965 51.5941 113.081 52.8235 112.351L68.3788 103.134Z" fill="black" stroke="black" stroke-width="2.919"></path>
+<path id="errpconnection_Vector_14" d="M82.0593 97.958H102.025L93.5212 103.134H73.1855L82.0593 97.958Z" fill="black" stroke="black" stroke-width="2.919"></path>
+<path id="errpconnection_Vector_15" d="M102.025 97.958V107.941L93.521 113.487V103.134L102.025 97.958Z" fill="black" stroke="black" stroke-width="2.919"></path>
+<path id="errpconnection_Vector_16" d="M97.2188 76.5127H122.361V89.0839H97.2188V76.5127Z" fill="black" stroke="black" stroke-width="2.919"></path>
+<path id="errpconnection_Vector_17" d="M138.629 66.291V78.7311L122.361 89.0839V76.5127L138.629 66.291Z" fill="black" stroke="black" stroke-width="2.919"></path>
+<path id="errpconnection_Vector_18" d="M122.361 76.5133H97.2188L115.019 65.5592C115.952 64.9854 117.025 64.6816 118.119 64.6816H137.2C138.629 64.6816 139.146 66.5668 137.916 67.2953L122.361 76.5133Z" fill="black" stroke="black" stroke-width="2.919"></path>
+</g>
+</mask>
+<g mask="url(#errpconnection_mask1_2361_68217)">
+<path id="errpconnection_topCable" d="M126.827 66.0331C125.319 66.6609 124.605 68.3925 125.233 69.9007C125.861 71.4088 127.592 72.1226 129.101 71.4948C132.959 69.8886 136.983 67.8489 140.232 65.6545C141.855 64.5584 143.353 63.378 144.551 62.143C145.714 60.9433 146.793 59.4912 147.257 57.8285C147.772 55.9837 147.469 54.0478 146.14 52.4104C144.948 50.9413 143.119 49.9465 141.015 49.2295C136.787 47.7881 130.037 47.0087 120.14 47.0087C115.322 47.0087 111.566 46.724 108.743 46.2362C105.859 45.738 104.208 45.0699 103.381 44.4907C102.995 44.221 102.891 44.0413 102.873 44.008L102.872 44.0062C102.869 44.0028 102.864 43.9971 102.871 43.9375C102.905 43.6613 103.205 42.8529 104.532 41.5392C107.113 38.9823 112.164 35.8915 119.292 32.7678C120.722 32.1416 122.223 31.5185 123.793 30.9022C121.193 29.7329 118.51 28.7171 115.755 27.8662C108.987 30.9209 103.561 34.1735 100.368 37.3362C98.7175 38.9718 97.2812 40.9542 97.0005 43.2051C96.6764 45.8049 97.963 47.9196 99.9894 49.3376C101.869 50.6533 104.528 51.5114 107.735 52.0657C111.004 52.6304 115.122 52.9246 120.14 52.9246C129.914 52.9246 135.846 53.7175 139.107 54.829C140.748 55.3883 141.366 55.9151 141.547 56.1386C141.564 56.1586 141.574 56.1619 141.579 56.1636C141.581 56.1641 141.582 56.1651 141.582 56.1651C141.584 56.1682 141.576 56.1779 141.559 56.238C141.476 56.5363 141.159 57.1423 140.304 58.0239C139.483 58.8703 138.338 59.7945 136.921 60.752C134.088 62.6651 130.438 64.5299 126.827 66.0331Z" stroke-width="1.7514" stroke-linejoin="round" style="fill: var(--icd8e9ff); stroke: var(--icf6faff)"></path>
+</g>
+</g>
+<path id="errpconnection_Vector_19" fill-rule="evenodd" clip-rule="evenodd" d="M97.2188 76.5127H122.361V89.0839H97.2188V76.5127ZM100.177 78.7311V85.3865H104.614V87.6049H114.966V85.3865H119.403V78.7311H100.177Z" stroke-width="1.7514" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--ice8f2ff)"></path>
+<path id="errpconnection_Vector_20" d="M138.629 66.291V78.7311L122.361 89.0839V76.5127L138.629 66.291Z" stroke-width="1.7514" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--icd8e9ff)"></path>
+<path id="errpconnection_Vector_21" d="M122.361 76.5133H97.2188L115.019 65.5592C115.952 64.9854 117.025 64.6816 118.119 64.6816H137.2C138.629 64.6816 139.146 66.5668 137.916 67.2953L122.361 76.5133Z" stroke-width="1.7514" stroke-linejoin="round" style="fill: var(--ice8f2ff); stroke: var(--icf6faff)"></path>
+<g>
+<path id="errpconnection_Vector_22" d="M48.8617 83.1502C48.8439 82.3336 49.4916 81.6572 50.3082 81.6395L74.3612 81.1166C75.1778 81.0988 75.8542 81.7465 75.8719 82.5631C75.8897 83.3797 75.242 84.0561 74.4254 84.0738L50.3724 84.5967C49.5558 84.6145 48.8794 83.9668 48.8617 83.1502Z" stroke-width="0.8757" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--icd8e9ff)"></path>
+<path id="errpconnection_Vector_23" d="M61.0597 54.6197C61.6372 54.0421 62.5737 54.0421 63.1512 54.6197L80.6681 72.1366C81.2456 72.7141 81.2456 73.6505 80.6681 74.2281C80.0905 74.8057 79.1541 74.8057 78.5765 74.2281L61.0597 56.7113C60.4821 56.1337 60.4821 55.1973 61.0597 54.6197Z" stroke-width="0.8757" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--icd8e9ff)"></path>
+<path id="errpconnection_Vector_24" d="M88.5112 42.4219C89.328 42.4219 89.9901 43.084 89.9901 43.9008V67.4309C89.9901 68.2478 89.328 68.9099 88.5112 68.9099C87.6944 68.9099 87.0322 68.2478 87.0322 67.4309V43.9008C87.0322 43.084 87.6944 42.4219 88.5112 42.4219Z" stroke-width="0.8757" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--icd8e9ff)"></path>
+<path id="errpconnection_Vector_25" d="M141.139 106.351C141.156 107.167 140.508 107.844 139.692 107.862L115.639 108.385C114.822 108.402 114.146 107.755 114.128 106.938C114.111 106.122 114.758 105.445 115.575 105.427L139.628 104.905C140.444 104.887 141.121 105.535 141.139 106.351Z" stroke-width="0.8757" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--icd8e9ff)"></path>
+<path id="errpconnection_Vector_26" d="M128.94 134.881C128.362 135.458 127.426 135.458 126.848 134.881L109.332 117.364C108.754 116.786 108.754 115.85 109.332 115.272C109.909 114.694 110.845 114.694 111.423 115.272L128.94 132.789C129.517 133.366 129.517 134.303 128.94 134.881Z" stroke-width="0.8757" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--icd8e9ff)"></path>
+<path id="errpconnection_Vector_27" d="M101.488 147.079C100.672 147.079 100.009 146.416 100.009 145.6V122.07C100.009 121.253 100.672 120.591 101.488 120.591C102.305 120.591 102.967 121.253 102.967 122.07V145.6C102.967 146.416 102.305 147.079 101.488 147.079Z" stroke-width="0.8757" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--icd8e9ff)"></path>
+</g>
+</g>
+</g>
+<defs>
+<filter id="errpconnection_filter0_f_2361_68217" x="-3.18018" y="-10.7793" width="231.7" height="221.44" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
+<feGaussianBlur stdDeviation="9" result="effect1_foregroundBlur_2361_68217"></feGaussianBlur>
+</filter>
+<linearGradient id="errpconnection_paint0_linear_2361_68217" x1="94.9999" y1="7.60063" x2="94.9999" y2="184.681" gradientUnits="userSpaceOnUse">
+<stop style="stop-color: var(--ic3076d4)"></stop>
+<stop offset="0.76" style="stop-color: var(--ic1b5eb2)"></stop>
+<stop offset="1" style="stop-color: var(--ic0d468c)"></stop>
+</linearGradient>
+<linearGradient id="errpconnection_paint1_linear_2361_68217" x1="41.0399" y1="16.3404" x2="156.18" y2="173.28" gradientUnits="userSpaceOnUse">
+<stop style="stop-color: var(--ic6eadff)"></stop>
+<stop offset="0.38" style="stop-color: var(--ic3076d4)"></stop>
+<stop offset="0.72" style="stop-color: var(--ic3076d4)"></stop>
+<stop offset="1" style="stop-color: var(--ic0d468c)"></stop>
+</linearGradient>
+</defs>
+</svg></span></sc-if>
+<sc-if value="{{errCal}}" hint-placeholder-val="{{ false }}"><span style="{{icBox}}"><svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 190 190" fill="none" aria-hidden="true" style="display: block"><g>
+<g>
+<path id="errpcalendar_Vector" d="M94.9999 183.921C142.85 183.921 181.64 145.131 181.64 97.2806C181.64 49.4307 142.85 10.6406 94.9999 10.6406C47.1499 10.6406 8.35986 49.4307 8.35986 97.2806C8.35986 145.131 47.1499 183.921 94.9999 183.921Z" fill="url(#errpcalendar_paint0_linear_2361_68217)"></path>
+<path id="errpcalendar_Vector_2" d="M94.9999 181.64C142.85 181.64 181.64 142.85 181.64 95.0004C181.64 47.1504 142.85 8.36035 94.9999 8.36035C47.1499 8.36035 8.35986 47.1504 8.35986 95.0004C8.35986 142.85 47.1499 181.64 94.9999 181.64Z" fill="url(#errpcalendar_paint1_linear_2361_68217)" style="stroke: var(--ic1b5eb2)"></path>
+</g>
+<g>
+<mask id="errpcalendar_mask0_2361_68217" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="8" y="8" width="174" height="174">
+<g>
+<path id="errpcalendar_Vector_3" d="M94.9999 181.64C142.85 181.64 181.64 142.85 181.64 95.0004C181.64 47.1504 142.85 8.36035 94.9999 8.36035C47.1499 8.36035 8.35986 47.1504 8.35986 95.0004C8.35986 142.85 47.1499 181.64 94.9999 181.64Z" fill="white"></path>
+</g>
+</mask>
+<g mask="url(#errpcalendar_mask0_2361_68217)">
+<g opacity="0.46" filter="url(#errpcalendar_filter0_f_2361_68217)">
+<path id="errpcalendar_Vector_4" d="M74.4798 39.9007C107.429 39.9007 134.14 32.585 134.14 23.5607C134.14 14.5364 107.429 7.2207 74.4798 7.2207C41.5305 7.2207 14.8198 14.5364 14.8198 23.5607C14.8198 32.585 41.5305 39.9007 74.4798 39.9007Z" style="fill: var(--ica0caff)"></path>
+<path id="errpcalendar_Vector_5" d="M169.86 192.661C192.316 192.661 210.52 178.54 210.52 161.121C210.52 143.702 192.316 129.581 169.86 129.581C147.404 129.581 129.2 143.702 129.2 161.121C129.2 178.54 147.404 192.661 169.86 192.661Z" style="fill: var(--ic0d468c)"></path>
+</g>
+</g>
+</g>
+<g>
+<path id="errpcalendar_calendarBody" d="M52.1133 123.635V69.9824H133.122V123.635C133.122 128.197 129.059 131.93 124.093 131.93H61.1421C56.1762 131.93 52.1133 128.197 52.1133 123.635Z" stroke-width="1.782" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--icd8e9ff)"></path>
+<path id="errpcalendar_calendarHeader" d="M133.122 58.5462V69.9827H52.1133V58.5462C52.1133 54.3528 56.1762 50.9219 61.1421 50.9219H124.093C129.059 50.9219 133.122 54.3528 133.122 58.5462Z" stroke-width="1.782" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--icd8e9ff)"></path>
+<path id="errpcalendar_binderBackRight" d="M113.32 67.6491C117.021 67.6491 120.022 64.6487 120.022 60.9476C120.022 57.2464 117.021 54.2461 113.32 54.2461C109.619 54.2461 106.619 57.2464 106.619 60.9476C106.619 64.6487 109.619 67.6491 113.32 67.6491Z" stroke-width="1.386" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--icf6faff)"></path>
+<path id="errpcalendar_binderBackLeft" d="M73.1102 67.6491C76.8114 67.6491 79.8117 64.6487 79.8117 60.9476C79.8117 57.2464 76.8114 54.2461 73.1102 54.2461C69.409 54.2461 66.4087 57.2464 66.4087 60.9476C66.4087 64.6487 69.409 67.6491 73.1102 67.6491Z" stroke-width="1.386" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--ice8f2ff)"></path>
+<path id="errpcalendar_binderPosts" d="M113.194 46.1562C110.752 46.1562 108.754 48.0623 108.754 50.392V60.9813C108.754 63.311 110.752 65.217 113.194 65.217C115.637 65.217 117.635 63.311 117.635 60.9813V50.392C117.635 48.0623 115.637 46.1562 113.194 46.1562ZM73.2318 46.1562C70.7897 46.1562 68.7915 48.0623 68.7915 50.392V60.9813C68.7915 63.311 70.7897 65.217 73.2318 65.217C75.6739 65.217 77.6721 63.311 77.6721 60.9813V50.392C77.6721 48.0623 75.6739 46.1562 73.2318 46.1562Z" stroke="white" stroke-width="1.584" stroke-linejoin="round" style="fill: var(--ice8f2ff)"></path>
+<path id="errpcalendar_calendarCells" d="M61.644 81.0175C61.644 80.1864 62.3177 79.5127 63.1488 79.5127H72.0522C72.8833 79.5127 73.557 80.1864 73.557 81.0175V88.7296C73.557 89.5607 72.8833 90.2344 72.0522 90.2344H63.1488C62.3177 90.2344 61.644 89.5607 61.644 88.7296V81.0175ZM78.3223 81.0175C78.3223 80.1864 78.996 79.5127 79.8271 79.5127H88.7304C89.5615 79.5127 90.2352 80.1864 90.2352 81.0175V88.7296C90.2352 89.5607 89.5615 90.2344 88.7304 90.2344H79.8271C78.996 90.2344 78.3223 89.5607 78.3223 88.7296V81.0175ZM95.0004 81.0175C95.0004 80.1864 95.6742 79.5127 96.5052 79.5127H105.409C106.24 79.5127 106.914 80.1864 106.914 81.0175V88.7296C106.914 89.5607 106.24 90.2344 105.409 90.2344H96.5052C95.6742 90.2344 95.0004 89.5607 95.0004 88.7296V81.0175ZM111.679 81.0175C111.679 80.1864 112.352 79.5127 113.183 79.5127H122.087C122.918 79.5127 123.591 80.1864 123.591 81.0175V88.7296C123.591 89.5607 122.918 90.2344 122.087 90.2344H113.183C112.352 90.2344 111.679 89.5607 111.679 88.7296V81.0175ZM61.644 97.1C61.644 96.2689 62.3177 95.5952 63.1488 95.5952H72.0522C72.8833 95.5952 73.557 96.2689 73.557 97.1V104.812C73.557 105.644 72.8833 106.317 72.0522 106.317H63.1488C62.3177 106.317 61.644 105.644 61.644 104.812V97.1ZM78.3223 97.1C78.3223 96.2689 78.996 95.5952 79.8271 95.5952H88.7304C89.5615 95.5952 90.2352 96.2689 90.2352 97.1V104.812C90.2352 105.644 89.5615 106.317 88.7304 106.317H79.8271C78.996 106.317 78.3223 105.644 78.3223 104.812V97.1ZM95.0004 97.1C95.0004 96.2689 95.6742 95.5952 96.5052 95.5952H105.409C106.24 95.5952 106.914 96.2689 106.914 97.1V104.812C106.914 105.644 106.24 106.317 105.409 106.317H96.5052C95.6742 106.317 95.0004 105.644 95.0004 104.812V97.1ZM111.679 97.1C111.679 96.2689 112.352 95.5952 113.183 95.5952H122.087C122.918 95.5952 123.591 96.2689 123.591 97.1V104.812C123.591 105.644 122.918 106.317 122.087 106.317H113.183C112.352 106.317 111.679 105.644 111.679 104.812V97.1ZM61.644 113.183C61.644 112.351 62.3177 111.678 63.1488 111.678H72.0522C72.8833 111.678 73.557 112.351 73.557 113.183V120.895C73.557 121.726 72.8833 122.4 72.0522 122.4H63.1488C62.3177 122.4 61.644 121.726 61.644 120.895V113.183ZM78.3223 113.183C78.3223 112.351 78.996 111.678 79.8271 111.678H88.7304C89.5615 111.678 90.2352 112.351 90.2352 113.183V120.895C90.2352 121.726 89.5615 122.4 88.7304 122.4H79.8271C78.996 122.4 78.3223 121.726 78.3223 120.895V113.183ZM95.0004 113.183C95.0004 112.351 95.6742 111.678 96.5052 111.678H105.409C106.24 111.678 106.914 112.351 106.914 113.183V120.895C106.914 121.726 106.24 122.4 105.409 122.4H96.5052C95.6742 122.4 95.0004 121.726 95.0004 120.895V113.183ZM111.679 113.183C111.679 112.351 112.352 111.678 113.183 111.678H122.087C122.918 111.678 123.591 112.351 123.591 113.183V120.895C123.591 121.726 122.918 122.4 122.087 122.4H113.183C112.352 122.4 111.679 121.726 111.679 120.895V113.183Z" stroke="white" stroke-width="1.089" stroke-linejoin="round" style="fill: var(--ice8f2ff)"></path>
+<path id="errpcalendar_lensBacking" d="M121.207 117.634C121.207 132.109 109.472 143.843 94.9981 143.843C80.5235 143.843 68.7896 132.109 68.7896 117.634C68.7896 103.159 80.5235 91.4258 94.9981 91.4258C109.472 91.4258 121.207 103.159 121.207 117.634Z" style="fill: var(--icd8e9ff)"></path>
+<path id="errpcalendar_lens" d="M121.207 117.634C121.207 132.109 109.472 143.843 94.9981 143.843C80.5235 143.843 68.7896 132.109 68.7896 117.634C68.7896 103.159 80.5235 91.4258 94.9981 91.4258C109.472 91.4258 121.207 103.159 121.207 117.634Z" stroke-width="1.386" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--ica0caff)"></path>
+<path id="errpcalendar_lensCellRight" d="M109.295 112.179H118.827C119.296 112.179 119.746 112.256 120.168 112.396C120.519 114.088 120.707 115.839 120.707 117.635C120.707 122.216 119.505 126.515 117.406 130.239H109.295C106.941 130.239 105.031 128.329 105.031 125.975V116.443C105.031 114.088 106.941 112.179 109.295 112.179Z" stroke="white" style="fill: var(--ice8f2ff)"></path>
+<path id="errpcalendar_lensCellLeft" d="M83.0874 112.179H92.6177C94.9731 112.179 96.8822 114.088 96.8823 116.443V125.975C96.8822 128.329 94.973 130.239 92.6177 130.239H83.0874C80.7319 130.239 78.8219 128.329 78.8218 125.975V116.443C78.8219 114.088 80.7318 112.179 83.0874 112.179Z" stroke="white" style="fill: var(--ice8f2ff)"></path>
+<path id="errpcalendar_lensCellTopLeft" d="M94.998 91.9258C95.6317 91.9258 96.2602 91.9507 96.8828 91.9961V99.7646C96.8828 102.12 94.9736 104.029 92.6182 104.03H83.0879C80.7323 104.03 78.8223 102.12 78.8223 99.7646V97.6514C83.2401 94.0707 88.868 91.9258 94.998 91.9258Z" stroke="white" style="fill: var(--ice8f2ff)"></path>
+<path id="errpcalendar_lensCellTopRight" d="M105.031 93.958C109.916 96.0311 114.028 99.5734 116.813 104.03H109.295C106.941 104.03 105.031 102.12 105.031 99.7646V93.958Z" stroke="white" style="fill: var(--ice8f2ff)"></path>
+<path id="errpcalendar_lensRing" d="M121.209 117.858C121.209 132.456 109.375 144.291 94.7763 144.291C80.178 144.291 68.3438 132.456 68.3438 117.858C68.3438 103.26 80.178 91.4258 94.7763 91.4258C109.375 91.4258 121.209 103.26 121.209 117.858Z" stroke="white" stroke-width="4" stroke-linejoin="round"></path>
+<path id="errpcalendar_lensHandle" d="M78.0077 137.355L57.4615 157.444C56.5736 156.915 55.6979 156.368 54.8354 155.802L75.9033 135.203L78.0077 137.355Z" stroke="white" stroke-width="1.386" stroke-linejoin="round" style="fill: var(--icd8e9ff)"></path>
+</g>
+</g>
+<defs>
+<filter id="errpcalendar_filter0_f_2361_68217" x="-3.18018" y="-10.7793" width="231.7" height="221.44" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
+<feGaussianBlur stdDeviation="9" result="effect1_foregroundBlur_2361_68217"></feGaussianBlur>
+</filter>
+<linearGradient id="errpcalendar_paint0_linear_2361_68217" x1="94.9999" y1="7.60063" x2="94.9999" y2="184.681" gradientUnits="userSpaceOnUse">
+<stop style="stop-color: var(--ic3076d4)"></stop>
+<stop offset="0.76" style="stop-color: var(--ic1b5eb2)"></stop>
+<stop offset="1" style="stop-color: var(--ic0d468c)"></stop>
+</linearGradient>
+<linearGradient id="errpcalendar_paint1_linear_2361_68217" x1="41.0399" y1="16.3404" x2="156.18" y2="173.28" gradientUnits="userSpaceOnUse">
+<stop style="stop-color: var(--ic6eadff)"></stop>
+<stop offset="0.38" style="stop-color: var(--ic3076d4)"></stop>
+<stop offset="0.72" style="stop-color: var(--ic3076d4)"></stop>
+<stop offset="1" style="stop-color: var(--ic0d468c)"></stop>
+</linearGradient>
+</defs>
+</svg></span></sc-if>
+<h1 style="margin: 28px 0 0; font-size: 28px; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; text-wrap: balance">{{err.title}}</h1>
+<sc-if value="{{err.text}}" hint-placeholder-val="{{ true }}"><p style="margin: 12px 0 0; font-size: 16px; line-height: 1.45; color: #63656B; text-wrap: balance">{{err.text}}</p></sc-if>
+<sc-if value="{{err.btn}}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{errReload}}" style="margin-top: 32px; height: 52px; min-width: 200px; padding: 0 32px; border: 0; border-radius: {{rBtnCta}}; background: {{accent}}; color: {{accentText}}; font: inherit; font-size: 16px; font-weight: 600; cursor: pointer">Обновить</button></sc-if>
+</div>
 </section>
+</sc-if>
 </div>
 
 
 
+<sc-if value="{{errModalOn}}" hint-placeholder-val="{{ false }}">
+<div onKeyDown="{{errKey}}" style="position: absolute; inset: 0; z-index: 58">
+<div class="ov" onClick="{{errClose}}" aria-hidden="true" style="position: absolute; inset: 0; background: rgba(0,0,0,0.5)"></div>
+<section class="dlg" role="alertdialog" aria-modal="true" aria-labelledby="err-dlg-t" aria-describedby="err-dlg-d" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 480px; box-sizing: border-box; padding: 48px 40px 40px; background: #FFFFFF; border-radius: 28px; display: flex; flex-direction: column; align-items: center; text-align: center; box-shadow: 0 24px 64px rgba(0,0,0,0.25)">
+<button type="button" ref="{{setErrClose}}" onClick="{{errClose}}" aria-label="Закрыть" style="position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; border: 0; border-radius: 999px; background: #F4F3EF; color: #3F4147; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
+<sc-if value="{{errMPick}}" hint-placeholder-val="{{ false }}"><span style="{{icBox}}"><svg xmlns="http://www.w3.org/2000/svg" width="136" height="136" viewBox="0 0 190 190" fill="none" aria-hidden="true" style="display: block"><g>
+<g>
+<path id="errmpick_Vector" d="M94.9999 183.921C142.85 183.921 181.64 145.131 181.64 97.2806C181.64 49.4307 142.85 10.6406 94.9999 10.6406C47.1499 10.6406 8.35986 49.4307 8.35986 97.2806C8.35986 145.131 47.1499 183.921 94.9999 183.921Z" fill="url(#errmpick_paint0_linear_2361_68217)"></path>
+<path id="errmpick_Vector_2" d="M94.9999 181.64C142.85 181.64 181.64 142.85 181.64 95.0004C181.64 47.1504 142.85 8.36035 94.9999 8.36035C47.1499 8.36035 8.35986 47.1504 8.35986 95.0004C8.35986 142.85 47.1499 181.64 94.9999 181.64Z" fill="url(#errmpick_paint1_linear_2361_68217)" style="stroke: var(--ic1b5eb2)"></path>
+</g>
+<g>
+<mask id="errmpick_mask0_2361_68217" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="8" y="8" width="174" height="174">
+<g>
+<path id="errmpick_Vector_3" d="M94.64 181.28C142.49 181.28 181.28 142.49 181.28 94.64C181.28 46.7901 142.49 8 94.64 8C46.7901 8 8 46.7901 8 94.64C8 142.49 46.7901 181.28 94.64 181.28Z" fill="white"></path>
+</g>
+</mask>
+<g mask="url(#errmpick_mask0_2361_68217)">
+<g opacity="0.46" filter="url(#errmpick_filter0_f_2361_68217)">
+<path id="errmpick_Vector_4" d="M74.12 39.5404C107.069 39.5404 133.78 32.2247 133.78 23.2004C133.78 14.176 107.069 6.86035 74.12 6.86035C41.1707 6.86035 14.46 14.176 14.46 23.2004C14.46 32.2247 41.1707 39.5404 74.12 39.5404Z" style="fill: var(--ica0caff)"></path>
+<path id="errmpick_Vector_5" d="M169.5 192.301C191.956 192.301 210.16 178.18 210.16 160.761C210.16 143.342 191.956 129.221 169.5 129.221C147.044 129.221 128.84 143.342 128.84 160.761C128.84 178.18 147.044 192.301 169.5 192.301Z" style="fill: var(--ic0d468c)"></path>
+</g>
+</g>
+</g>
+<g>
+<g>
+<mask id="errmpick_mask1_2361_68217" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="24" y="24" width="142" height="142">
+<g>
+<path id="errmpick_Vector_6" d="M164.278 25.7217V164.277H25.7222V25.7217H164.278Z" stroke-width="1.946" style="fill: var(--icd8e9ff); stroke: var(--icf6faff)"></path>
+<path id="errmpick_Vector_7" d="M134.793 104.66L55.6316 105.942L50.2295 117.318L56.8206 128.048L135.663 120.833L131.801 112.93L134.793 104.66Z" stroke-width="3.892" stroke-linejoin="round" style="fill: var(--icd8e9ff); stroke: var(--icf6faff)"></path>
+<path id="errmpick_Vector_8" d="M49.7095 70.5489L140.487 62.3838L148.056 74.7923L141.818 87.92L50.6825 89.2297L53.6237 79.7108L49.7095 70.5489Z" stroke-width="3.892" stroke-linejoin="round" style="fill: var(--icd8e9ff); stroke: var(--icf6faff)"></path>
+</g>
+</mask>
+<g mask="url(#errmpick_mask1_2361_68217)">
+<path id="errmpick_Vector_9" d="M88.3433 53.219C88.3433 50.156 90.8264 47.6729 93.8894 47.6729C96.9524 47.6729 99.4355 50.156 99.4355 53.219V165.25H88.3433V53.219Z" stroke-width="2.1406" style="fill: var(--ica0caff); stroke: var(--icf6faff)"></path>
+</g>
+</g>
+<path id="errmpick_Vector_10" d="M134.793 104.66L55.6316 105.942L50.2295 117.318L56.8206 128.048L135.663 120.833L131.801 112.93L134.793 104.66Z" stroke="white" stroke-width="2.1406" stroke-linejoin="round" style="fill: var(--ica0caff)"></path>
+<path id="errmpick_Vector_11" d="M49.7095 70.5489L140.487 62.3838L148.056 74.7923L141.818 87.92L50.6825 89.2297L53.6237 79.7108L49.7095 70.5489Z" stroke="white" stroke-width="2.1406" stroke-linejoin="round" style="fill: var(--ica0caff)"></path>
+</g>
+<g>
+<mask id="errmpick_mask2_2361_68217" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="49" y="47" width="100" height="119">
+<g>
+<g>
+<path id="errmpick_Vector_12" d="M88.3433 53.219C88.3433 50.156 90.8264 47.6729 93.8894 47.6729C96.9524 47.6729 99.4355 50.156 99.4355 53.219V165.25H88.3433V53.219Z" fill="white"></path>
+<path id="errmpick_Vector_13" d="M134.793 104.66L55.6316 105.942L50.2295 117.318L56.8206 128.048L135.663 120.833L131.801 112.93L134.793 104.66Z" fill="white"></path>
+<path id="errmpick_Vector_14" d="M49.709 70.5489L140.487 62.3838L148.055 74.7923L141.817 87.92L50.682 89.2297L53.6232 79.7108L49.709 70.5489Z" fill="white"></path>
+</g>
+</g>
+</mask>
+<g mask="url(#errmpick_mask2_2361_68217)">
+<g>
+<g opacity="0.55" filter="url(#errmpick_filter1_f_2361_68217)">
+<path d="M47.1196 132.619C56.9996 118.939 67.2596 106.399 81.3196 93.4795" stroke-width="34" stroke-linecap="round" style="stroke: var(--ice8f2ff)"></path>
+</g>
+<g filter="url(#errmpick_filter2_f_2361_68217)">
+<path d="M52.8198 130.339C61.1798 119.319 69.1598 110.199 79.0398 101.459" stroke-width="7" stroke-linecap="round" style="stroke: var(--icd8e9ff)"></path>
+</g>
+</g>
+</g>
+</g>
+<g>
+<g>
+<mask id="errmpick_mask3_2361_68217" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="24" y="24" width="142" height="142">
+<g>
+<path id="errmpick_Vector_17" d="M165.251 24.749H24.7495V165.25H165.251V24.749Z" fill="white"></path>
+<path id="errmpick_Vector_18" d="M134.793 104.66L55.6316 105.942L50.2295 117.318L56.8206 128.048L135.663 120.833L131.801 112.93L134.793 104.66Z" fill="black" stroke="black" stroke-width="3.892" stroke-linejoin="round"></path>
+<path id="errmpick_Vector_19" d="M49.7095 70.5489L140.487 62.3838L148.056 74.7923L141.818 87.92L50.6825 89.2297L53.6237 79.7108L49.7095 70.5489Z" fill="black" stroke="black" stroke-width="3.892" stroke-linejoin="round"></path>
+</g>
+</mask>
+<g mask="url(#errmpick_mask3_2361_68217)">
+<path id="errmpick_Vector_20" d="M88.3433 53.219C88.3433 50.156 90.8264 47.6729 93.8894 47.6729C96.9524 47.6729 99.4355 50.156 99.4355 53.219V165.25H88.3433V53.219Z" stroke-width="1.40112" style="stroke: var(--icf6faff)"></path>
+</g>
+</g>
+<path id="errmpick_Vector_21" d="M134.793 104.66L55.6316 105.942L50.2295 117.318L56.8206 128.048L135.663 120.833L131.801 112.93L134.793 104.66Z" stroke-width="1.40112" stroke-linejoin="round" style="stroke: var(--ice8f2ff)"></path>
+<path id="errmpick_Vector_22" d="M49.7095 70.5489L140.487 62.3838L148.056 74.7923L141.818 87.92L50.6825 89.2297L53.6237 79.7108L49.7095 70.5489Z" stroke-width="1.40112" stroke-linejoin="round" style="stroke: var(--ice8f2ff)"></path>
+</g>
+</g>
+<defs>
+<filter id="errmpick_filter0_f_2361_68217" x="-3.54004" y="-11.1396" width="231.7" height="221.44" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
+<feGaussianBlur stdDeviation="9" result="effect1_foregroundBlur_2361_68217"></feGaussianBlur>
+</filter>
+<filter id="errmpick_filter1_f_2361_68217" x="12.1182" y="58.4795" width="104.202" height="109.142" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
+<feGaussianBlur stdDeviation="9" result="effect1_foregroundBlur_2361_68217"></feGaussianBlur>
+</filter>
+<filter id="errmpick_filter2_f_2361_68217" x="44.9198" y="93.559" width="42.0202" height="44.6799" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
+<feGaussianBlur stdDeviation="2.2" result="effect1_foregroundBlur_2361_68217"></feGaussianBlur>
+</filter>
+<linearGradient id="errmpick_paint0_linear_2361_68217" x1="94.9999" y1="7.60063" x2="94.9999" y2="184.681" gradientUnits="userSpaceOnUse">
+<stop style="stop-color: var(--ic3076d4)"></stop>
+<stop offset="0.76" style="stop-color: var(--ic1b5eb2)"></stop>
+<stop offset="1" style="stop-color: var(--ic0d468c)"></stop>
+</linearGradient>
+<linearGradient id="errmpick_paint1_linear_2361_68217" x1="41.0399" y1="16.3404" x2="156.18" y2="173.28" gradientUnits="userSpaceOnUse">
+<stop style="stop-color: var(--ic6eadff)"></stop>
+<stop offset="0.38" style="stop-color: var(--ic3076d4)"></stop>
+<stop offset="0.72" style="stop-color: var(--ic3076d4)"></stop>
+<stop offset="1" style="stop-color: var(--ic0d468c)"></stop>
+</linearGradient>
+</defs>
+</svg></span></sc-if>
+<sc-if value="{{errMConn}}" hint-placeholder-val="{{ false }}"><span style="{{icBox}}"><svg xmlns="http://www.w3.org/2000/svg" width="136" height="136" viewBox="0 0 190 190" fill="none" aria-hidden="true" style="display: block"><g>
+<g>
+<path id="errmconnection_Vector" d="M94.9999 183.921C142.85 183.921 181.64 145.131 181.64 97.2806C181.64 49.4307 142.85 10.6406 94.9999 10.6406C47.1499 10.6406 8.35986 49.4307 8.35986 97.2806C8.35986 145.131 47.1499 183.921 94.9999 183.921Z" fill="url(#errmconnection_paint0_linear_2361_68217)"></path>
+<path id="errmconnection_Vector_2" d="M94.9999 181.64C142.85 181.64 181.64 142.85 181.64 95.0004C181.64 47.1504 142.85 8.36035 94.9999 8.36035C47.1499 8.36035 8.35986 47.1504 8.35986 95.0004C8.35986 142.85 47.1499 181.64 94.9999 181.64Z" fill="url(#errmconnection_paint1_linear_2361_68217)" style="stroke: var(--ic1b5eb2)"></path>
+</g>
+<g>
+<mask id="errmconnection_mask0_2361_68217" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="8" y="8" width="174" height="174">
+<g>
+<path id="errmconnection_Vector_3" d="M94.9999 181.64C142.85 181.64 181.64 142.85 181.64 95.0004C181.64 47.1504 142.85 8.36035 94.9999 8.36035C47.1499 8.36035 8.35986 47.1504 8.35986 95.0004C8.35986 142.85 47.1499 181.64 94.9999 181.64Z" fill="white"></path>
+</g>
+</mask>
+<g mask="url(#errmconnection_mask0_2361_68217)">
+<g opacity="0.46" filter="url(#errmconnection_filter0_f_2361_68217)">
+<path id="errmconnection_Vector_4" d="M74.4798 39.9007C107.429 39.9007 134.14 32.585 134.14 23.5607C134.14 14.5364 107.429 7.2207 74.4798 7.2207C41.5305 7.2207 14.8198 14.5364 14.8198 23.5607C14.8198 32.585 41.5305 39.9007 74.4798 39.9007Z" style="fill: var(--ica0caff)"></path>
+<path id="errmconnection_Vector_5" d="M169.86 192.661C192.316 192.661 210.52 178.54 210.52 161.121C210.52 143.702 192.316 129.581 169.86 129.581C147.404 129.581 129.2 143.702 129.2 161.121C129.2 178.54 147.404 192.661 169.86 192.661Z" style="fill: var(--ic1251a0)"></path>
+</g>
+</g>
+</g>
+<g>
+<path id="errmconnection_lowerConnectorFront" d="M53.5893 128.276C52.7725 128.276 52.1104 127.614 52.1104 126.797V114.226C52.1104 113.818 52.4414 113.486 52.8498 113.486H74.2948V128.276H53.5893Z" stroke-width="1.7514" stroke-linejoin="round" style="fill: var(--ice8f2ff); stroke: var(--icf6faff)"></path>
+<path id="errmconnection_Vector_6" d="M93.5209 116.444V103.134L74.2944 114.596V128.276L93.5209 116.444Z" stroke-width="1.7514" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--ice8f2ff)"></path>
+<path id="errmconnection_Vector_7" d="M68.3788 103.134H93.5211L75.7207 114.088C74.7883 114.662 73.715 114.965 72.6202 114.965H53.5397C52.1107 114.965 51.5941 113.081 52.8235 112.351L68.3788 103.134Z" stroke-width="1.7514" stroke-linejoin="round" style="fill: var(--ice8f2ff); stroke: var(--icf6faff)"></path>
+<path id="errmconnection_Vector_8" d="M82.0593 97.958H102.025L93.5212 103.134H73.1855L82.0593 97.958Z" stroke-width="1.7514" stroke-linejoin="round" style="fill: var(--ice8f2ff); stroke: var(--icf6faff)"></path>
+<path id="errmconnection_Vector_9" d="M102.025 97.958V107.941L93.521 113.487V103.134L102.025 97.958Z" stroke-width="1.7514" stroke-linejoin="round" style="fill: var(--icd8e9ff); stroke: var(--icf6faff)"></path>
+<path id="errmconnection_bottomCable" d="M76.0784 162.673C73.2654 161.888 70.5235 160.932 67.8646 159.818C68.8601 159.412 69.8261 159.004 70.7608 158.594C77.8892 155.471 82.9402 152.38 85.5213 149.823C86.8474 148.509 87.1477 147.701 87.1822 147.424C87.1896 147.365 87.184 147.359 87.1808 147.356L87.1794 147.354C87.1621 147.321 87.0576 147.141 86.6721 146.871C85.8445 146.292 84.1936 145.624 81.3103 145.126C78.4871 144.638 74.7314 144.353 69.9135 144.353C60.0157 144.353 53.2664 143.574 49.0378 142.133C46.9339 141.415 45.105 140.421 43.9125 138.951C42.5835 137.314 42.2814 135.378 42.7962 133.533C43.2602 131.871 44.3391 130.418 45.5027 129.219C46.7006 127.984 48.1981 126.804 49.8209 125.707C53.0697 123.513 57.0941 121.474 60.9527 119.868C62.4608 119.24 64.1924 119.953 64.8202 121.461C65.4481 122.97 64.7345 124.701 63.2264 125.329C59.6151 126.832 55.9646 128.697 53.1323 130.61C51.7146 131.568 50.5701 132.492 49.7492 133.338C48.894 134.219 48.5775 134.826 48.4942 135.124C48.4843 135.159 48.4773 135.178 48.4736 135.187C48.4711 135.193 48.4711 135.197 48.4711 135.197C48.4711 135.197 48.4725 135.198 48.4742 135.198C48.4791 135.2 48.4893 135.204 48.5055 135.224C48.6869 135.447 49.305 135.973 50.946 136.533C54.2071 137.645 60.1393 138.437 69.9132 138.437C74.9312 138.437 79.0489 138.732 82.3172 139.296C85.5252 139.851 88.1837 140.709 90.0638 142.025C92.09 143.442 93.3766 145.557 93.0525 148.157C92.7718 150.408 91.3358 152.39 89.6847 154.026C86.7772 156.906 82.0176 159.861 76.0784 162.673Z" stroke-width="1.7514" stroke-linejoin="round" style="fill: var(--icd8e9ff); stroke: var(--icf6faff)"></path>
+<g>
+<mask id="errmconnection_mask1_2361_68217" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="24" y="24" width="142" height="142">
+<g>
+<path id="errmconnection_Vector_10" d="M165.251 24.749H24.7495V165.25H165.251V24.749Z" fill="white"></path>
+<path id="errmconnection_Vector_11" d="M53.5893 128.276C52.7725 128.276 52.1104 127.614 52.1104 126.797V114.226C52.1104 113.818 52.4414 113.486 52.8498 113.486H74.2948V128.276H53.5893Z" fill="black" stroke="black" stroke-width="2.919"></path>
+<path id="errmconnection_Vector_12" d="M93.5209 116.444V103.134L74.2944 114.596V128.276L93.5209 116.444Z" fill="black" stroke="black" stroke-width="2.919"></path>
+<path id="errmconnection_Vector_13" d="M68.3788 103.134H93.5211L75.7207 114.088C74.7883 114.662 73.715 114.965 72.6202 114.965H53.5397C52.1107 114.965 51.5941 113.081 52.8235 112.351L68.3788 103.134Z" fill="black" stroke="black" stroke-width="2.919"></path>
+<path id="errmconnection_Vector_14" d="M82.0593 97.958H102.025L93.5212 103.134H73.1855L82.0593 97.958Z" fill="black" stroke="black" stroke-width="2.919"></path>
+<path id="errmconnection_Vector_15" d="M102.025 97.958V107.941L93.521 113.487V103.134L102.025 97.958Z" fill="black" stroke="black" stroke-width="2.919"></path>
+<path id="errmconnection_Vector_16" d="M97.2188 76.5127H122.361V89.0839H97.2188V76.5127Z" fill="black" stroke="black" stroke-width="2.919"></path>
+<path id="errmconnection_Vector_17" d="M138.629 66.291V78.7311L122.361 89.0839V76.5127L138.629 66.291Z" fill="black" stroke="black" stroke-width="2.919"></path>
+<path id="errmconnection_Vector_18" d="M122.361 76.5133H97.2188L115.019 65.5592C115.952 64.9854 117.025 64.6816 118.119 64.6816H137.2C138.629 64.6816 139.146 66.5668 137.916 67.2953L122.361 76.5133Z" fill="black" stroke="black" stroke-width="2.919"></path>
+</g>
+</mask>
+<g mask="url(#errmconnection_mask1_2361_68217)">
+<path id="errmconnection_topCable" d="M126.827 66.0331C125.319 66.6609 124.605 68.3925 125.233 69.9007C125.861 71.4088 127.592 72.1226 129.101 71.4948C132.959 69.8886 136.983 67.8489 140.232 65.6545C141.855 64.5584 143.353 63.378 144.551 62.143C145.714 60.9433 146.793 59.4912 147.257 57.8285C147.772 55.9837 147.469 54.0478 146.14 52.4104C144.948 50.9413 143.119 49.9465 141.015 49.2295C136.787 47.7881 130.037 47.0087 120.14 47.0087C115.322 47.0087 111.566 46.724 108.743 46.2362C105.859 45.738 104.208 45.0699 103.381 44.4907C102.995 44.221 102.891 44.0413 102.873 44.008L102.872 44.0062C102.869 44.0028 102.864 43.9971 102.871 43.9375C102.905 43.6613 103.205 42.8529 104.532 41.5392C107.113 38.9823 112.164 35.8915 119.292 32.7678C120.722 32.1416 122.223 31.5185 123.793 30.9022C121.193 29.7329 118.51 28.7171 115.755 27.8662C108.987 30.9209 103.561 34.1735 100.368 37.3362C98.7175 38.9718 97.2812 40.9542 97.0005 43.2051C96.6764 45.8049 97.963 47.9196 99.9894 49.3376C101.869 50.6533 104.528 51.5114 107.735 52.0657C111.004 52.6304 115.122 52.9246 120.14 52.9246C129.914 52.9246 135.846 53.7175 139.107 54.829C140.748 55.3883 141.366 55.9151 141.547 56.1386C141.564 56.1586 141.574 56.1619 141.579 56.1636C141.581 56.1641 141.582 56.1651 141.582 56.1651C141.584 56.1682 141.576 56.1779 141.559 56.238C141.476 56.5363 141.159 57.1423 140.304 58.0239C139.483 58.8703 138.338 59.7945 136.921 60.752C134.088 62.6651 130.438 64.5299 126.827 66.0331Z" stroke-width="1.7514" stroke-linejoin="round" style="fill: var(--icd8e9ff); stroke: var(--icf6faff)"></path>
+</g>
+</g>
+<path id="errmconnection_Vector_19" fill-rule="evenodd" clip-rule="evenodd" d="M97.2188 76.5127H122.361V89.0839H97.2188V76.5127ZM100.177 78.7311V85.3865H104.614V87.6049H114.966V85.3865H119.403V78.7311H100.177Z" stroke-width="1.7514" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--ice8f2ff)"></path>
+<path id="errmconnection_Vector_20" d="M138.629 66.291V78.7311L122.361 89.0839V76.5127L138.629 66.291Z" stroke-width="1.7514" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--icd8e9ff)"></path>
+<path id="errmconnection_Vector_21" d="M122.361 76.5133H97.2188L115.019 65.5592C115.952 64.9854 117.025 64.6816 118.119 64.6816H137.2C138.629 64.6816 139.146 66.5668 137.916 67.2953L122.361 76.5133Z" stroke-width="1.7514" stroke-linejoin="round" style="fill: var(--ice8f2ff); stroke: var(--icf6faff)"></path>
+<g>
+<path id="errmconnection_Vector_22" d="M48.8617 83.1502C48.8439 82.3336 49.4916 81.6572 50.3082 81.6395L74.3612 81.1166C75.1778 81.0988 75.8542 81.7465 75.8719 82.5631C75.8897 83.3797 75.242 84.0561 74.4254 84.0738L50.3724 84.5967C49.5558 84.6145 48.8794 83.9668 48.8617 83.1502Z" stroke-width="0.8757" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--icd8e9ff)"></path>
+<path id="errmconnection_Vector_23" d="M61.0597 54.6197C61.6372 54.0421 62.5737 54.0421 63.1512 54.6197L80.6681 72.1366C81.2456 72.7141 81.2456 73.6505 80.6681 74.2281C80.0905 74.8057 79.1541 74.8057 78.5765 74.2281L61.0597 56.7113C60.4821 56.1337 60.4821 55.1973 61.0597 54.6197Z" stroke-width="0.8757" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--icd8e9ff)"></path>
+<path id="errmconnection_Vector_24" d="M88.5112 42.4219C89.328 42.4219 89.9901 43.084 89.9901 43.9008V67.4309C89.9901 68.2478 89.328 68.9099 88.5112 68.9099C87.6944 68.9099 87.0322 68.2478 87.0322 67.4309V43.9008C87.0322 43.084 87.6944 42.4219 88.5112 42.4219Z" stroke-width="0.8757" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--icd8e9ff)"></path>
+<path id="errmconnection_Vector_25" d="M141.139 106.351C141.156 107.167 140.508 107.844 139.692 107.862L115.639 108.385C114.822 108.402 114.146 107.755 114.128 106.938C114.111 106.122 114.758 105.445 115.575 105.427L139.628 104.905C140.444 104.887 141.121 105.535 141.139 106.351Z" stroke-width="0.8757" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--icd8e9ff)"></path>
+<path id="errmconnection_Vector_26" d="M128.94 134.881C128.362 135.458 127.426 135.458 126.848 134.881L109.332 117.364C108.754 116.786 108.754 115.85 109.332 115.272C109.909 114.694 110.845 114.694 111.423 115.272L128.94 132.789C129.517 133.366 129.517 134.303 128.94 134.881Z" stroke-width="0.8757" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--icd8e9ff)"></path>
+<path id="errmconnection_Vector_27" d="M101.488 147.079C100.672 147.079 100.009 146.416 100.009 145.6V122.07C100.009 121.253 100.672 120.591 101.488 120.591C102.305 120.591 102.967 121.253 102.967 122.07V145.6C102.967 146.416 102.305 147.079 101.488 147.079Z" stroke-width="0.8757" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--icd8e9ff)"></path>
+</g>
+</g>
+</g>
+<defs>
+<filter id="errmconnection_filter0_f_2361_68217" x="-3.18018" y="-10.7793" width="231.7" height="221.44" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
+<feGaussianBlur stdDeviation="9" result="effect1_foregroundBlur_2361_68217"></feGaussianBlur>
+</filter>
+<linearGradient id="errmconnection_paint0_linear_2361_68217" x1="94.9999" y1="7.60063" x2="94.9999" y2="184.681" gradientUnits="userSpaceOnUse">
+<stop style="stop-color: var(--ic3076d4)"></stop>
+<stop offset="0.76" style="stop-color: var(--ic1b5eb2)"></stop>
+<stop offset="1" style="stop-color: var(--ic0d468c)"></stop>
+</linearGradient>
+<linearGradient id="errmconnection_paint1_linear_2361_68217" x1="41.0399" y1="16.3404" x2="156.18" y2="173.28" gradientUnits="userSpaceOnUse">
+<stop style="stop-color: var(--ic6eadff)"></stop>
+<stop offset="0.38" style="stop-color: var(--ic3076d4)"></stop>
+<stop offset="0.72" style="stop-color: var(--ic3076d4)"></stop>
+<stop offset="1" style="stop-color: var(--ic0d468c)"></stop>
+</linearGradient>
+</defs>
+</svg></span></sc-if>
+<sc-if value="{{errMCal}}" hint-placeholder-val="{{ false }}"><span style="{{icBox}}"><svg xmlns="http://www.w3.org/2000/svg" width="136" height="136" viewBox="0 0 190 190" fill="none" aria-hidden="true" style="display: block"><g>
+<g>
+<path id="errmcalendar_Vector" d="M94.9999 183.921C142.85 183.921 181.64 145.131 181.64 97.2806C181.64 49.4307 142.85 10.6406 94.9999 10.6406C47.1499 10.6406 8.35986 49.4307 8.35986 97.2806C8.35986 145.131 47.1499 183.921 94.9999 183.921Z" fill="url(#errmcalendar_paint0_linear_2361_68217)"></path>
+<path id="errmcalendar_Vector_2" d="M94.9999 181.64C142.85 181.64 181.64 142.85 181.64 95.0004C181.64 47.1504 142.85 8.36035 94.9999 8.36035C47.1499 8.36035 8.35986 47.1504 8.35986 95.0004C8.35986 142.85 47.1499 181.64 94.9999 181.64Z" fill="url(#errmcalendar_paint1_linear_2361_68217)" style="stroke: var(--ic1b5eb2)"></path>
+</g>
+<g>
+<mask id="errmcalendar_mask0_2361_68217" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="8" y="8" width="174" height="174">
+<g>
+<path id="errmcalendar_Vector_3" d="M94.9999 181.64C142.85 181.64 181.64 142.85 181.64 95.0004C181.64 47.1504 142.85 8.36035 94.9999 8.36035C47.1499 8.36035 8.35986 47.1504 8.35986 95.0004C8.35986 142.85 47.1499 181.64 94.9999 181.64Z" fill="white"></path>
+</g>
+</mask>
+<g mask="url(#errmcalendar_mask0_2361_68217)">
+<g opacity="0.46" filter="url(#errmcalendar_filter0_f_2361_68217)">
+<path id="errmcalendar_Vector_4" d="M74.4798 39.9007C107.429 39.9007 134.14 32.585 134.14 23.5607C134.14 14.5364 107.429 7.2207 74.4798 7.2207C41.5305 7.2207 14.8198 14.5364 14.8198 23.5607C14.8198 32.585 41.5305 39.9007 74.4798 39.9007Z" style="fill: var(--ica0caff)"></path>
+<path id="errmcalendar_Vector_5" d="M169.86 192.661C192.316 192.661 210.52 178.54 210.52 161.121C210.52 143.702 192.316 129.581 169.86 129.581C147.404 129.581 129.2 143.702 129.2 161.121C129.2 178.54 147.404 192.661 169.86 192.661Z" style="fill: var(--ic0d468c)"></path>
+</g>
+</g>
+</g>
+<g>
+<path id="errmcalendar_calendarBody" d="M52.1133 123.635V69.9824H133.122V123.635C133.122 128.197 129.059 131.93 124.093 131.93H61.1421C56.1762 131.93 52.1133 128.197 52.1133 123.635Z" stroke-width="1.782" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--icd8e9ff)"></path>
+<path id="errmcalendar_calendarHeader" d="M133.122 58.5462V69.9827H52.1133V58.5462C52.1133 54.3528 56.1762 50.9219 61.1421 50.9219H124.093C129.059 50.9219 133.122 54.3528 133.122 58.5462Z" stroke-width="1.782" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--icd8e9ff)"></path>
+<path id="errmcalendar_binderBackRight" d="M113.32 67.6491C117.021 67.6491 120.022 64.6487 120.022 60.9476C120.022 57.2464 117.021 54.2461 113.32 54.2461C109.619 54.2461 106.619 57.2464 106.619 60.9476C106.619 64.6487 109.619 67.6491 113.32 67.6491Z" stroke-width="1.386" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--icf6faff)"></path>
+<path id="errmcalendar_binderBackLeft" d="M73.1102 67.6491C76.8114 67.6491 79.8117 64.6487 79.8117 60.9476C79.8117 57.2464 76.8114 54.2461 73.1102 54.2461C69.409 54.2461 66.4087 57.2464 66.4087 60.9476C66.4087 64.6487 69.409 67.6491 73.1102 67.6491Z" stroke-width="1.386" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--ice8f2ff)"></path>
+<path id="errmcalendar_binderPosts" d="M113.194 46.1562C110.752 46.1562 108.754 48.0623 108.754 50.392V60.9813C108.754 63.311 110.752 65.217 113.194 65.217C115.637 65.217 117.635 63.311 117.635 60.9813V50.392C117.635 48.0623 115.637 46.1562 113.194 46.1562ZM73.2318 46.1562C70.7897 46.1562 68.7915 48.0623 68.7915 50.392V60.9813C68.7915 63.311 70.7897 65.217 73.2318 65.217C75.6739 65.217 77.6721 63.311 77.6721 60.9813V50.392C77.6721 48.0623 75.6739 46.1562 73.2318 46.1562Z" stroke="white" stroke-width="1.584" stroke-linejoin="round" style="fill: var(--ice8f2ff)"></path>
+<path id="errmcalendar_calendarCells" d="M61.644 81.0175C61.644 80.1864 62.3177 79.5127 63.1488 79.5127H72.0522C72.8833 79.5127 73.557 80.1864 73.557 81.0175V88.7296C73.557 89.5607 72.8833 90.2344 72.0522 90.2344H63.1488C62.3177 90.2344 61.644 89.5607 61.644 88.7296V81.0175ZM78.3223 81.0175C78.3223 80.1864 78.996 79.5127 79.8271 79.5127H88.7304C89.5615 79.5127 90.2352 80.1864 90.2352 81.0175V88.7296C90.2352 89.5607 89.5615 90.2344 88.7304 90.2344H79.8271C78.996 90.2344 78.3223 89.5607 78.3223 88.7296V81.0175ZM95.0004 81.0175C95.0004 80.1864 95.6742 79.5127 96.5052 79.5127H105.409C106.24 79.5127 106.914 80.1864 106.914 81.0175V88.7296C106.914 89.5607 106.24 90.2344 105.409 90.2344H96.5052C95.6742 90.2344 95.0004 89.5607 95.0004 88.7296V81.0175ZM111.679 81.0175C111.679 80.1864 112.352 79.5127 113.183 79.5127H122.087C122.918 79.5127 123.591 80.1864 123.591 81.0175V88.7296C123.591 89.5607 122.918 90.2344 122.087 90.2344H113.183C112.352 90.2344 111.679 89.5607 111.679 88.7296V81.0175ZM61.644 97.1C61.644 96.2689 62.3177 95.5952 63.1488 95.5952H72.0522C72.8833 95.5952 73.557 96.2689 73.557 97.1V104.812C73.557 105.644 72.8833 106.317 72.0522 106.317H63.1488C62.3177 106.317 61.644 105.644 61.644 104.812V97.1ZM78.3223 97.1C78.3223 96.2689 78.996 95.5952 79.8271 95.5952H88.7304C89.5615 95.5952 90.2352 96.2689 90.2352 97.1V104.812C90.2352 105.644 89.5615 106.317 88.7304 106.317H79.8271C78.996 106.317 78.3223 105.644 78.3223 104.812V97.1ZM95.0004 97.1C95.0004 96.2689 95.6742 95.5952 96.5052 95.5952H105.409C106.24 95.5952 106.914 96.2689 106.914 97.1V104.812C106.914 105.644 106.24 106.317 105.409 106.317H96.5052C95.6742 106.317 95.0004 105.644 95.0004 104.812V97.1ZM111.679 97.1C111.679 96.2689 112.352 95.5952 113.183 95.5952H122.087C122.918 95.5952 123.591 96.2689 123.591 97.1V104.812C123.591 105.644 122.918 106.317 122.087 106.317H113.183C112.352 106.317 111.679 105.644 111.679 104.812V97.1ZM61.644 113.183C61.644 112.351 62.3177 111.678 63.1488 111.678H72.0522C72.8833 111.678 73.557 112.351 73.557 113.183V120.895C73.557 121.726 72.8833 122.4 72.0522 122.4H63.1488C62.3177 122.4 61.644 121.726 61.644 120.895V113.183ZM78.3223 113.183C78.3223 112.351 78.996 111.678 79.8271 111.678H88.7304C89.5615 111.678 90.2352 112.351 90.2352 113.183V120.895C90.2352 121.726 89.5615 122.4 88.7304 122.4H79.8271C78.996 122.4 78.3223 121.726 78.3223 120.895V113.183ZM95.0004 113.183C95.0004 112.351 95.6742 111.678 96.5052 111.678H105.409C106.24 111.678 106.914 112.351 106.914 113.183V120.895C106.914 121.726 106.24 122.4 105.409 122.4H96.5052C95.6742 122.4 95.0004 121.726 95.0004 120.895V113.183ZM111.679 113.183C111.679 112.351 112.352 111.678 113.183 111.678H122.087C122.918 111.678 123.591 112.351 123.591 113.183V120.895C123.591 121.726 122.918 122.4 122.087 122.4H113.183C112.352 122.4 111.679 121.726 111.679 120.895V113.183Z" stroke="white" stroke-width="1.089" stroke-linejoin="round" style="fill: var(--ice8f2ff)"></path>
+<path id="errmcalendar_lensBacking" d="M121.207 117.634C121.207 132.109 109.472 143.843 94.9981 143.843C80.5235 143.843 68.7896 132.109 68.7896 117.634C68.7896 103.159 80.5235 91.4258 94.9981 91.4258C109.472 91.4258 121.207 103.159 121.207 117.634Z" style="fill: var(--icd8e9ff)"></path>
+<path id="errmcalendar_lens" d="M121.207 117.634C121.207 132.109 109.472 143.843 94.9981 143.843C80.5235 143.843 68.7896 132.109 68.7896 117.634C68.7896 103.159 80.5235 91.4258 94.9981 91.4258C109.472 91.4258 121.207 103.159 121.207 117.634Z" stroke-width="1.386" stroke-linejoin="round" style="fill: var(--ica0caff); stroke: var(--ica0caff)"></path>
+<path id="errmcalendar_lensCellRight" d="M109.295 112.179H118.827C119.296 112.179 119.746 112.256 120.168 112.396C120.519 114.088 120.707 115.839 120.707 117.635C120.707 122.216 119.505 126.515 117.406 130.239H109.295C106.941 130.239 105.031 128.329 105.031 125.975V116.443C105.031 114.088 106.941 112.179 109.295 112.179Z" stroke="white" style="fill: var(--ice8f2ff)"></path>
+<path id="errmcalendar_lensCellLeft" d="M83.0874 112.179H92.6177C94.9731 112.179 96.8822 114.088 96.8823 116.443V125.975C96.8822 128.329 94.973 130.239 92.6177 130.239H83.0874C80.7319 130.239 78.8219 128.329 78.8218 125.975V116.443C78.8219 114.088 80.7318 112.179 83.0874 112.179Z" stroke="white" style="fill: var(--ice8f2ff)"></path>
+<path id="errmcalendar_lensCellTopLeft" d="M94.998 91.9258C95.6317 91.9258 96.2602 91.9507 96.8828 91.9961V99.7646C96.8828 102.12 94.9736 104.029 92.6182 104.03H83.0879C80.7323 104.03 78.8223 102.12 78.8223 99.7646V97.6514C83.2401 94.0707 88.868 91.9258 94.998 91.9258Z" stroke="white" style="fill: var(--ice8f2ff)"></path>
+<path id="errmcalendar_lensCellTopRight" d="M105.031 93.958C109.916 96.0311 114.028 99.5734 116.813 104.03H109.295C106.941 104.03 105.031 102.12 105.031 99.7646V93.958Z" stroke="white" style="fill: var(--ice8f2ff)"></path>
+<path id="errmcalendar_lensRing" d="M121.209 117.858C121.209 132.456 109.375 144.291 94.7763 144.291C80.178 144.291 68.3438 132.456 68.3438 117.858C68.3438 103.26 80.178 91.4258 94.7763 91.4258C109.375 91.4258 121.209 103.26 121.209 117.858Z" stroke="white" stroke-width="4" stroke-linejoin="round"></path>
+<path id="errmcalendar_lensHandle" d="M78.0077 137.355L57.4615 157.444C56.5736 156.915 55.6979 156.368 54.8354 155.802L75.9033 135.203L78.0077 137.355Z" stroke="white" stroke-width="1.386" stroke-linejoin="round" style="fill: var(--icd8e9ff)"></path>
+</g>
+</g>
+<defs>
+<filter id="errmcalendar_filter0_f_2361_68217" x="-3.18018" y="-10.7793" width="231.7" height="221.44" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
+<feGaussianBlur stdDeviation="9" result="effect1_foregroundBlur_2361_68217"></feGaussianBlur>
+</filter>
+<linearGradient id="errmcalendar_paint0_linear_2361_68217" x1="94.9999" y1="7.60063" x2="94.9999" y2="184.681" gradientUnits="userSpaceOnUse">
+<stop style="stop-color: var(--ic3076d4)"></stop>
+<stop offset="0.76" style="stop-color: var(--ic1b5eb2)"></stop>
+<stop offset="1" style="stop-color: var(--ic0d468c)"></stop>
+</linearGradient>
+<linearGradient id="errmcalendar_paint1_linear_2361_68217" x1="41.0399" y1="16.3404" x2="156.18" y2="173.28" gradientUnits="userSpaceOnUse">
+<stop style="stop-color: var(--ic6eadff)"></stop>
+<stop offset="0.38" style="stop-color: var(--ic3076d4)"></stop>
+<stop offset="0.72" style="stop-color: var(--ic3076d4)"></stop>
+<stop offset="1" style="stop-color: var(--ic0d468c)"></stop>
+</linearGradient>
+</defs>
+</svg></span></sc-if>
+<h2 id="err-dlg-t" style="margin: 24px 0 0; font-size: 24px; line-height: 1.2; font-weight: 700; letter-spacing: -0.02em">{{err.title}}</h2>
+<p id="err-dlg-d" style="margin: 10px 0 0; font-size: 15px; line-height: 1.45; color: #63656B; text-wrap: balance">{{err.text}}</p>
+</section>
+</div>
+</sc-if>
 <sc-if value="{{modalOn}}" hint-placeholder-val="{{ false }}">
 <div onKeyDown="{{m.onKey}}" style="position: absolute; inset: 0; z-index: 80">
 <div class="ov" onClick="{{m.close}}" aria-hidden="true" style="position: absolute; inset: 0; background: rgba(0,0,0,0.5)"></div>
@@ -1032,7 +1512,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 </sc-if>
 </div>
 </template>
-<script type="text/x-dc-logic" data-dc="MainDesktop" data-props='{"accent": {"editor": "color", "default": "#1B5EB2", "options": ["#1B5EB2", "#15161A", "#E2572B", "#1F7A55"]}, "showMenu": {"editor": "boolean", "default": false}, "activeTab": {"editor": "enum", "default": "none", "options": ["none", "food", "spa", "banya", "rent", "transfer", "tours", "kids", "picnic", "pets", "parking", "gifts"]}, "$preview": {"width": 1440, "height": 900}, "showPhoto": {"editor": "boolean", "default": true}, "startWithCart": {"editor": "boolean", "default": false}, "showToast": {"editor": "boolean", "default": false}, "styleScope": {"editor": "enum", "default": "accent", "options": ["accent", "all"]}, "theme": {"editor": "enum", "default": "default", "options": ["default", "cosmos"]}}'>
+<script type="text/x-dc-logic" data-dc="MainDesktop" data-props='{"accent": {"editor": "color", "default": "#1B5EB2", "options": ["#1B5EB2", "#15161A", "#E2572B", "#1F7A55"]}, "showMenu": {"editor": "boolean", "default": false}, "activeTab": {"editor": "enum", "default": "none", "options": ["none", "food", "spa", "banya", "rent", "transfer", "tours", "kids", "picnic", "pets", "parking", "gifts"]}, "$preview": {"width": 1440, "height": 900}, "showPhoto": {"editor": "boolean", "default": true}, "startWithCart": {"editor": "boolean", "default": false}, "showToast": {"editor": "boolean", "default": false}, "styleScope": {"editor": "enum", "default": "accent", "options": ["accent", "all"]}, "errorState": {"editor": "enum", "default": "none", "options": ["none", "unavailable", "link", "tech", "tech-loaded", "soldout", "past", "auth"]}, "theme": {"editor": "enum", "default": "default", "options": ["default", "cosmos"]}}'>
 class Component extends DCLogic {
 hdr() {
 const st = this.state || {};
@@ -1132,7 +1612,7 @@ nrTitle: q ? 'Ничего не нашлось' : 'В этом разделе п
 nrText: q ? 'Попробуйте другое название или выберите раздел выше' : 'Выберите другой раздел или снимите фильтр',
 showAll: !abA, tabAll, 
 xStyle: abA ? 'position: absolute; top: -6px; right: -6px; width: 22px; height: 22px; border-radius: 999px; background: ' + this.icAcc() + '; color: #FFFFFF; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 2px #FFFFFF' : 'display: none',
-...mv, toastOn: !!ts, toast, closeToast: () => { clearTimeout(this.toastT); this.setState({ toast: null }); }, hasCart: count > 0, cartCount: count, cartLabel: count + ' ' + plural(count, 'услуга', 'услуги', 'услуг'), cartTotal: fmt(total),
+...mv, toastOn: !!ts, toast, closeToast: () => { clearTimeout(this.toastT); this.setState({ toast: null }); }, hasCart: count > 0 && !this.errPage(), cartCount: count, cartLabel: count + ' ' + plural(count, 'услуга', 'услуги', 'услуг'), cartTotal: fmt(total),
 cartAria: 'Корзина: ' + count + ' ' + plural(count, 'услуга', 'услуги', 'услуг') + ' на ' + fmt(total), cartHref: 'Cart' + S + '.html'
 };
 }
@@ -1142,7 +1622,7 @@ const toHsl = (hex) => { const n = parseInt(hex.replace('#', ''), 16); const r =
 const toHex = (h, s, l) => { s /= 100; l /= 100; const k = (n) => (n + h / 30) % 12; const a = s * Math.min(l, 1 - l); const f = (n) => Math.round(255 * (l - a * Math.max(-1, Math.min(k(n) - 3, 9 - k(n), 1)))); return '#' + [f(0), f(8), f(4)].map((v) => v.toString(16).padStart(2, '0')).join(''); };
 const pw = (v, from, to) => v <= from ? (from ? v * to / from : to) : to + (v - from) * (100 - to) / (100 - from);
 const A = toHsl('#1B5EB2'), B = toHsl(acc);
-const list = '002e6a 062b5d 083b82 0d468c 1251a0 155eaf 1b5eb2 233247 3076d4 3a86d2 559fff 6eadff 99c9f7 a0caff d8e9ff e8f2ff eaf5ff eaf6ff'.split(' ');
+const list = '002e6a 062b5d 083b82 0d468c 1251a0 155eaf 1b5eb2 233247 3076d4 3a86d2 559fff 6eadff 99c9f7 a0caff d8e9ff e8f2ff eaf5ff eaf6ff f6faff'.split(' ');
 return 'display: contents; ' + list.map((hx) => { const c = toHsl(hx); const h = (c[0] + B[0] - A[0] + 360) % 360; return '--ic' + hx + ': ' + toHex(h, pw(c[1], A[1], B[1]), pw(c[2], A[2], B[2])); }).join('; ');
 }
 flyToCart(pic, id, img, x) {
@@ -1333,7 +1813,7 @@ const shell = 'position: relative; z-index: 5; display: flex; flex-direction: co
 const row = 'z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 32px; box-sizing: border-box; ';
 const layer = 'position: absolute; z-index: 0; pointer-events: none; overflow: hidden; ';
 const title = 'position: relative; z-index: 1; margin: auto 0 0; padding: 0 40px 123px; white-space: nowrap; font-size: 56px; line-height: 1.05; font-weight: 700; letter-spacing: -0.03em; color: #FFFFFF; text-shadow: 0 2px 8px rgba(0,0,0,0.35), 0 6px 40px rgba(0,0,0,0.6)';
-const has = this.photoOn();
+const has0 = this.photoOn(); const has = has0 && !this.errPage();
 const ph = has && this.cartN() === 0 && !(this.state.flying > 0) && !this.state.scrolled;
 const acc = this.acc();
 const ez = 'cubic-bezier(.65,0,.35,1)';
@@ -1342,10 +1822,10 @@ return {
 ...this.navVals(), ...this.themeVals(), hasPhoto: has, photoOn: ph, titleHidden: ph ? 'false' : 'true',
 setRoot: (el) => { this.rootEl = el; },
 pillClass: this.state.pop ? 'pill-' + (this.state.popKind || 'pop') + (this.state.pop % 2) : '',
-photoAria: has ? 'true' : 'false',
-togglePhoto: () => { this.lsSet('uslugi-photo', has ? '0' : '1'); this.setState({ photo: !has }); },
-swTrack: 'position: relative; width: 34px; height: 18px; border-radius: 999px; transition: background .2s; background: ' + (has ? acc : '#C9C9CE'),
-swKnob: 'position: absolute; top: 2px; left: ' + (has ? '18px' : '2px') + '; width: 14px; height: 14px; border-radius: 999px; background: #FFFFFF; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: left .2s',
+photoAria: has0 ? 'true' : 'false',
+togglePhoto: () => { this.lsSet('uslugi-photo', has0 ? '0' : '1'); this.setState({ photo: !has0 }); },
+swTrack: 'position: relative; width: 34px; height: 18px; border-radius: 999px; transition: background .2s; background: ' + (has0 ? acc : '#C9C9CE'),
+swKnob: 'position: absolute; top: 2px; left: ' + (has0 ? '18px' : '2px') + '; width: 14px; height: 14px; border-radius: 999px; background: #FFFFFF; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: left .2s',
 panelStyle: 'display: flex; align-items: center; gap: 10px; padding: 14px 0 0 16px',
 onScroll: (e) => { const y = e.currentTarget.scrollTop; const now = Date.now(); if (this.lockUntil && now < this.lockUntil) return; const want = this.state.scrolled ? y > 2 : y > 24; if (want !== !!this.state.scrolled) { this.lockUntil = now + 750; this.setState({ scrolled: want }); } },
 heroStyle: 'position: sticky; top: 16px; z-index: 5; flex: none; box-sizing: border-box; width: min(1200px, calc(100% - 80px)); margin: 16px 0 0 ' + side + '; border: 1px solid #EDEBE6; border-radius: ' + this.theme().radiusBlock + 'px; transition: height .7s ' + ez + ', background-color .5s ease, box-shadow .4s ease; box-shadow: 0 -16px 0 0 ' + this.theme().pageBg + ', ' + (this.state.scrolled ? '0 8px 24px rgba(21,22,26,0.08)' : '0 6px 20px rgba(21,22,26,0.04)') + '; height: ' + (ph ? '360px' : '82px') + '; background: ' + (ph ? '#2A3442' : this.theme().blockBg),
@@ -1357,9 +1837,30 @@ shadeStyle: 'position: absolute; inset: 0; background: linear-gradient(180deg, r
 titleStyle: 'position: absolute; z-index: 1; left: 40px; bottom: 40px; margin: 0; white-space: nowrap; font-size: 56px; line-height: 1.05; font-weight: 700; letter-spacing: -0.03em; color: #FFFFFF; text-shadow: 0 2px 8px rgba(0,0,0,0.35), 0 6px 40px rgba(0,0,0,0.6); pointer-events: none; transition: opacity .3s ease, transform .6s ' + ez + '; opacity: ' + (ph ? '1' : '0') + '; transform: ' + (ph ? 'none' : 'translateY(-40px)')
 };
 }
+errList() { return { 'none': { kind: null, icon: null, title: '', text: '', btn: false }, 'unavailable': { kind: 'page', icon: 'pick', title: 'Онлайн-бронирование услуг недоступно', text: 'Вы можете оформить услуги на месте или связаться со стойкой регистрации', btn: false }, 'link': { kind: 'page', icon: 'pick', title: 'Не удалось открыть страницу', text: 'Возможно, ссылка устарела или содержит ошибку', btn: false }, 'tech': { kind: 'page', icon: 'connection', title: 'Что-то пошло не так', text: 'Попробуйте обновить страницу или зайдите позже', btn: true }, 'tech-loaded': { kind: 'modal', icon: 'connection', title: 'Что-то пошло не так', text: 'Попробуйте обновить страницу или зайдите позже', btn: false }, 'soldout': { kind: 'page', icon: 'calendar', title: 'На ваши даты все услуги уже забронированы', text: 'Свободные слоты могут появиться позже. Вы также сможете уточнить наличие мест при заезде', btn: false }, 'past': { kind: 'page', icon: 'calendar', title: 'Даты проживания уже прошли', text: 'Не получится привязать услуги к прошлому проживанию. Но вы всегда можете забронировать новое', btn: false }, 'auth': { kind: 'modal', icon: 'connection', title: 'Что-то пошло не так', text: 'Попробуйте обновить страницу или зайдите позже', btn: false } }; }
+errId() { const L = this.errList(); const v = this.state.err !== undefined ? this.state.err : ((window.P && window.P.qs ? window.P.qs.get('err') : null) || this.props.errorState || 'none'); return L[v] ? v : 'none'; }
+errPage() { return this.errList()[this.errId()].kind === 'page'; }
+errVals() {
+const id = this.errId(), e = this.errList()[id];
+const modal = e.kind === 'modal' && !this.state.errClosed;
+const ic = modal || e.kind === 'page' ? e.icon : null;
+return {
+err: e, errVal: id, errPage: e.kind === 'page', errNone: e.kind !== 'page', errModalOn: modal,
+errPick: ic === 'pick', errConn: ic === 'connection', errCal: ic === 'calendar',
+errMPick: modal && ic === 'pick', errMConn: modal && ic === 'connection', errMCal: modal && ic === 'calendar',
+errOpts: [['none', 'Без ошибки'], ['unavailable', 'Витрина недоступна'], ['link', 'Ссылка недоступна'], ['tech', 'Тех. ошибка при открытии'], ['tech-loaded', 'Тех. ошибка на витрине'], ['soldout', 'Все услуги раскупили'], ['past', 'Даты проживания прошли'], ['auth', 'Ошибка авторизации']].map(([k, n]) => ({ id: k, name: n })),
+onErr: (ev) => this.setState({ err: ev.target.value, errClosed: false, modal: null }),
+errClose: () => this.setState({ errClosed: true }),
+errKey: (ev) => { if (ev.key === 'Escape') this.setState({ errClosed: true }); },
+setErrClose: (el) => { if (el && el !== this.errCloseEl) { this.errCloseEl = el; requestAnimationFrame(() => el.focus()); } if (!el) this.errCloseEl = null; },
+errReload: () => this.setState({ err: 'none', errClosed: false }),
+onLogin: (ev) => { if (id === 'auth') { ev.preventDefault(); this.setState({ errClosed: false }); } }
+};
+}
 renderVals() {
 return {
 ...this.hero(),
+...this.errVals(),
 icBox: this.icPalette(),
 ...this.hdr(),
 iconsBrand: (this.props.iconStyle ?? 'brand') === 'brand',
