@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Услуги — главная, десктоп</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&amp;family=Montserrat:wght@400;500;600;700&amp;family=Roboto:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600&amp;family=Montserrat:wght@400;500;600;700&amp;family=Roboto:wght@400;500;600;700&amp;display=swap">
 <style>
 body{margin:0;background:#F4F3EF}
 a{color:inherit;text-decoration:none}a:hover{color:inherit}
@@ -56,41 +56,41 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 <div style="{{topRowStyle}}">
 <a href="MainDesktop.html" aria-label="{{hotelLogoAlt}} — на главную" style="display: flex; align-items: center; height: 44px"><img src="{{hotelLogo}}" alt="{{hotelLogoAlt}}" style="height: {{hotelLogoH}}; width: auto; display: block"></a>
 <div style="display: flex; gap: 8px">
-<sc-if value="{{hasCart}}"><span style="position: relative; display: flex"><a href="{{cartHref}}" data-cart-pill="1" class="{{pillClass}}" aria-label="{{cartAria}}" style="height: 44px; padding: 0 16px 0 6px; border-radius: {{rBtnRound}}; background: {{accent}}; color: {{accentText}}; display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; box-shadow: 0 4px 12px rgba(27,94,178,0.25)"><span style="height: 32px; padding: 0 10px 0 8px; border-radius: 999px; background: rgba(255,255,255,0.18); display: flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 700"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1 13H7z"></path><path d="M9 7a3 3 0 0 1 6 0"></path></svg>{{cartCount}}</span>{{cartTotal}}</a>
+<sc-if value="{{hasCart}}"><span style="position: relative; display: flex"><a href="{{cartHref}}" data-cart-pill="1" class="{{pillClass}}" aria-label="{{cartAria}}" style="height: 44px; padding: 0 16px 0 6px; border-radius: {{rBtnRound}}; background: {{accent}}; color: {{accentText}}; display: flex; align-items: center; gap: 8px; font-size: 14px; line-height: 16px; font-weight: 600; letter-spacing: -0.5px; box-shadow: 0 4px 12px rgba(27,94,178,0.25)"><span style="height: 32px; padding: 0 10px 0 8px; border-radius: 999px; background: rgba(255,255,255,0.18); display: flex; align-items: center; gap: 5px; font-size: 14px; line-height: 16px; font-weight: 600; letter-spacing: -0.5px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1 13H7z"></path><path d="M9 7a3 3 0 0 1 6 0"></path></svg>{{cartCount}}</span>{{cartTotal}}</a>
 <sc-if value="{{toastOn}}" hint-placeholder-val="{{ false }}">
 <div class="toast" role="status" aria-live="polite" style="position: absolute; z-index: 40; top: calc(100% + 14px); right: 0; width: 440px; box-sizing: border-box; padding: 18px 18px 20px 20px; background: #FFFFFF; border-radius: 24px; box-shadow: 0 18px 48px rgba(21,22,26,0.18), 0 0 0 1px rgba(21,22,26,0.05); display: flex; flex-direction: column; gap: 16px; color: var(--tx); text-align: left">
 <span aria-hidden="true" style="position: absolute; top: -7px; right: 58px; width: 14px; height: 14px; background: #FFFFFF; transform: rotate(45deg); border-radius: 3px 0 0 0; box-shadow: -1px -1px 0 rgba(21,22,26,0.05)"></span>
 <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
-<span style="display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 700; letter-spacing: -0.02em"><span style="width: 26px; height: 26px; border-radius: 999px; background: #E3F4EA; color: #1F7A55; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></span>Добавлено в корзину</span>
+<span style="display: flex; align-items: center; gap: 10px; font-size: 16px; line-height: 24px; font-weight: 600"><span style="width: 26px; height: 26px; border-radius: 999px; background: #E3F4EA; color: #1F7A55; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></span>Добавлено в корзину</span>
 <button type="button" onClick="{{closeToast}}" aria-label="Закрыть" style="flex: none; width: 36px; height: 36px; border: 0; border-radius: 999px; background: #F4F3EF; color: #3F4147; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
 </div>
 <div style="display: grid; grid-template-columns: 72px 1fr; gap: 14px; align-items: center">
 <span style="{{toast.thumb}}"></span>
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
-<span style="font-size: 16px; font-weight: 600; line-height: 1.25">{{toast.name}}</span>
-<span style="font-size: 13px; color: #63656B">{{toast.meta}}</span>
-<span style="margin-top: 2px; font-size: 18px; font-weight: 700; letter-spacing: -0.02em">{{toast.price}}</span>
+<span style="font-size: 16px; line-height: 24px; font-weight: 600">{{toast.name}}</span>
+<span style="font-size: 14px; line-height: 20px; font-weight: 400; color: #63656B">{{toast.meta}}</span>
+<span style="margin-top: 2px; font-size: 16px; line-height: 24px; font-weight: 600">{{toast.price}}</span>
 </div>
 </div>
-<a href="{{cartHref}}" style="height: 44px; border-radius: {{rBtnToast}}; background: {{secBg}}; color: {{secText}}; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 600">Перейти в корзину</a>
+<a href="{{cartHref}}" style="height: 44px; border-radius: {{rBtnToast}}; background: {{secBg}}; color: {{secText}}; display: flex; align-items: center; justify-content: center; font-size: 16px; line-height: 20px; font-weight: 600; letter-spacing: -0.5px">Перейти в корзину</a>
 </div>
 </sc-if>
 </span></sc-if>
 <button type="button" onClick="{{toggleMenu}}" data-fly-anchor="1" aria-haspopup="true" aria-expanded="{{menuExpanded}}" aria-label="Язык и валюта" style="{{globeStyle}}"><span>{{langCode}} · {{curSym}}</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{chevStyle}}"><path d="M6 9l6 6 6-6"></path></svg></button>
-<a href="#login" onClick="{{onLogin}}" style="height: 44px; padding: 0 14px 0 12px; border-radius: {{rBtnRound}}; background: #F4F3EF; color: var(--tx); display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Войти</a>
+<a href="#login" onClick="{{onLogin}}" style="height: 44px; padding: 0 14px 0 12px; border-radius: {{rBtnRound}}; background: #F4F3EF; color: var(--tx); display: flex; align-items: center; gap: 6px; font-size: 14px; line-height: 16px; font-weight: 600; letter-spacing: -0.5px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Войти</a>
 </div>
 </div>
 <sc-if value="{{hasPhoto}}" hint-placeholder-val="{{ true }}"><h1 aria-hidden="{{titleHidden}}" style="{{titleStyle}}">{{hotelTitle}}</h1></sc-if>
 <sc-if value="{{menuOpen}}" hint-placeholder-val="{{ false }}">
 <div role="dialog" aria-label="Язык и валюта" style="position: absolute; z-index: 30; top: {{menuTop}}; right: 24px; width: 340px; box-sizing: border-box; background: #FFFFFF; border-radius: 24px; box-shadow: 0 18px 48px rgba(21,22,26,0.18), 0 0 0 1px rgba(21,22,26,0.05); padding: 8px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px">
 <div style="display: flex; flex-direction: column; gap: 2px">
-<span style="padding: 10px 12px 6px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #63656B">Валюта</span>
+<span style="padding: 10px 12px 6px; font-size: 12px; line-height: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #63656B">Валюта</span>
 <sc-for list="{{curs}}" as="c" hint-placeholder-count="4">
-<button type="button" onClick="{{c.pick}}" style="{{c.style}}"><span style="width: 28px; height: 28px; border-radius: 999px; background: #F4F3EF; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700">{{c.sym}}</span><span style="flex: 1">{{c.code}}</span><sc-if value="{{c.sel}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></sc-if></button>
+<button type="button" onClick="{{c.pick}}" style="{{c.style}}"><span style="width: 28px; height: 28px; border-radius: 999px; background: #F4F3EF; display: flex; align-items: center; justify-content: center; font-size: 14px; line-height: 16px; font-weight: 600; letter-spacing: -0.5px">{{c.sym}}</span><span style="flex: 1">{{c.code}}</span><sc-if value="{{c.sel}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></sc-if></button>
 </sc-for>
 </div>
 <div style="display: flex; flex-direction: column; gap: 2px; border-left: 1px solid #EEECE7; padding-left: 4px">
-<span style="padding: 10px 12px 6px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #63656B">Язык</span>
+<span style="padding: 10px 12px 6px; font-size: 12px; line-height: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #63656B">Язык</span>
 <sc-for list="{{langs}}" as="l" hint-placeholder-count="4">
 <button type="button" onClick="{{l.pick}}" style="{{l.style}}"><span style="flex: 1">{{l.name}}</span><sc-if value="{{l.sel}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg></sc-if></button>
 </sc-for>
@@ -105,7 +105,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 <div style="{{searchWrap}}">
 <label style="{{fieldStyle}}">
 <svg width="20" height="20" style="flex: none; display: block" viewBox="0 0 24 24" fill="none" stroke="#63656B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
-<input id="svc-search" aria-label="Поиск услуг" type="text" autocomplete="off" enterkeyhint="search" ref="{{setInput}}" value="{{query}}" onChange="{{onInput}}" onKeyDown="{{onKey}}" onFocus="{{onFocus}}" onBlur="{{onBlur}}" placeholder="{{ph}}" style="flex: 1; min-width: 0; height: 100%; border: 0; outline: none; background: transparent; font: inherit; font-size: 16px; color: var(--tx)">
+<input id="svc-search" aria-label="Поиск услуг" type="text" autocomplete="off" enterkeyhint="search" ref="{{setInput}}" value="{{query}}" onChange="{{onInput}}" onKeyDown="{{onKey}}" onFocus="{{onFocus}}" onBlur="{{onBlur}}" placeholder="{{ph}}" style="flex: 1; min-width: 0; height: 100%; border: 0; outline: none; background: transparent; font: inherit; font-size: 16px; line-height: 24px; font-weight: 400; color: var(--tx)">
 <sc-if value="{{hasQuery}}" hint-placeholder-val="{{ false }}">
 <button type="button" onMouseDown="{{keepFocus}}" onClick="{{clearQuery}}" aria-label="Очистить поиск" style="flex: none; width: 32px; height: 32px; border: 0; border-radius: 999px; background: #ECEBE7; color: #3F4147; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
 </sc-if>
@@ -944,28 +944,28 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 <sc-for list="{{items}}" as="it">
 <article class="card" style="background: {{cardBg}}; border: 1px solid #E4E2DC; border-radius: {{rCard}}; padding: 0 0 8px; overflow: hidden; display: flex; flex-direction: column; gap: 10px">
 <a aria-label="{{it.name}}" href="{{it.href}}" onClick="{{it.open}}" style="position: relative; display: block; height: 190px; border-radius: 0; overflow: hidden; background: #2B2F36">
-<img alt="" src="{{it.img}}" style="width: 100%; height: 100%; object-fit: cover; display: block"><sc-if value="{{it.inCart}}"><span style="position: absolute; inset: 0; background: rgba(21,22,26,0.42)"></span><span style="position: absolute; top: 10px; left: 10px; height: 28px; padding: 0 10px 0 6px; border-radius: 999px; background: rgba(255,255,255,0.92); color: var(--tx); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); display: flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 600"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewBox="0 0 24 24" width="16"><path d="M20 6L9 17l-5-5"></path></svg>В корзине: {{it.inCartQty}}</span></sc-if>
+<img alt="" src="{{it.img}}" style="width: 100%; height: 100%; object-fit: cover; display: block"><sc-if value="{{it.inCart}}"><span style="position: absolute; inset: 0; background: rgba(21,22,26,0.42)"></span><span style="position: absolute; top: 10px; left: 10px; height: 28px; padding: 0 10px 0 6px; border-radius: 999px; background: rgba(255,255,255,0.92); color: var(--tx); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); display: flex; align-items: center; gap: 5px; font-size: 14px; line-height: 16px; font-weight: 600; letter-spacing: -0.5px"><svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewBox="0 0 24 24" width="16"><path d="M20 6L9 17l-5-5"></path></svg>В корзине: {{it.inCartQty}}</span></sc-if>
 <span style="position: absolute; left: 10px; right: 10px; bottom: 10px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 3px"><span style="height: 3px; border-radius: 2px; background: #FFFFFF"></span><span style="height: 3px; border-radius: 2px; background: rgba(255,255,255,0.45)"></span><span style="height: 3px; border-radius: 2px; background: rgba(255,255,255,0.45)"></span><span style="height: 3px; border-radius: 2px; background: rgba(255,255,255,0.45)"></span></span>
 </a>
 <div style="display: flex; flex-direction: column; gap: 6px; padding: 2px 14px 0">
-<a href="{{it.href}}" onClick="{{it.open}}" style="font-size: 16px; font-weight: 600; line-height: 1.25; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden">{{it.name}}</a>
-<div style="display: flex; flex-direction: column; gap: 3px; font-size: 13px; color: #63656B">
+<a href="{{it.href}}" onClick="{{it.open}}" style="font-size: 16px; line-height: 24px; font-weight: 600; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden">{{it.name}}</a>
+<div style="display: flex; flex-direction: column; gap: 3px; font-size: 14px; line-height: 20px; font-weight: 400; color: #63656B">
 <sc-if value="{{it.guests}}"><span style="display: flex; align-items: center; gap: 5px"><svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24" width="14"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>{{it.guests}}</span></sc-if>
 <sc-if value="{{it.duration}}"><span style="display: flex; align-items: center; gap: 5px"><svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24" width="14"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>{{it.duration}}</span></sc-if>
 </div>
 </div>
 <sc-if value="{{it.hasPrice}}"><div style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 0 8px 0 14px">
-<span style="font-size: 15px; font-weight: 700">{{it.priceLabel}}</span>
+<span style="font-size: 16px; line-height: 24px; font-weight: 600">{{it.priceLabel}}</span>
 <button aria-label="{{it.addLabel}}" onClick="{{it.add}}" style="width: 44px; height: 44px; border: 0; border-radius: {{rBtnRound}}; background: {{accent}}; color: {{accentText}}; display: flex; align-items: center; justify-content: center; cursor: pointer" type="button"><svg aria-hidden="true" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewBox="0 0 24 24" width="20"><path d="M12 5v14M5 12h14"></path></svg></button>
 </div></sc-if><sc-if value="{{it.noPrice}}"><div style="margin-top: auto; display: flex; padding: 0 8px">
-<a href="{{it.href}}" onClick="{{it.open}}" style="flex: 1; height: 44px; border-radius: {{rBtnRound}}; background: {{secBg}}; color: {{secText}}; box-shadow: inset 0 0 0 1px {{secLine}}; display: flex; align-items: center; justify-content: center; padding: 0 12px; font-size: 14px; font-weight: 600; text-align: center; line-height: 1.15">Узнать цену</a>
+<a href="{{it.href}}" onClick="{{it.open}}" style="flex: 1; height: 44px; border-radius: {{rBtnRound}}; background: {{secBg}}; color: {{secText}}; box-shadow: inset 0 0 0 1px {{secLine}}; display: flex; align-items: center; justify-content: center; padding: 0 12px; font-size: 14px; line-height: 16px; font-weight: 600; letter-spacing: -0.5px; text-align: center">Узнать цену</a>
 </div></sc-if>
 </article>
 </sc-for>
 <sc-if value="{{noResults}}" hint-placeholder-val="{{ false }}">
 <div style="grid-column: 1 / -1; padding: 40px 24px; border-radius: 24px; background: #FFFFFF; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center">
-<span style="font-size: 16px; font-weight: 600">{{nrTitle}}</span>
-<span style="font-size: 14px; color: #63656B">{{nrText}}</span>
+<span style="font-size: 16px; line-height: 20px; font-weight: 600; letter-spacing: -0.5px">{{nrTitle}}</span>
+<span style="font-size: 14px; line-height: 20px; font-weight: 400; color: #63656B">{{nrText}}</span>
 </div>
 </sc-if>
 </div>
@@ -1203,9 +1203,9 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 </linearGradient>
 </defs>
 </svg></span></sc-if>
-<h1 style="margin: 28px 0 0; font-size: 28px; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; text-wrap: balance">{{err.title}}</h1>
-<sc-if value="{{err.text}}" hint-placeholder-val="{{ true }}"><p style="margin: 12px 0 0; font-size: 16px; line-height: 1.45; color: #63656B; text-wrap: balance">{{err.text}}</p></sc-if>
-<sc-if value="{{err.btn}}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{errReload}}" style="margin-top: 32px; height: 52px; min-width: 200px; padding: 0 32px; border: 0; border-radius: {{rBtnCta}}; background: {{accent}}; color: {{accentText}}; font: inherit; font-size: 16px; font-weight: 600; cursor: pointer">Обновить</button></sc-if>
+<h1 style="margin: 28px 0 0; font-size: 28px; line-height: 32px; font-weight: 400; text-wrap: balance">{{err.title}}</h1>
+<sc-if value="{{err.text}}" hint-placeholder-val="{{ true }}"><p style="margin: 12px 0 0; font-size: 16px; line-height: 24px; font-weight: 400; color: #63656B; text-wrap: balance">{{err.text}}</p></sc-if>
+<sc-if value="{{err.btn}}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{errReload}}" style="margin-top: 32px; height: 52px; min-width: 200px; padding: 0 32px; border: 0; border-radius: {{rBtnCta}}; background: {{accent}}; color: {{accentText}}; font: inherit; font-size: 16px; line-height: 20px; font-weight: 600; letter-spacing: -0.5px; cursor: pointer">Обновить</button></sc-if>
 </div>
 </section>
 </sc-if>
@@ -1448,8 +1448,8 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 </linearGradient>
 </defs>
 </svg></span></sc-if>
-<h2 id="err-dlg-t" style="margin: 24px 0 0; font-size: 24px; line-height: 1.2; font-weight: 700; letter-spacing: -0.02em">{{err.title}}</h2>
-<p id="err-dlg-d" style="margin: 10px 0 0; font-size: 15px; line-height: 1.45; color: #63656B; text-wrap: balance">{{err.text}}</p>
+<h2 id="err-dlg-t" style="margin: 24px 0 0; font-size: 28px; line-height: 32px; font-weight: 400">{{err.title}}</h2>
+<p id="err-dlg-d" style="margin: 10px 0 0; font-size: 16px; line-height: 24px; font-weight: 400; color: #63656B; text-wrap: balance">{{err.text}}</p>
 </section>
 </div>
 </sc-if>
@@ -1463,20 +1463,20 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 <button type="button" onClick="{{m.close}}" aria-label="Закрыть" style="position: absolute; top: 10px; right: 10px; width: 44px; height: 44px; border: 0; border-radius: 999px; background: #FFFFFF; color: var(--tx); display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
 </div>
 <div style="display: flex; flex-direction: column; gap: 10px">
-<h2 style="margin: 0; font-size: 28px; line-height: 1.1; font-weight: 700; letter-spacing: -0.03em">{{m.name}}</h2>
+<h2 style="margin: 0; font-size: 28px; line-height: 32px; font-weight: 400">{{m.name}}</h2>
 <div style="display: flex; gap: 6px; flex-wrap: wrap">
-<sc-if value="{{m.duration}}"><span style="height: 32px; padding: 0 12px; border-radius: 999px; background: #F4F3EF; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>{{m.duration}}</span></sc-if>
-<sc-if value="{{m.guests}}"><span style="height: 32px; padding: 0 12px; border-radius: 999px; background: #F4F3EF; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>{{m.guests}}</span></sc-if>
+<sc-if value="{{m.duration}}"><span style="height: 32px; padding: 0 12px; border-radius: 999px; background: #F4F3EF; display: flex; align-items: center; gap: 6px; font-size: 14px; line-height: 16px; font-weight: 400; letter-spacing: -0.5px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>{{m.duration}}</span></sc-if>
+<sc-if value="{{m.guests}}"><span style="height: 32px; padding: 0 12px; border-radius: 999px; background: #F4F3EF; display: flex; align-items: center; gap: 6px; font-size: 14px; line-height: 16px; font-weight: 400; letter-spacing: -0.5px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>{{m.guests}}</span></sc-if>
 </div>
-<sc-if value="{{m.desc}}"><p style="margin: 0; font-size: 15px; line-height: 1.45; color: #4A4C52">{{m.desc}}</p></sc-if>
+<sc-if value="{{m.desc}}"><p style="margin: 0; font-size: 16px; line-height: 24px; font-weight: 400; color: #4A4C52">{{m.desc}}</p></sc-if>
 </div>
 <div style="display: flex; flex-direction: column; gap: 10px">
-<span style="font-size: 15px; font-weight: 600">Дата</span>
-<button type="button" style="height: 56px; padding: 0 16px; border: 1.5px solid #E4E2DC; border-radius: 16px; background: #FFFFFF; font: inherit; font-size: 16px; color: var(--tx); display: flex; align-items: center; gap: 12px; cursor: pointer; text-align: left"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg><span style="flex: 1">14 декабря 2026</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#63656B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+<span style="font-size: 16px; line-height: 20px; font-weight: 600; letter-spacing: -0.5px">Дата</span>
+<button type="button" style="height: 56px; padding: 0 16px; border: 1.5px solid #E4E2DC; border-radius: 16px; background: #FFFFFF; font: inherit; font-size: 16px; line-height: 24px; font-weight: 400; color: var(--tx); display: flex; align-items: center; gap: 12px; cursor: pointer; text-align: left"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg><span style="flex: 1">14 декабря 2026</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#63656B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
 </div>
 <sc-if value="{{m.hasSlots}}">
 <div role="group" aria-label="Время" style="display: flex; flex-direction: column; gap: 10px">
-<span style="font-size: 15px; font-weight: 600">Время</span>
+<span style="font-size: 16px; line-height: 20px; font-weight: 600; letter-spacing: -0.5px">Время</span>
 <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
 <sc-for list="{{m.slots}}" as="sl" hint-placeholder-count="4">
 <button type="button" onClick="{{sl.pick}}" aria-pressed="{{sl.pressed}}" style="{{sl.style}}">{{sl.label}}</button>
@@ -1486,26 +1486,26 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 </sc-if>
 <div style="display: flex; align-items: center; justify-content: space-between">
 <div style="display: flex; flex-direction: column; gap: 2px">
-<span style="font-size: 15px; font-weight: 600">{{m.qLabel}}</span>
-<span style="font-size: 13px; color: #63656B">{{m.qHint}}</span>
+<span style="font-size: 16px; line-height: 20px; font-weight: 600; letter-spacing: -0.5px">{{m.qLabel}}</span>
+<span style="font-size: 14px; line-height: 20px; font-weight: 400; color: #63656B">{{m.qHint}}</span>
 </div>
 <div style="height: 48px; border-radius: 999px; background: #F4F3EF; display: flex; align-items: center">
 <button type="button" onClick="{{m.dec}}" aria-label="Меньше" style="width: 48px; height: 48px; border: 0; background: transparent; color: var(--tx); display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
-<span aria-live="polite" style="min-width: 20px; text-align: center; font-size: 16px; font-weight: 700">{{m.qty}}</span>
+<span aria-live="polite" style="min-width: 20px; text-align: center; font-size: 16px; line-height: 24px; font-weight: 600">{{m.qty}}</span>
 <button type="button" onClick="{{m.inc}}" aria-label="Больше" style="width: 48px; height: 48px; border: 0; background: transparent; color: var(--tx); display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
 </div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 10px">
-<label for="svc-comment" style="font-size: 15px; font-weight: 600">Комментарий</label>
-<textarea id="svc-comment" rows="2" placeholder="Пожелания к услуге" style="padding: 14px 16px; border: 1.5px solid #E4E2DC; border-radius: 16px; font: inherit; font-size: 16px; color: var(--tx); resize: none; outline: none"></textarea>
+<label for="svc-comment" style="font-size: 16px; line-height: 20px; font-weight: 600; letter-spacing: -0.5px">Комментарий</label>
+<textarea id="svc-comment" rows="2" placeholder="Пожелания к услуге" style="padding: 14px 16px; border: 1.5px solid #E4E2DC; border-radius: 16px; font: inherit; font-size: 16px; line-height: 24px; font-weight: 400; color: var(--tx); resize: none; outline: none"></textarea>
 </div>
 </div>
 <footer style="flex: none; padding: 16px 24px 20px; border-top: 1px solid #EEECE7; display: flex; align-items: center; gap: 12px; background: #FFFFFF">
 <div style="display: flex; flex-direction: column; gap: 2px; padding-left: 4px">
-<span style="font-size: 13px; color: #63656B">{{m.summary}}</span>
-<span style="font-size: 20px; font-weight: 700; letter-spacing: -0.02em">{{m.total}}</span>
+<span style="font-size: 14px; line-height: 20px; font-weight: 400; color: #63656B">{{m.summary}}</span>
+<span style="font-size: 20px; line-height: 24px; font-weight: 600; letter-spacing: -0.5px">{{m.total}}</span>
 </div>
-<button type="button" onClick="{{m.add}}" style="flex: 1; height: 56px; border: 0; border-radius: {{rBtnCta}}; background: {{accent}}; color: {{accentText}}; font: inherit; font-size: 16px; font-weight: 600; cursor: pointer">Добавить в корзину</button>
+<button type="button" onClick="{{m.add}}" style="flex: 1; height: 56px; border: 0; border-radius: {{rBtnCta}}; background: {{accent}}; color: {{accentText}}; font: inherit; font-size: 16px; line-height: 20px; font-weight: 600; letter-spacing: -0.5px; cursor: pointer">Добавить в корзину</button>
 </footer>
 </section>
 </div>
@@ -1519,11 +1519,11 @@ const st = this.state || {};
 const open = st.menu ?? (this.props.showMenu ?? false);
 const cur = st.cur || 'RUB';
 const lang = st.lang || 'ru';
-const item = 'width: 100%; min-height: 44px; padding: 0 10px; border: 0; border-radius: 14px; font: inherit; font-size: 15px; color: var(--tx); display: flex; align-items: center; gap: 10px; text-align: left; cursor: pointer; ';
+const item = 'width: 100%; min-height: 44px; padding: 0 10px; border: 0; border-radius: 14px; font: inherit; font-size: 16px; line-height: 24px; font-weight: 400; color: var(--tx); display: flex; align-items: center; gap: 10px; text-align: left; cursor: pointer; ';
 const curList = [['RUB', '₽'], ['USD', '$'], ['EUR', '€'], ['KZT', '₸']];
 const langList = [['ru', 'Русский', 'RU'], ['en', 'English', 'EN'], ['de', 'Deutsch', 'DE'], ['zh', '中文', 'ZH']];
 const on = 'background: #F4F3EF; font-weight: 600';
-const off = 'background: transparent; font-weight: 500';
+const off = 'background: transparent; font-weight: 400';
 const curs = curList.map(([code, sym]) => ({ code, sym, sel: code === cur, style: item + (code === cur ? on : off), pick: () => this.setState({ cur: code }) }));
 const langs = langList.map(([id, name]) => ({ name, sel: id === lang, style: item + (id === lang ? on : off), pick: () => this.setState({ lang: id }) }));
 return {
@@ -1533,7 +1533,7 @@ toggleMenu: () => this.setState({ menu: !open }),
 curs, langs,
 curSym: curList.find((c) => c[0] === cur)[1],
 langCode: langList.find((l) => l[0] === lang)[2],
-globeStyle: 'height: 44px; padding: 0 10px 0 12px; border: 0; border-radius: ' + (this.theme().radiusBtn == null ? 999 : this.theme().radiusBtn) + 'px; font: inherit; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 6px; cursor: pointer; ' + (open ? 'background: #15161A; color: #FFFFFF' : 'background: #F4F3EF; color: var(--tx)'),
+globeStyle: 'height: 44px; padding: 0 10px 0 12px; border: 0; border-radius: ' + (this.theme().radiusBtn == null ? 999 : this.theme().radiusBtn) + 'px; font: inherit; font-size: 14px; line-height: 16px; font-weight: 600; letter-spacing: -0.5px; display: flex; align-items: center; gap: 6px; cursor: pointer; ' + (open ? 'background: #15161A; color: #FFFFFF' : 'background: #F4F3EF; color: var(--tx)'),
 chevStyle: 'transition: transform .2s; transform: rotate(' + (open ? '180' : '0') + 'deg)'
 };
 }
@@ -1586,7 +1586,7 @@ add: (e) => { if (INFO[s[0]] && INFO[s[0]][0]) { this.openModal(s[0]); return; }
 });
 const sel_on = 'background: ' + this.tint(0.16) + '; border: 1.5px solid ' + this.icAcc() + '; color: ' + this.selAcc() + '; box-shadow: 0 6px 16px ' + this.icAcc() + '2E';
 const sel_off = 'background: ' + this.chipBg() + '; border: 1px solid ' + this.chipBg() + '; color: var(--tx)';
-const base = 'position: relative; flex: none; height: 56px; padding: 0 18px 0 8px; border-radius: 999px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; transition: background .2s, border-color .2s, color .2s; ';
+const base = 'position: relative; flex: none; height: 56px; padding: 0 18px 0 8px; border-radius: 999px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; font: inherit; font-size: 16px; line-height: 20px; font-weight: 600; letter-spacing: -0.5px; cursor: pointer; transition: background .2s, border-color .2s, color .2s; ';
 const tab = {};
 const abA = window.P.ab === 'a';
 const tabAll = { pressed: sel ? 'false' : 'true', pick: (e) => { this.chipReveal(e); this.setState({ tab: null, sub: 'all' }); }, style: base + 'padding: 0 22px; ' + (sel ? sel_off : sel_on) };
@@ -1594,8 +1594,8 @@ DATA.cats.forEach(([id]) => {
 const on = sel === id;
 tab[id] = { on, hint: on ? 'Снять фильтр' : '', pressed: on ? 'true' : 'false', pick: (e) => { this.chipReveal(e); this.setState({ tab: on ? null : id, sub: 'all' }); }, style: base + (on ? sel_on : sel_off) };
 });
-const subBase = 'flex: none; height: 36px; padding: 0 14px; border-radius: 999px; font: inherit; font-size: 14px; cursor: pointer; transition: background .2s, color .2s, border-color .2s; ';
-const subs = [['all', 'Все']].concat(tags.map((t) => [t, t])).map(([sid, label]) => ({ label, pressed: sub === sid ? 'true' : 'false', pick: () => this.setState({ sub: sid }), style: subBase + (sub === sid ? 'border: 1.5px solid ' + this.icAcc() + '; background: ' + this.tint(0.14) + '; color: ' + this.selAcc() + '; font-weight: 600' : 'border: 1px solid ' + this.chipBg() + '; background: ' + this.chipBg() + '; color: #3F4147; font-weight: 500') }));
+const subBase = 'flex: none; height: 36px; padding: 0 14px; border-radius: 999px; font: inherit; font-size: 14px; line-height: 20px; font-weight: 400; cursor: pointer; transition: background .2s, color .2s, border-color .2s; ';
+const subs = [['all', 'Все']].concat(tags.map((t) => [t, t])).map(([sid, label]) => ({ label, pressed: sub === sid ? 'true' : 'false', pick: () => this.setState({ sub: sid }), style: subBase + (sub === sid ? 'border: 1.5px solid ' + this.icAcc() + '; background: ' + this.tint(0.14) + '; color: ' + this.selAcc() + '; font-weight: 600' : 'border: 1px solid ' + this.chipBg() + '; background: ' + this.chipBg() + '; color: #3F4147; font-weight: 400') }));
 const tid = this.state.toast !== undefined ? this.state.toast : ((this.props.showToast ?? false) ? 'banya-master' : null);
 const ts = tid ? DATA.svc.find((x) => x[0] === tid) : null;
 const tx = this.state.toastX && this.state.toastX.id === tid ? this.state.toastX : null;
@@ -1679,7 +1679,7 @@ const qtyText = qty + ' ' + plural(qty, word[0], word[1], word[2]);
 const price = s[4] || 0;
 const sum = I[5] ? price * qty : price;
 const close = () => this.setState({ modal: null });
-const base = 'height: 48px; border-radius: 14px; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; ';
+const base = 'height: 48px; border-radius: 14px; font: inherit; font-size: 16px; line-height: 20px; font-weight: 600; letter-spacing: -0.5px; cursor: pointer; ';
 const slots = I[1].map((label) => ({ label, pick: () => this.setState({ mSlot: label }), pressed: slot === label ? 'true' : 'false', style: base + (slot === label ? 'border: 1.5px solid #15161A; background: #15161A; color: #FFFFFF' : 'border: 1.5px solid #E4E2DC; background: #FFFFFF; color: var(--tx)') }));
 const meta = ['14 декабря 2026', slot, qtyText, I[6] === 'hour' ? '' : s[6]].filter(Boolean).join(' • ');
 return {
@@ -1751,7 +1751,7 @@ try { n.scrollTo({ left: to, behavior: 'smooth' }); } catch (err) { n.scrollLeft
 tint(p) { const h = (this.chipAcc()).replace('#', ''); const n = parseInt(h, 16); const c = [n >> 16 & 255, n >> 8 & 255, n & 255].map((v) => Math.round(255 - (255 - v) * p)); return '#' + c.map((v) => v.toString(16).padStart(2, '0')).join(''); }
 themesAll() {
 return {
-default: { name: 'Дефолтный', accentBg: '#1B5EB2', accentText: '#FFFFFF', pageBg: '#F4F3EF', blockBg: '#FFFFFF', radiusBtn: null, radiusCard: 24, font: "'Onest', system-ui, sans-serif", text: '#15161A', cardBg: '#FFFFFF', hotel: 'Услуги отеля', logo: 'assets/71f2b8ba869ca24ce665ae6a8b5d5182.svg', logoAlt: 'Логотип отеля', logoH: 34, photo: 'assets/194c581a51832f8d117efe20ac6d059e.webp', photoPos: '50% 60%' },
+default: { name: 'Дефолтный', accentBg: '#1B5EB2', accentText: '#FFFFFF', pageBg: '#F4F3EF', blockBg: '#FFFFFF', radiusBtn: null, radiusCard: 24, font: "'Noto Sans', system-ui, sans-serif", text: '#15161A', cardBg: '#FFFFFF', hotel: 'Услуги отеля', logo: 'assets/71f2b8ba869ca24ce665ae6a8b5d5182.svg', logoAlt: 'Логотип отеля', logoH: 34, photo: 'assets/194c581a51832f8d117efe20ac6d059e.webp', photoPos: '50% 60%' },
 cosmos: { name: 'Cosmos', accentBg: '#00A5B5', accentText: '#FFFFFF', pageBg: '#FFFFFF', blockBg: '#FFFFFF', radiusBtn: 2, radiusCard: 4, font: "'Circe', Arial, sans-serif", text: '#323232', cardBg: '#FFFFFF', hotel: 'Услуги в гостинице «Космос»', logo: 'assets/e61c0e74ae9b8b9fc548604cdf741b10.png', logoAlt: 'Cosmos Москва ВДНХ', logoH: 34, photo: 'assets/17814eb412adbe740e438842d121f330.jpg', photoPos: '50% 38.4305%' },
 ohta: { name: 'Охта Парк', accentBg: '#006738', accentText: '#FFFFFF', pageBg: '#FFFFFF', blockBg: '#FFFFFF', radiusBtn: 10, radiusCard: 20, font: "'Montserrat', system-ui, sans-serif", text: '#000000', cardBg: '#F9FAF9', hotel: 'Услуги курорта «Охта Парк»', logo: 'assets/49695d9890919d24f3b1c1a6d0a47f86.svg', logoAlt: 'Охта Парк', logoH: 40, photo: 'assets/7f883da43b7e27ddcb0e290435b1fb65.webp', photoPos: '50% 55%' },
 territoria: { name: 'Территория', accentBg: '#986E61', accentText: '#FFFFFF', pageBg: '#FFFFFF', blockBg: '#FFFFFF', radiusBtn: 999, radiusCard: 0, font: "'Roboto', system-ui, sans-serif", text: '#1C2631', cardBg: '#FFFFFF', hotel: 'Услуги глэмпинга «Территория»', logo: 'assets/af765d90b6cbb1f7f82594328f1058f7.png', logoAlt: 'Глэмпинг Территория', logoH: 26, photo: 'assets/4a9cd242cf35a8a207249a4f60d8e155.webp', photoPos: '50% 72%' },
@@ -1812,7 +1812,7 @@ hero() {
 const shell = 'position: relative; z-index: 5; display: flex; flex-direction: column; box-sizing: border-box; width: min(1200px, calc(100% - 80px)); min-height: 330px; background: #FFFFFF; border: 1px solid #EDEBE6; border-radius: 28px; box-shadow: 0 6px 20px rgba(21,22,26,0.04); ';
 const row = 'z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 32px; box-sizing: border-box; ';
 const layer = 'position: absolute; z-index: 0; pointer-events: none; overflow: hidden; ';
-const title = 'position: relative; z-index: 1; margin: auto 0 0; padding: 0 40px 123px; white-space: nowrap; font-size: 56px; line-height: 1.05; font-weight: 700; letter-spacing: -0.03em; color: #FFFFFF; text-shadow: 0 2px 8px rgba(0,0,0,0.35), 0 6px 40px rgba(0,0,0,0.6)';
+const title = 'position: relative; z-index: 1; margin: auto 0 0; padding: 0 40px 123px; white-space: nowrap; font-size: 42px; line-height: 48px; font-weight: 400; color: #FFFFFF; text-shadow: 0 2px 8px rgba(0,0,0,0.35), 0 6px 40px rgba(0,0,0,0.6)';
 const has0 = this.photoOn(); const has = has0 && !this.errPage();
 const ph = has && this.cartN() === 0 && !(this.state.flying > 0) && !this.state.scrolled;
 const acc = this.acc();
@@ -1834,7 +1834,7 @@ topRowStyle: 'position: absolute; z-index: 2; display: flex; align-items: center
 : 'top: 4px; left: 4px; right: 4px; padding: 0 20px 0 20px; background: rgba(255,255,255,0); -webkit-backdrop-filter: blur(0px); backdrop-filter: blur(0px); box-shadow: inset 0 0 0 1px rgba(255,255,255,0), 0 10px 30px rgba(21,22,26,0)'),
 layerStyle: 'position: absolute; z-index: 0; pointer-events: none; overflow: hidden; inset: 0; border-radius: inherit; transition: opacity .55s ease, transform .7s ' + ez + '; opacity: ' + (ph ? '1' : '0') + '; transform: ' + (ph ? 'none' : 'scale(1.06)'),
 shadeStyle: 'position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,0.28) 100%)', menuTop: ph ? '96px' : '84px',
-titleStyle: 'position: absolute; z-index: 1; left: 40px; bottom: 40px; margin: 0; white-space: nowrap; font-size: 56px; line-height: 1.05; font-weight: 700; letter-spacing: -0.03em; color: #FFFFFF; text-shadow: 0 2px 8px rgba(0,0,0,0.35), 0 6px 40px rgba(0,0,0,0.6); pointer-events: none; transition: opacity .3s ease, transform .6s ' + ez + '; opacity: ' + (ph ? '1' : '0') + '; transform: ' + (ph ? 'none' : 'translateY(-40px)')
+titleStyle: 'position: absolute; z-index: 1; left: 40px; bottom: 40px; margin: 0; white-space: nowrap; font-size: 42px; line-height: 48px; font-weight: 400; color: #FFFFFF; text-shadow: 0 2px 8px rgba(0,0,0,0.35), 0 6px 40px rgba(0,0,0,0.6); pointer-events: none; transition: opacity .3s ease, transform .6s ' + ez + '; opacity: ' + (ph ? '1' : '0') + '; transform: ' + (ph ? 'none' : 'translateY(-40px)')
 };
 }
 errList() { return { 'none': { kind: null, icon: null, title: '', text: '', btn: false }, 'unavailable': { kind: 'page', icon: 'pick', title: 'Онлайн-бронирование услуг недоступно', text: 'Вы можете оформить услуги на месте или связаться со стойкой регистрации', btn: false }, 'link': { kind: 'page', icon: 'pick', title: 'Не удалось открыть страницу', text: 'Возможно, ссылка устарела или содержит ошибку', btn: false }, 'tech': { kind: 'page', icon: 'connection', title: 'Что-то пошло не так', text: 'Попробуйте обновить страницу или зайдите позже', btn: true }, 'tech-loaded': { kind: 'modal', icon: 'connection', title: 'Что-то пошло не так', text: 'Попробуйте обновить страницу или зайдите позже', btn: false }, 'soldout': { kind: 'page', icon: 'calendar', title: 'На ваши даты все услуги уже забронированы', text: 'Свободные слоты могут появиться позже. Вы также сможете уточнить наличие мест при заезде', btn: false }, 'past': { kind: 'page', icon: 'calendar', title: 'Даты проживания уже прошли', text: 'Не получится привязать услуги к прошлому проживанию. Но вы всегда можете забронировать новое', btn: false }, 'auth': { kind: 'modal', icon: 'connection', title: 'Что-то пошло не так', text: 'Попробуйте обновить страницу или зайдите позже', btn: false } }; }
@@ -1891,7 +1891,7 @@ onKey: (e) => { if (e.key === 'Escape') { this.setState({ query: '' }); if (this
 P.mix(Component);
 </script>
 <script src="catalog.js"></script>
-<script src="proto-logic.js?v=ab2"></script>
+<script src="proto-logic.js?v=alma1"></script>
 <script src="dc-runtime.js"></script>
 <script>DC.boot("MainDesktop")</script>
 </body>

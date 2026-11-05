@@ -11,11 +11,11 @@
     const open = st.menu ?? (this.props.showMenu ?? false);
     const cur = st.cur || 'RUB';
     const lang = st.lang || 'ru';
-    const item = 'width: 100%; min-height: 44px; padding: 0 10px; border: 0; border-radius: 14px; font: inherit; font-size: 15px; color: #15161A; display: flex; align-items: center; gap: 10px; text-align: left; cursor: pointer; ';
+    const item = 'width: 100%; min-height: 44px; padding: 0 10px; border: 0; border-radius: 14px; font: inherit; font-size: 16px; line-height: 24px; font-weight: 400; color: #15161A; display: flex; align-items: center; gap: 10px; text-align: left; cursor: pointer; ';
     const curList = [['RUB', '₽'], ['USD', '$'], ['EUR', '€'], ['KZT', '₸']];
     const langList = [['ru', 'Русский', 'RU'], ['en', 'English', 'EN'], ['de', 'Deutsch', 'DE'], ['zh', '中文', 'ZH']];
     const on = 'background: #F4F3EF; font-weight: 600';
-    const off = 'background: transparent; font-weight: 500';
+    const off = 'background: transparent; font-weight: 400';
     const curs = curList.map(([code, sym]) => ({ code, sym, sel: code === cur, style: item + (code === cur ? on : off), pick: () => this.setState({ cur: code }) }));
     const langs = langList.map(([id, name]) => ({ name, sel: id === lang, style: item + (id === lang ? on : off), pick: () => this.setState({ lang: id }) }));
     return {
@@ -25,7 +25,7 @@
     curs, langs,
     curSym: curList.find((c) => c[0] === cur)[1],
     langCode: langList.find((l) => l[0] === lang)[2],
-    globeStyle: 'height: 44px; padding: 0 10px 0 12px; border: 0; border-radius: 999px; font: inherit; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 6px; cursor: pointer; ' + (open ? 'background: #15161A; color: #FFFFFF' : 'background: #F4F3EF; color: #15161A'),
+    globeStyle: 'height: 44px; padding: 0 10px 0 12px; border: 0; border-radius: 999px; font: inherit; font-size: 14px; line-height: 16px; font-weight: 600; letter-spacing: -0.5px; display: flex; align-items: center; gap: 6px; cursor: pointer; ' + (open ? 'background: #15161A; color: #FFFFFF' : 'background: #F4F3EF; color: #15161A'),
     chevStyle: 'transition: transform .2s; transform: rotate(' + (open ? '180' : '0') + 'deg)'
     };
     },
@@ -126,13 +126,13 @@
     var ctx = P.ctx();
     var cat = C.catById[ctx.c] || C.catById.banya;
     var cur = (comp.state && comp.state.filter) || 'all';
-    var base = 'flex: none; height: 36px; padding: 0 14px; border-radius: 999px; font: inherit; font-size: 14px; cursor: pointer; transition: background .2s, color .2s, border-color .2s; ';
+    var base = 'flex: none; height: 36px; padding: 0 14px; border-radius: 999px; font: inherit; font-size: 14px; line-height: 20px; font-weight: 400; cursor: pointer; transition: background .2s, color .2s, border-color .2s; ';
     var list = [['all', 'Все']].concat(cat.filters.map(function (f) { return [f, f]; }));
     var filters = list.map(function (p) {
       return {
         label: p[1], pressed: cur === p[0] ? 'true' : 'false',
         pick: function () { comp.setState({ filter: p[0] }); },
-        style: base + (cur === p[0] ? 'border: 1px solid #C9D6FF; background: #E6EDFF; color: #2440C8; font-weight: 600' : 'border: 1px solid #E4E2DC; background: #FFFFFF; color: #3F4147; font-weight: 500')
+        style: base + (cur === p[0] ? 'border: 1px solid #C9D6FF; background: #E6EDFF; color: #2440C8; font-weight: 600' : 'border: 1px solid #E4E2DC; background: #FFFFFF; color: #3F4147; font-weight: 400')
       };
     });
     var items = cat.items.filter(function (s) { return cur === 'all' || s.tag === cur; }).map(function (s) { return P.card(s, S, 'cat', cat.id); });
@@ -149,7 +149,7 @@
     var st = comp.state;
     var slot = st.slot || (s.slots ? s.slots[0] : '');
     var qty = st.qty || s.q.min;
-    var base = 'height: 48px; border-radius: 14px; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; ';
+    var base = 'height: 48px; border-radius: 14px; font: inherit; font-size: 16px; line-height: 20px; font-weight: 600; letter-spacing: -0.5px; cursor: pointer; ';
     var slots = (s.slots || []).map(function (label) {
       return {
         label: label,
