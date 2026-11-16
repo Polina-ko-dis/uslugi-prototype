@@ -1732,7 +1732,7 @@ const extra = this.state.extra || {};
 const total = window.CAT.cart.total();
 const mv = this.modalVals(DATA, fmt, plural, accent);
 return {
-items, popItems, popInOn: this.popLayout() !== '1' && !q, gridHeadOn: this.popLayout() !== '1' && !q, gridTitle: cat ? cat[1] : 'Все услуги', svcCls: this.popLayout() === '3' ? 'svc-split' : '', popInPad: (this.popLayout() === '3' ? 20 : 20) + 'px', popCount: popItems.length + ' ' + plural(popItems.length, 'услуга', 'услуги', 'услуг'), tab, subs, hasSubs: tags.length > 0, gridTop: tags.length > 0 ? '14px' : '16px',
+items, popItems, popInOn: this.popLayout() !== '1' && !q && !sel, gridHeadOn: this.popLayout() !== '1' && !q && !sel, gridTitle: cat ? cat[1] : 'Все услуги', svcCls: this.popLayout() === '3' ? 'svc-split' : '', popInPad: (this.popLayout() === '3' ? 20 : 20) + 'px', popCount: popItems.length + ' ' + plural(popItems.length, 'услуга', 'услуги', 'услуг'), tab, subs, hasSubs: tags.length > 0, gridTop: tags.length > 0 ? '14px' : '16px',
 noResults: items.length === 0,
 nrTitle: q ? 'Ничего не нашлось' : 'В этом разделе пока нет услуг',
 nrText: q ? 'Попробуйте другое название или выберите раздел выше' : 'Выберите другой раздел или снимите фильтр',
