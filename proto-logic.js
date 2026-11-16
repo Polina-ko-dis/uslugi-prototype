@@ -96,6 +96,16 @@
     } catch (e) { v = v === 'a' || v === 'b' ? v : null; }
     return v === 'a' || v === 'b' ? v : null;
   })();
+  /* Расположение подборки: ?pop=2|3 (запоминается), ?pop=1 возвращает основной вариант. */
+  P.pop = (function () {
+    var v = qs.get('pop');
+    try {
+      if (v === '2' || v === '3') localStorage.setItem('uslugi-pop', v);
+      else if (v === '1' || v === 'off') localStorage.removeItem('uslugi-pop');
+      v = localStorage.getItem('uslugi-pop');
+    } catch (e) { v = v === '2' || v === '3' ? v : null; }
+    return v === '2' || v === '3' ? v : null;
+  })();
   var AB_LS = { 'uslugi-theme': 'default', 'uslugi-scope': 'accent', 'uslugi-photo': '0' };
   P.lsGet = function (k) {
     if (P.ab && k in AB_LS) return AB_LS[k];

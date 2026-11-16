@@ -12,7 +12,9 @@
     : (w < 700 ? 'Main' : w < 1180 ? 'MainTablet' : 'MainDesktop');
   // ?ab=a|b — вариант A/B-теста; без него обычный прототип с демо-панелью
   var ab = new URLSearchParams(location.search).get('ab');
-  location.replace(page + '.html?ab=' + (ab === 'a' || ab === 'b' ? ab : 'off'));
+  // ?pop=2|3 — вариант расположения подборки; без него основной (над блоком услуг)
+  var pop = new URLSearchParams(location.search).get('pop');
+  location.replace(page + '.html?ab=' + (ab === 'a' || ab === 'b' ? ab : 'off') + '&pop=' + (pop === '2' || pop === '3' ? pop : '1'));
 })();
 </script>
 </head>
