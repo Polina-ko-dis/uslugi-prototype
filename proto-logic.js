@@ -1,6 +1,73 @@
 /* Общая логика страниц прототипа. */
 (function () {
   'use strict';
+  if (!document.body || document.body.getAttribute('data-collection-drag') !== 'mouse') return;
+  var drag = null, blockedRow = null, clickTimer;
+  var style = document.createElement('style');
+  style.textContent = '.pop-row{cursor:grab}.pop-row a{cursor:inherit}.pop-row img{-webkit-user-drag:none}.pop-row,.pop-row *{-webkit-user-select:none;user-select:none}.pop-row[data-dragging]{scroll-snap-type:none;scroll-behavior:auto}.pop-row[data-dragging],.pop-row[data-dragging] *{cursor:grabbing!important}';
+  document.head.appendChild(style);
+
+  function rowOf(target) {
+    return target && target.closest ? target.closest('.pop-row') : null;
+  }
+  function clearClick() {
+    clearTimeout(clickTimer);
+    blockedRow = null;
+  }
+  function endDrag(event) {
+    if (!drag || (event && event.pointerId != null && event.pointerId !== drag.id)) return;
+    var previous = drag;
+    drag = null;
+    previous.row.removeAttribute('data-dragging');
+    if (previous.row.hasPointerCapture(previous.id)) previous.row.releasePointerCapture(previous.id);
+    if (previous.moved) {
+      blockedRow = previous.row;
+      clearTimeout(clickTimer);
+      clickTimer = setTimeout(clearClick, 350);
+    }
+  }
+
+  document.addEventListener('pointerdown', function (event) {
+    clearClick();
+    if (event.pointerType !== 'mouse' || event.button !== 0 || event.isPrimary === false ||
+        event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
+    var row = rowOf(event.target);
+    if (!row || row.scrollWidth <= row.clientWidth) return;
+    drag = { row: row, id: event.pointerId, x: event.clientX, y: event.clientY, left: row.scrollLeft, moved: false };
+  }, true);
+
+  document.addEventListener('pointermove', function (event) {
+    if (!drag || event.pointerId !== drag.id) return;
+    if (!(event.buttons & 1)) { endDrag(event); return; }
+    var dx = event.clientX - drag.x, dy = event.clientY - drag.y;
+    if (!drag.moved) {
+      if (Math.abs(dx) < 6 || Math.abs(dx) <= Math.abs(dy)) return;
+      drag.moved = true;
+      drag.row.setAttribute('data-dragging', 'true');
+      drag.row.setPointerCapture(drag.id);
+    }
+    event.preventDefault();
+    drag.row.scrollLeft = drag.left - dx;
+  }, { capture: true, passive: false });
+
+  document.addEventListener('pointerup', endDrag, true);
+  document.addEventListener('pointercancel', endDrag, true);
+  document.addEventListener('lostpointercapture', endDrag, true);
+  window.addEventListener('blur', endDrag);
+
+  document.addEventListener('click', function (event) {
+    if (!blockedRow || event.detail === 0 || !blockedRow.contains(event.target)) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    clearClick();
+  }, true);
+  document.addEventListener('dragstart', function (event) {
+    if (rowOf(event.target)) event.preventDefault();
+  }, true);
+})();
+
+(function () {
+  'use strict';
   var C = window.CAT;
   var qs = new URLSearchParams(location.search);
   var P = {};

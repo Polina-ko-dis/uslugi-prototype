@@ -49,7 +49,7 @@ a{color:inherit;text-decoration:none}a:hover{color:inherit}
 </style>
 <style>html,body{height:100%;margin:0}#app{height:100vh;height:100dvh;overflow:hidden}dc-host{display:contents}section[aria-label="Состав заказа"]>div:last-child{border-bottom:0!important}</style>
 </head>
-<body>
+<body data-collection-drag="mouse">
 <div id="app"></div>
 <template data-dc="MainTablet">
 <div ref="{{setRoot}}" style="width: 100%; height: 100%; display: flex; flex-direction: column; position: relative; overflow: hidden; background: {{pageBg}}; font-family: {{fontFamily}}; --tx: {{textColor}}; color: var(--tx)">
@@ -1970,7 +1970,7 @@ onKey: (e) => { if (e.key === 'Escape') { this.setState({ query: '' }); if (this
 P.mix(Component);
 </script>
 <script src="catalog.js"></script>
-<script src="proto-logic.js?v=pop1"></script>
+<script src="proto-logic.js?v=drag2"></script>
 <script src="dc-runtime.js"></script>
 <script>DC.boot("MainTablet")</script>
 </body>
