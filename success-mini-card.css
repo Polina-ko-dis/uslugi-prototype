@@ -1,0 +1,94 @@
+/* Mini Card, Figma 16266:86363. Shared by all confirmation layouts. */
+.order-mini-cards {
+  --mini-card-line: #C3C8CF;
+  --mini-card-text: #2E3236;
+  --mini-card-secondary: #737880;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--mini-card-text);
+}
+
+.order-mini-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+  padding: 16px 0;
+}
+
+.order-mini-card + .order-mini-card {
+  border-top: 1px solid var(--mini-card-line);
+}
+
+.order-mini-card__image {
+  display: block;
+  flex: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.order-mini-card__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.order-mini-card__title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  margin: 0;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+.order-mini-card__properties {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1px 4px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.order-mini-card__property {
+  display: inline-flex;
+  gap: 4px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.order-mini-card__property + .order-mini-card__property::before {
+  content: '•';
+  flex: none;
+  width: 5px;
+  text-align: center;
+}
+
+.order-mini-card__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px;
+  margin-top: 4px;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+.order-mini-card__currency {
+  color: var(--mini-card-secondary);
+}

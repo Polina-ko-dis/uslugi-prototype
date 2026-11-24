@@ -286,11 +286,13 @@
     var o = C.cart.lastOrder() || C.cart.demoOrder();
     var lines = (o.lines || []).filter(function (l) { return C.byId[l.id]; }).map(function (l) {
       var s = C.byId[l.id];
+      var duration = /^(От|С |До |За |Доставка|Заказ|Действует|Подача|На всё)/.test(s.duration || '') ? '' : s.duration;
+      var sum = s.price === null ? 'По запросу' : (s.price === 0 ? 'Бесплатно' : C.money(C.lineTotal(s, l.qty) * l.count));
       return {
         img: s.img, name: s.name + (l.count > 1 ? ' × ' + l.count : ''),
-        when: C.DATE + (l.time ? ' · ' + l.time : ''),
-        what: [C.qtyWord(s.q.unit, l.qty), /^(От|С |До |За |Доставка|Заказ|Действует|Подача|На всё)/.test(s.duration || '') ? '' : s.duration].filter(Boolean).join(' · '),
-        sum: s.price === null ? 'По запросу' : (s.price === 0 ? 'Бесплатно' : C.money(C.lineTotal(s, l.qty) * l.count))
+        properties: [C.DATE, l.time, C.qtyWord(s.q.unit, l.qty), duration].filter(Boolean),
+        price: sum.replace(/\s*₽$/, ''),
+        currency: s.price > 0 ? '₽' : ''
       };
     });
     return { orderNo: o.no, orderLines: lines, orderTotal: C.money(o.total || 0), hasLines: lines.length > 0 };
