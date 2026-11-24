@@ -265,10 +265,9 @@
       meta.push(C.qtyWord(s.q.unit, l.qty));
       var sum = s.price === null ? 'По запросу' : (s.price === 0 ? 'Бесплатно' : C.money(C.lineTotal(s, l.qty) * l.count));
       return {
-        name: s.name, meta: meta.join(' · '), qty: l.count, sum: sum,
+        name: s.name + (l.count > 1 ? ' × ' + l.count : ''), meta: meta.join(' · '), sum: sum,
         thumb: 'width: 64px; height: 64px; border-radius: 14px; background: #E4E2DC url(' + s.img + ') center / cover no-repeat',
-        inc: function () { C.cart.setCount(l.key, Math.min(9, l.count + 1)); },
-        dec: function () { C.cart.setCount(l.key, l.count - 1); }
+        remove: function () { C.cart.setCount(l.key, 0); }
       };
     });
     var n = C.cart.count();

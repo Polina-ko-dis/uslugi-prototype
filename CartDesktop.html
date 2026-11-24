@@ -6,6 +6,7 @@
 <title>Корзина — десктоп</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600&amp;family=Montserrat:wght@400;500;600;700&amp;family=Roboto:wght@400;500;600;700&amp;display=swap">
 <style>
+.cart-mini-card + .cart-mini-card{border-top:1px solid #EEECE7}
 body{margin:0;background:#F4F3EF}
 a{color:inherit;text-decoration:none}a:hover{color:inherit}
 .hs{scrollbar-width:none}.hs::-webkit-scrollbar{display:none}
@@ -1436,20 +1437,16 @@ P.mix(Component);
 <button type="button" aria-label="Изменить данные заказчика" style="flex: none; width: 44px; height: 44px; border: 0; border-radius: 999px; background: transparent; color: var(--tx); display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" data-alma="ai_edit_24"><path d="M21 22H3V20H21V22ZM20.71 5.85C20.8037 5.75704 20.8781 5.64644 20.9289 5.52458C20.9797 5.40272 21.0058 5.27201 21.0058 5.14C21.0058 5.00799 20.9797 4.87728 20.9289 4.75542C20.8781 4.63356 20.8037 4.52296 20.71 4.43L18.57 2.29C18.477 2.19627 18.3664 2.12188 18.2446 2.07111C18.1227 2.02034 17.992 1.9942 17.86 1.9942C17.728 1.9942 17.5973 2.02034 17.4754 2.07111C17.3536 2.12188 17.243 2.19627 17.15 2.29L16 3.45L19.55 7L20.71 5.85ZM4 19L5.78 13.67L15 4.43L18.57 8L9.33 17.22L4 19Z"/></svg></button>
 </div>
 <sc-for list="{{items}}" as="it" hint-placeholder-count="2">
-<div style="display: grid; grid-template-columns: 64px 1fr; gap: 12px; padding: 14px 4px; border-bottom: 1px solid #EEECE7">
+<div class="cart-mini-card" style="display: grid; grid-template-columns: 64px 1fr; gap: 12px; padding: 14px 4px">
 <span style="{{it.thumb}}"></span>
 <div style="display: flex; flex-direction: column; gap: 10px; min-width: 0">
 <div style="display: flex; flex-direction: column; gap: 3px">
 <span style="font-size: 16px; line-height: 24px; font-weight: 600">{{it.name}}</span>
 <span style="font-size: 14px; line-height: 20px; font-weight: 400; color: #63656B">{{it.meta}}</span>
 </div>
-<div style="display: flex; align-items: center; justify-content: space-between">
-<div style="height: 40px; border-radius: 999px; background: #F4F3EF; display: flex; align-items: center">
-<button type="button" onClick="{{it.dec}}" aria-label="Меньше" style="width: 44px; height: 40px; border: 0; background: transparent; color: var(--tx); display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" data-alma="ai_minus_24"><path fill-rule="evenodd" clip-rule="evenodd" d="M19 11H5V13H19V11Z"/></svg></button>
-<span style="min-width: 16px; text-align: center; font-size: 16px; line-height: 24px; font-weight: 600">{{it.qty}}</span>
-<button type="button" onClick="{{it.inc}}" aria-label="Больше" style="width: 44px; height: 40px; border: 0; background: transparent; color: var(--tx); display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" data-alma="ai_plus_24"><path fill-rule="evenodd" clip-rule="evenodd" d="M19 11H13V5H11V11H5V13H11V19H13V13H19V11Z"/></svg></button>
-</div>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
 <span style="font-size: 16px; line-height: 24px; font-weight: 600">{{it.sum}}</span>
+<button type="button" onClick="{{it.remove}}" aria-label="Удалить {{it.name}} из корзины" title="Удалить услугу" style="flex: none; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 999px; background: transparent; color: {{accent}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7M14 10v7"/></svg></button>
 </div>
 </div>
 </div>
@@ -1498,7 +1495,7 @@ return Object.assign({}, P.cartPageVals(this, 'Desktop'), this.cartTheme());
 P.mix(Component);
 </script>
 <script src="catalog.js"></script>
-<script src="proto-logic.js?v=pop1"></script>
+<script src="proto-logic.js?v=cart-remove1"></script>
 <script src="dc-runtime.js"></script>
 <script>DC.boot("CartDesktop")</script>
 </body>
